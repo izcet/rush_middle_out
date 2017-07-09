@@ -23,7 +23,7 @@ public:
 	Missile(Missile const & src); //canonical
 	Missile(void); //Canonical
 	~Missile(void); //Canonical
-        bool takeAction(void);
+    bool takeAction(void);
 private:
 	void _initValue(void);
 };
