@@ -29,6 +29,9 @@ public:
 	Player(Player const & src); //canonical
 	Player(void); //Canonical
 	~Player(void); //Canonical
+  int getPosX(void) const;
+  int getPosY(void) const;
+  void takeDamage(void);
 
 private:
 	void _initValue(void);

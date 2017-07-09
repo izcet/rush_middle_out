@@ -28,6 +28,9 @@ public:
   bool checkCollision(void);
   void _initValue(void);
   void doAction(void);
+  int getPosX(void) const;
+  int getPosY(void) const;
+  
   
   
   
