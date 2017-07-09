@@ -47,6 +47,7 @@ void Game::play() {
   int ch = 0;
   timeout(300);
   box(stdscr, '|', '_');
+  Player playerOne(maxY, maxX / 2);
   while ((ch = getch()) != 'q') {
     map.starsRnd();
 
