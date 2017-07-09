@@ -43,21 +43,22 @@ bool Player::move(int key)
 	return (true);
 }
 
-bool Player::checkCollisionObject(char c)
-{
-	if (c == 'X')
-	{
-		this->_lives--;
-		std::cout << "Player hit!" << std::endl;
-		return true;
-	}
-	return false;
-}
+// bool Player::checkCollisionObject(char c)
+// {
+	// if (c == 'X')
+	// {
+	// 	this->_lives--;
+	// 	std::cout << "Player hit!" << std::endl;
+	// 	return true;
+	// }
+	// return false;
+// }
 
 //Params same x and y as movement
 
 // bool Player::checkCollision(int x, int y)
 // {
+<<<<<<< HEAD
 // 	bool hit = false;
 // 	char d;
 
@@ -65,6 +66,15 @@ bool Player::checkCollisionObject(char c)
 // 	mvwscanw(Game::playerWin, y, x, "%c", d);
 // 	hit = checkCollisionObject(d);
 // 	return (hit);
+=======
+	// bool hit = false;
+	// char d;
+
+	// d = 'S';
+	// mvwscanw(Game::playerWin, y, x, "%c", d);
+	// hit = checkCollisionObject(d);
+	// return (hit);
+>>>>>>> 24cffcc758a53ec54340828a298748938badd8f9
 // }
 
 // OPERATOR OVERLOADS //

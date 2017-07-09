@@ -12,6 +12,7 @@
 #include "Environment.hpp"
 #include "GameEntity.class.hpp"
 #include "Player.class.hpp"
+#include "Enemy.class.hpp"
 
 int Game::score = 0;
 int Game::maxX = 0;
@@ -49,6 +50,8 @@ void Game::play() {
   box(stdscr, '|', '_');
   Player playerOne(maxY, maxX / 2);
   playerWin = newwin(0, 0, 0, 0);
+  Enemy *enemyHorde;
+  enemyHorde = new Enemy[10];
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
     map.starsRnd();
@@ -82,11 +85,22 @@ void Game::play() {
     // // is_alive == false;
     // this.cleanup();
 
+    for (int i = 0; i < enemyHorde[0].getAmount(); i++)
+    {
+      if (playerOne.getPosX() == enemyHorde[i].getPosY() &&
+            playerOne.getPosX() == enemyHorde[i].getPosY())
+      {
+        //delete enemyHorde[i];
+        playerOne.takeDamage();
+      }
+    }
+
     if (ch == 'D') debug = true;
     if (ch != ERR) addch(ch);
     refresh();
     ch = 0;
   }
+  delete [] enemyHorde;
 }
 /*
 GameEntity		*Game::getEntityAt(int x, int y)
