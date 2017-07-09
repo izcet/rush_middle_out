@@ -37,7 +37,6 @@ Game &Game::operator=(const Game &rhs) {
 void Game::launch() {
   cbreak();
   noecho();
-  keypad(_win, TRUE);
   curs_set(0);
   getmaxyx(stdscr, maxY, maxX);
   printw("window size id %d tall and %d wide", maxY, maxX);
@@ -47,6 +46,8 @@ void Game::launch() {
 void Game::play() {
   Environment map;
   int ch = 0;
+  keypad(map.getWin(), TRUE);
+  nodelay(map.getWin(), TRUE);
   timeout(300);
   border(0, 0, 0, 0, 0, 0, 0, 0);
   while ((ch = wgetch(_win)) != 'q') {
