@@ -18,9 +18,12 @@ class   Environment
                 void    starsRnd( void );
                 unsigned int    starShift(void);
                 ~Environment( void );
+                static WINDOW *background;
 
         private:
         //                unsigned int _characters;
+        protected:
+        //        bool    asteroid(int x, int y);
 };
 
 #endif

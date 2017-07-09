@@ -37,7 +37,7 @@ Game &Game::operator=(const Game &rhs) {
 void Game::launch() {
   cbreak();
   noecho();
-  keypad(stdscr, TRUE);
+  keypad(_win, TRUE);
   curs_set(0);
   getmaxyx(stdscr, maxY, maxX);
   printw("window size id %d tall and %d wide", maxY, maxX);
@@ -86,7 +86,7 @@ void Game::play() {
     wrefresh(_win);
     ch = 0;
   }
-  wclear(_win);
+  wclear(map.background);
 }
 /*
 GameEntity		*Game::getEntityAt(int x, int y)
