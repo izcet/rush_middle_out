@@ -13,6 +13,8 @@
 
 Enemy::Enemy(void) {
 	this->_initValue();
+	this->_posX = rand() % Game::maxX;
+	this->_posY = rand() % Game::maxY;
 	std::cout << "Enemy Default Constructor" << std::endl;
 	return;
 }

@@ -139,7 +139,7 @@ void Player::_initValue(void)
 	this->_dirX = 1;
 	this->_dirY = 1;
 	this->_speed = 1;
-	this->_symbol = '@';
+	this->_symbol = '^';
 	this->_lives = 3;
 
 }

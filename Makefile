@@ -22,6 +22,7 @@ SRC_FILE	=	main.cpp \
 			Enemy.class.cpp \
 			Game.cpp \
 			Environment.cpp \
+			Missile.class.cpp
 
 
 

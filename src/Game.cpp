@@ -13,6 +13,7 @@
 #include "GameEntity.class.hpp"
 #include "Player.class.hpp"
 #include "Enemy.class.hpp"
+#include "Missile.class.hpp"
 
 int Game::score = 0;
 int Game::maxX = 0;
@@ -55,7 +56,7 @@ void Game::play() {
   Player playerOne(maxX / 2, maxY - 10);
   playerWin = newwin(0, 0, 0, 0);
   Enemy enemy1(maxX / 2, maxY / 2);
-  Enemy enemy2(0, 0);
+  Enemy massEnemy[10];
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
     map.starsRnd();
@@ -68,6 +69,12 @@ void Game::play() {
     // bullet once,
     // // check for collisions and change is_alive as needed
     // this.bulletsAct();
+    //printw("Shoot missile! %d", ch);
+    if (ch == 32)
+    {
+      printw("Shoot missile!");
+      //Missile bullet(playerOne.getPosY(), playerOne.getPosX());
+    }
 
     // // Do what for and mean to be. Fire lasers, do some damage! Move the
     // player!
@@ -89,18 +96,32 @@ void Game::play() {
     // // is_alive == false;
     // this.cleanup();
 
-    
-    
-      if (playerOne.getPosX() == enemy1.getPosY() &&
-            playerOne.getPosX() == enemy1.getPosY())
+    for (int i = 0; i < 10; i++)
+    {
+      if (playerOne.getPosX() == massEnemy[i].getPosX() &&
+            playerOne.getPosY() == massEnemy[i].getPosY())
       {
-        //delete enemyHorde[i];
+        printw("Missile hit target!");;
+      }
+    }
+    
+      if (playerOne.getPosX() == enemy1.getPosX() &&
+            playerOne.getPosY() == enemy1.getPosY())
+      {
         playerOne.takeDamage();
       }
+
       wclear(enemyWin);
       enemy1.doAction(enemyWin);
+
+      for (int i = 0; i < 10; i++)
+      {
+        massEnemy[i].doAction(enemyWin);
+      }
+
       overlay(enemyWin, stdscr);
       wclear(playerWin);
+
       playerOne.drawPlayer(playerWin);
       overlay(playerWin, stdscr);      
     refresh();

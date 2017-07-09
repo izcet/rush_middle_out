@@ -64,4 +64,8 @@ bool AGameEntity::getAlive(void) const
 //   return (true);
 // }
 
+AGameEntity::~AGameEntity(void)
+{
+	return;
+}
 

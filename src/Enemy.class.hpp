@@ -17,7 +17,7 @@ class Enemy : public AGameEntity{
 public:
 
 	Enemy(void);
-  	Enemy(int x, int y);
+  Enemy(int x, int y);
 	Enemy(Enemy const & old);
 	~Enemy(void); // to be updated
 
