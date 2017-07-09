@@ -37,7 +37,7 @@ bool Player::move(int key)
 	  return(false);
 	if (prevX == this->_posX && prevy == this->_posY)
 	  {
-	    if (checkCollision(this->_posX, this->_posY + 1))
+	    if (checkCollision(this->_posX, this->_posY - 1))
 	      return (false);
 	  }
 	return (true);
