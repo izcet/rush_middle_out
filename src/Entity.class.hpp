@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 00:43:42 by dubious          ###   ########.fr       */
+/*   Updated: 2017/07/09 13:52:22 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,42 +25,51 @@
 
 class Entity {
 
-		public:
+	public:
 
-				~Entity(void);
+		// we have to be able to reference a generic entity
+		// as a return value from another function
+		// but an entity will never be declared on its own
+		// it should technically be abstract butt fuck it
+		Entity			&operator=(Entity const &old);
+		~Entity(void);
 
-				bool	isAlive(void) const;
+		// overridden by child classes
+		virtual void	act(World &w);
 
-				void	moveUp(World &w);
-				void	moveDown(World &w);
-				void	moveLeft(World &w);
-				void	moveRight(World &w);
+		// these are the same for all entities
+		virtual	char	getSymbol(void) const;
+		bool			isAlive(void) const;
+	
+		void			die(void);
+		void			collision(Entity &a, Entity &b);
 
-				Entity	*getLeft(World &w) const;
-				Entity	*getRight(World &w) const;
-				Entity	*getUp(World &w) const;
-				Entity	*getDown(World &w) const;
-				char	getSymbol(void) const;
+	private:
 
-		private:
+		Entity(void);
+		Entity(const Entity *ent);
+		Entity(Entity const & old);
+		Entity(void);
 
-				Entity(void);
-				Entity(const Entity *ent);
-				Entity(Entity const & old);
-				Entity(void);
-				Entity	&operator=(Entity const &old);
+	protected:
 
-				void	act(World &w);
-				void	die(void);
+		void			moveUp(World &w);
+		void			moveDown(World &w);
+		void			moveLeft(World &w);
+		void			moveRight(World &w);
 
-				bool	_alive;
-				int		_x;
-				int		_y;
-				int		_direction;
-				char	_symbol;
+		Entity			*getLeft(World &w) const;
+		Entity			*getRight(World &w) const;
+		Entity			*getUp(World &w) const;
+		Entity			*getDown(World &w) const;
 
+		bool			_alive;
+		int				_x;
+		int				_y;
+		int				_direction;
+		char			_symbol;
 };
 
-std::ostream	&operator<<(std::ostream &o, Entity const &c);
+std::ostream		&operator<<(std::ostream &o, Entity const &c);
 
 #endif

@@ -4,25 +4,29 @@
 # include <iostream>
 # include <string>
 
-class Enemy {
+# include "Entity.class.hpp"
+# include "World.cass.hpp"
+
+class Enemy : public Entity{
 
 public:
 
 	Enemy(void);
-	Enemy(/* args */);
-	Enemy(Enemy const & old);
-	Enemy(void);
-	~Enemy(void); // to be updated
-
+	Enemy(char symbol);
+	Enemy(int x);
+	Enemy(int x, char symbol);
+	~Enemy(void);
 	Enemy			&operator=(Enemy const &old);
 
-	void			sampleFunction(void) const;
+	virtual void	act(World &w);
+	virtual char	getSymbol(void) const;
 
 private:
-	int		_hp;
-	int		_x;
-	int		_y;
+	Enemy(Enemy const & old);
 
+	int		_moveStep; // 0
+	int		_moveMax; // 10
+	// move every 10 frames or cycles
 
 };
 
