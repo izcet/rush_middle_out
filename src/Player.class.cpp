@@ -43,8 +43,8 @@ bool Player::move(int key)
 	return (true);
 }
 
-bool Player::checkCollisionObject(char c)
-{
+// bool Player::checkCollisionObject(char c)
+// {
 	// if (c == 'X')
 	// {
 	// 	this->_lives--;
@@ -52,12 +52,12 @@ bool Player::checkCollisionObject(char c)
 	// 	return true;
 	// }
 	// return false;
-}
+// }
 
 //Params same x and y as movement
 
-bool Player::checkCollision(int x, int y)
-{
+// bool Player::checkCollision(int x, int y)
+// {
 	// bool hit = false;
 	// char d;
 
@@ -65,7 +65,7 @@ bool Player::checkCollision(int x, int y)
 	// mvwscanw(Game::playerWin, y, x, "%c", d);
 	// hit = checkCollisionObject(d);
 	// return (hit);
-}
+// }
 
 // OPERATOR OVERLOADS //
 

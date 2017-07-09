@@ -12,6 +12,7 @@
 #include "Environment.hpp"
 #include "GameEntity.class.hpp"
 #include "Player.class.hpp"
+#include "Enemy.class.hpp"
 
 int Game::score = 0;
 int Game::maxX = 0;
@@ -49,15 +50,9 @@ void Game::play() {
   box(stdscr, '|', '_');
   Player playerOne(maxY, maxX / 2);
   playerWin = newwin(0, 0, 0, 0);
-<<<<<<< HEAD
-  Enemy enemyHorde[10];
-  for (int i = 0; i < 10; i++)
-  {
-    enemyHorde[i] = new enemyHorde(0, maxX / 2);
-  }
-=======
+  Enemy *enemyHorde;
+  enemyHorde = new Enemy[10];
   enemyWin = newwin(0, 0, 0, 0);
->>>>>>> 6a928b45644aa63e3f410a6da4d7eb0c1f34a2a5
   while ((ch = getch()) != 'q') {
     map.starsRnd();
     playerOne.move(ch);
@@ -90,12 +85,14 @@ void Game::play() {
     // // is_alive == false;
     // this.cleanup();
 
-    for (int i = 0; i < enemy[0].getAmount(); i++)
+    for (int i = 0; i < enemyHorde[0].getAmount(); i++)
     {
       if (playerOne.getPosX() == enemyHorde[i].getPosY() &&
             playerOne.getPosX() == enemyHorde[i].getPosY())
-        delete enemyHorde[i];
+      {
+        //delete enemyHorde[i];
         playerOne.takeDamage();
+      }
     }
 
     if (ch == 'D') debug = true;
@@ -103,6 +100,7 @@ void Game::play() {
     refresh();
     ch = 0;
   }
+  delete [] enemyHorde;
 }
 /*
 GameEntity		*Game::getEntityAt(int x, int y)
