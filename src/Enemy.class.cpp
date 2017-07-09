@@ -82,26 +82,22 @@ bool Enemy::move(void)
 	return (true);
 }
 
-bool Enemy::checkCollisionObject(char c)
-{
-  if (c == '&' || c == '|') //change second to Bullet::_symbol
-	{
-		this->_lives--;
-		std::cout << "Enemy hit!" << std::endl;
-		return true;
-	}
-	return false;
-}
+// bool Enemy::checkCollisionObject(char c)
+// {
+//   if (c == '&' || c == '|') //change second to Bullet::_symbol
+// 	{
+// 		this->_lives--;
+// 		std::cout << "Enemy hit!" << std::endl;
+// 		return true;
+// 	}
+// 	return false;
+// }
 
-void Enemy::doAction(void)
+void Enemy::doAction(WINDOW *enemyWin)
 {
   bool hit = false;
-  this->move();
-  hit = this->checkCollision();
-  if (hit)
-     mvwaddch(Game::enemyWin, this->_posY, this->_posX, this->_symbol);
-    
-  
+  hit = this->move();
+  mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol); 
 }
 
 // bool Enemy::checkCollision(void)
@@ -146,3 +142,4 @@ int Enemy::getAmount(void) const
 }
 
 int _amount  = 10;
+

@@ -27,7 +27,7 @@ public:
   bool checkCollisionObject(char c);
   bool checkCollision(void);
   void _initValue(void);
-  void doAction(void);
+  void doAction(WINDOW *enemyWin);
   int getPosX(void) const;
   int getPosY(void) const;
   int getAmount(void) const;
