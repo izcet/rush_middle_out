@@ -22,6 +22,8 @@ SRC_FILE	=	main.cpp \
 			Enemy.class.cpp \
 			Game.cpp \
 			Environment.cpp \
+			Menu.cpp	\
+			Screen.cpp	\
 			Missile.class.cpp
 
 
@@ -39,7 +41,7 @@ INC			=	-I src
 all: $(NAME)
 
 $(NAME): $(SRCS) | $(OBJS)
-	    $(CXX) $(INC) $(FLAGS) -l ncurses $(OBJS) -o $(NAME)
+	    $(CXX) $(INC) $(FLAGS) -l ncurses -l menu $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	@$(CXX) $(INC) -c $^ $(FLAGS) -o $@
