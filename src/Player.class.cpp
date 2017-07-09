@@ -22,8 +22,8 @@ void Player::shoot(std::string gun)
 
 bool Player::move(int key)
 {
-  int prevX = this->_posX;
-  int prevy = this->_posY;
+  // int prevX = this->_posX;
+  //int prevy = this->_posY;
 
 	if (key == KEY_UP && this->_posY - 1 > 0)
 		this->_posY = this->_posY - 1;
@@ -33,13 +33,13 @@ bool Player::move(int key)
 		this->_posX = this->_posX - 1;
 	if (key == KEY_RIGHT && this->_posX + 1 < Game::maxX)
 		this->_posY = this->_posX + 1;
-	if (checkCollision(this->_posX, this->_posY))
-	  return(false);
-	if (prevX == this->_posX && prevy == this->_posY)
-	  {
-	    if (checkCollision(this->_posX, this->_posY - 1))
-	      return (false);
-	  }
+	// if (checkCollision(this->_posX, this->_posY))
+	//   return(false);
+	// if (prevX == this->_posX && prevy == this->_posY)
+	//   {
+	//     if (checkCollision(this->_posX, this->_posY - 1))
+	//       return (false);
+	//   }
 	return (true);
 }
 
