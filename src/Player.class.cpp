@@ -136,3 +136,21 @@ void Player::_initValue(void)
 	this->_lives = 3;
 
 }
+
+int Player::getPosX(void) const
+{
+  return (this->_posX);
+}
+
+
+int Player::getPosY(void) const
+{
+  return (this->_posY);
+}
+
+void Player::takeDamage(void)
+{
+  this->_lives--;
+}
+
+

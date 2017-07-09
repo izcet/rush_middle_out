@@ -127,3 +127,21 @@ void Enemy::_initValue(void)
 	this->_lives = 1;
 
 }
+
+int Enemy::getPosX(void) const
+{
+  return (this->_posX);
+}
+
+
+int Enemy::getPosY(void) const
+{
+  return (this->_posY);
+}
+
+int Enemy::getAmount(void) const
+{
+  return(this->_amount);
+}
+
+int _amount  = 10;
