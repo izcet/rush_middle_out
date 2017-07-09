@@ -5,13 +5,13 @@
  *
  * Author: Sesl, Irhett, Tiny, Bemillie, Searsie
  * ==========================================================================*/
-
+ 
 #include "Game.hpp"
 #include <ncurses.h>
 //#include "Enemy.class.hpp"
 #include "Environment.hpp"
-//#include "GameEntity.class.hpp"
-//#include "Player.class.hpp"
+#include "GameEntity.class.hpp"
+#include "Player.class.hpp"
 
 int Game::score = 0;
 int Game::maxX = 0;
@@ -36,7 +36,6 @@ void Game::launch() {
   cbreak();
   noecho();
   keypad(stdscr, TRUE);
-  curs_set(0);
   getmaxyx(stdscr, maxY, maxX);
   printw("window size id %d tall and %d wide", maxY, maxX);
   play();
@@ -47,10 +46,11 @@ void Game::play() {
   Environment map;
   int ch = 0;
   timeout(300);
-  border(0, 0, 0, 0, 0, 0, 0, 0);
+  box(stdscr, '|', '_');
+  Player playerOne(maxY, maxX / 2);
   while ((ch = getch()) != 'q') {
     map.starsRnd();
-
+    playerOne.move(ch);
     // every X cycles, spawn a new enemy at a random position on the spawn wall.
     // this.spawnEnemies();
 
