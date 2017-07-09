@@ -14,10 +14,6 @@ static WINDOW *background;
 
 Environment::Environment( void )
 {
-   // std::srand(time(NULL));
-    mvprintw(0, 0,"Let the games begin\n");
-
-    //Environment::starsRnd();
     background = newwin(Game::maxY - 2, Game::maxX - 2, 1, 1);
     return ;
 }
@@ -55,7 +51,7 @@ void    Environment::starsRnd( void )/* Displays the stars randomly in terminal*
     if (movement == 10)
     {
         wattron(background, COLOR_PAIR(3));
-        mvwaddch(background, 0, (starShift() % Game::maxX), 'O');
+        mvwaddch(background, 0, (starShift() % Game::maxX), '0');
         movement = 0;
     }
     wattroff(background, COLOR_PAIR(1));
