@@ -40,7 +40,6 @@ bool Player::move(int key)
 	    if (checkCollision(this->_posX, this->_posY - 1))
 	      return (false);
 	  }
-	std::cout << "player moving" << std::endl;
 	return (true);
 }
 
@@ -68,11 +67,6 @@ bool Player::checkCollision(int x, int y)
 	return (hit);
 }
 
-void Player::draw(void) const
-{
-	mvwprintw(Game::playerWin, this->_posY, this->_posX, "%c", this->_symbol);
-}
-
 // OPERATOR OVERLOADS //
 
 Player & Player::operator=(Player const & rhs)
@@ -92,7 +86,6 @@ Player & Player::operator=(Player const & rhs)
 
 Player::Player(int startX, int startY)
 {
-	std::srand(std::time(NULL));
 	this->_initValue();
 	this->_posX = startX;
 	this->_posY = startY;
@@ -105,7 +98,6 @@ Player::Player(int startX, int startY)
 
 Player::Player(Player const & src)
 {
-	std::srand(std::time(NULL));
 	*this = src;
 	if (Game::debug)
 	{
@@ -117,9 +109,8 @@ Player::Player(Player const & src)
 
 Player::Player(void)
 {
-	std::srand(std::time(NULL));
 	this->_initValue();
-	std::cout << "Player has been created!" << std::endl;
+	//std::cout << "Player has been created!" << std::endl;
 	mvwprintw(Game::playerWin, Game::maxX / 2, Game::maxY / 2, "Player has been created!");
 }
 
@@ -127,7 +118,6 @@ Player::Player(void)
 
 Player::~Player(void)
 {
-	std::cout << "Player deleted" << std::endl;
 	mvwprintw(stdscr, Game::maxX / 2, Game::maxY / 2, "Player has been destroyed!");
 	return;
 }
