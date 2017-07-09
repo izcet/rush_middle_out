@@ -95,8 +95,11 @@ bool Enemy::checkCollisionObject(char c)
 
 void Enemy::doAction(void)
 {
+  bool hit = false;
   this->move();
-  this->checkCollision();
+  hit = this->checkCollision();
+  if (hit)
+    wprintw(enemyWin, "%c", this->_symbol);
   
 }
 
@@ -105,7 +108,7 @@ bool Enemy::checkCollision(void)
 	char c;
 	bool hit = false;
 
-	mvwscanw(Game::enemyWin, this->_posY, this->_posX, "%c", c);
+	mvwscanw(stdscr, this->_posY, this->_posX, "%c", c);
 	hit = this->checkCollisionObject(c);
 	return (hit);
 }
