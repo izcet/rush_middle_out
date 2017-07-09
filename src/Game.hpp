@@ -19,6 +19,7 @@ public:
   void launch();
   void play();
 
+  static WINDOW* enemyWin;
   static WINDOW* playerWin;
   static  int score;
   static int maxY;
