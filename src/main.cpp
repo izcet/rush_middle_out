@@ -10,7 +10,7 @@
 
 int main(void)
 {
-  Game Ebachman;
-  Ebachman.launch();
+    Menu  test(1);
+    Game  test2(test.get_window());
   return (0);
 }
