@@ -74,3 +74,4 @@ void Enemy::_initValue(void)
 	this->_lives = 1;
 }
 
+
