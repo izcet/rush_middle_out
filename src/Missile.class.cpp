@@ -79,9 +79,9 @@ bool Missile::takeAction(void)
   return(hit);
 }
 
-void Missile::drawMissile(void) const
+void Missile::drawMissile(WINDOW *wind) const
 {
-  mvwaddch(Game::enemyWin, this->_posY, this->_posX, this->_symbol);
+  mvwaddch(wind, this->_posY, this->_posX, this->_symbol);
 }
 
 
