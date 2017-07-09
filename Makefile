@@ -19,9 +19,10 @@ SRC_DIR		=	src
 SRC_FILE	=	main.cpp \
 			GameEntity.class.cpp \
 			Player.class.cpp \
+			Enemy.class.cpp \
 			Game.cpp \
 			Environment.cpp \
-			main.cpp
+
 
 
 SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILE))

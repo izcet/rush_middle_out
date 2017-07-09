@@ -32,7 +32,7 @@ bool Player::move(int key)
 	if (key == KEY_LEFT && this->_posX - 1 > 0)
 		this->_posX = this->_posX - 1;
 	if (key == KEY_RIGHT && this->_posX + 1 < Game::maxX)
-		this->_posY = this->_posX + 1;
+		this->_posX = this->_posX + 1;
 	// if (checkCollision(this->_posX, this->_posY))
 	//   return(false);
 	// if (prevX == this->_posX && prevy == this->_posY)
@@ -118,7 +118,7 @@ Player::Player(void)
 {
 	this->_initValue();
 	//std::cout << "Player has been created!" << std::endl;
-	mvwprintw(Game::playerWin, Game::maxX / 2, Game::maxY / 2, "Player has been created!");
+	//mvwprintw(Game::playerWin, Game::maxX / 2, Game::maxY / 2, "Player has been created!");
 }
 
 // DECONSTRUCTORS //

@@ -141,5 +141,5 @@ int Enemy::getAmount(void) const
   return(this->_amount);
 }
 
-int _amount  = 10;
+int Enemy::_amount  = 10;
 

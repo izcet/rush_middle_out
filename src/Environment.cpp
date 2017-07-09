@@ -59,7 +59,7 @@ void    Environment::starsRnd( void )/* Displays the stars randomly in terminal*
     wattroff(background, COLOR_PAIR(3));
     scrollok(background, TRUE);
     wscrl(background, -1);
-    wrefresh(background);
+    overwrite(background, stdscr);
     return ;
 }
 

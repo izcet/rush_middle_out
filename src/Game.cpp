@@ -18,6 +18,9 @@ int Game::score = 0;
 int Game::maxX = 0;
 int Game::maxY = 0;
 bool Game::debug = false;
+WINDOW *Game::enemyWin = NULL;
+WINDOW *Game::playerWin = NULL;
+
 
 Game::Game() {}
 
@@ -36,6 +39,7 @@ void Game::launch() {
   initscr();
   cbreak();
   noecho();
+  curs_set(0);
   keypad(stdscr, TRUE);
   getmaxyx(stdscr, maxY, maxX);
   printw("window size id %d tall and %d wide", maxY, maxX);
@@ -47,11 +51,11 @@ void Game::play() {
   Environment map;
   int ch = 0;
   timeout(300);
-  box(stdscr, '|', '_');
-  Player playerOne(maxY, maxX / 2);
+  border(0,0,0,0,0,0,0,0);
+  Player playerOne(maxX / 2, maxY - 10);
   playerWin = newwin(0, 0, 0, 0);
-  Enemy *enemyHorde;
-  enemyHorde = new Enemy[10];
+  Enemy enemy1(maxX / 2, maxY / 2);
+  Enemy enemy2(0, 0);
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
     map.starsRnd();
@@ -85,22 +89,24 @@ void Game::play() {
     // // is_alive == false;
     // this.cleanup();
 
-    for (int i = 0; i < enemyHorde[0].getAmount(); i++)
-    {
-      if (playerOne.getPosX() == enemyHorde[i].getPosY() &&
-            playerOne.getPosX() == enemyHorde[i].getPosY())
+    
+    
+      if (playerOne.getPosX() == enemy1.getPosY() &&
+            playerOne.getPosX() == enemy1.getPosY())
       {
         //delete enemyHorde[i];
         playerOne.takeDamage();
       }
-    }
-
-    if (ch == 'D') debug = true;
-    if (ch != ERR) addch(ch);
+      wclear(enemyWin);
+      enemy1.doAction(enemyWin);
+      overlay(enemyWin, stdscr);
+      wclear(playerWin);
+      playerOne.drawPlayer(playerWin);
+      overlay(playerWin, stdscr);      
     refresh();
     ch = 0;
   }
-  delete [] enemyHorde;
+  //delete  enemy1;
 }
 /*
 GameEntity		*Game::getEntityAt(int x, int y)
