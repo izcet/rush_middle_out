@@ -96,5 +96,3 @@ void Missile::_initValue(void)
 	this->_symbol = '|';
 	this->_lives = 1;
 }
-
-

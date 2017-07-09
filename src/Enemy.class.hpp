@@ -28,7 +28,8 @@ public:
   bool checkCollision(void);
   void _initValue(void);
   void doAction(void);
-  void drawMissile(void) const;
+  
+  
   
 private:
   std::string name;
