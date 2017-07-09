@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 13:52:22 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 14:20:31 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ class Entity {
 	
 		void			die(void);
 		void			collision(Entity &a, Entity &b);
+
+		char			type;
 
 	private:
 
