@@ -8,8 +8,10 @@
 
 #ifndef MISSILE_HPP
 # define MISSILE_HPP
+# include "GameEntity.class.hpp"
+# include "Game.hpp"
 
-class Missile {
+class Missile : public AGameEntity{
 public:
 	void instantiate(void);
 	bool move(void);
