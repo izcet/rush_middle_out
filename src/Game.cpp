@@ -49,6 +49,11 @@ void Game::play() {
   box(stdscr, '|', '_');
   Player playerOne(maxY, maxX / 2);
   playerWin = newwin(0, 0, 0, 0);
+  Enemy enemyHorde[10];
+  for (int i = 0; i < 10; i++)
+  {
+    enemyHorde[i] = new enemyHorde(0, maxX / 2);
+  }
   while ((ch = getch()) != 'q') {
     map.starsRnd();
     playerOne.move(ch);
@@ -80,6 +85,14 @@ void Game::play() {
     // entities with
     // // is_alive == false;
     // this.cleanup();
+
+    for (int i = 0; i < enemy[0].getAmount(); i++)
+    {
+      if (playerOne.getPosX() == enemyHorde[i].getPosY() &&
+            playerOne.getPosX() == enemyHorde[i].getPosY())
+        delete enemyHorde[i];
+        playerOne.takeDamage();
+    }
 
     if (ch == 'D') debug = true;
     if (ch != ERR) addch(ch);
