@@ -58,7 +58,6 @@ bool Player::move(int key)
 
 // bool Player::checkCollision(int x, int y)
 // {
-<<<<<<< HEAD
 // 	bool hit = false;
 // 	char d;
 
@@ -66,7 +65,6 @@ bool Player::move(int key)
 // 	mvwscanw(Game::playerWin, y, x, "%c", d);
 // 	hit = checkCollisionObject(d);
 // 	return (hit);
-=======
 	// bool hit = false;
 	// char d;
 
@@ -74,7 +72,6 @@ bool Player::move(int key)
 	// mvwscanw(Game::playerWin, y, x, "%c", d);
 	// hit = checkCollisionObject(d);
 	// return (hit);
->>>>>>> 24cffcc758a53ec54340828a298748938badd8f9
 // }
 
 // OPERATOR OVERLOADS //
