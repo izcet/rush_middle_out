@@ -18,7 +18,10 @@ int Game::maxX = 0;
 int Game::maxY = 0;
 bool Game::debug = false;
 
-Game::Game() {}
+Game::Game(WINDOW *win)
+{
+  _win = win;
+}
 
 Game::Game(const Game &other) { *this = other; }
 
@@ -32,7 +35,6 @@ Game &Game::operator=(const Game &rhs) {
 }
 
 void Game::launch() {
-  initscr();
   cbreak();
   noecho();
   keypad(stdscr, TRUE);
@@ -40,7 +42,6 @@ void Game::launch() {
   getmaxyx(stdscr, maxY, maxX);
   printw("window size id %d tall and %d wide", maxY, maxX);
   play();
-  endwin();
 }
 
 void Game::play() {
@@ -48,7 +49,7 @@ void Game::play() {
   int ch = 0;
   timeout(300);
   border(0, 0, 0, 0, 0, 0, 0, 0);
-  while ((ch = getch()) != 'q') {
+  while ((ch = wgetch(_win)) != 'q') {
     map.starsRnd();
 
     // every X cycles, spawn a new enemy at a random position on the spawn wall.
@@ -82,9 +83,10 @@ void Game::play() {
 
     if (ch == 'D') debug = true;
     if (ch != ERR) addch(ch);
-    refresh();
+    wrefresh(_win);
     ch = 0;
   }
+  wclear(_win);
 }
 /*
 GameEntity		*Game::getEntityAt(int x, int y)

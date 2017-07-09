@@ -1,10 +1,11 @@
 #ifndef GAME_HPP
 #define GAME_HPP
+#include "Menu.hpp"
 
 class Game {
 public:
   //! Default constructor
-  Game();
+  Game(WINDOW *win);
 
   //! Copy constructor
   Game(const Game &other);
@@ -31,6 +32,7 @@ public:
 
  protected:
  private:
+    WINDOW *_win;
 
  // GameEntity		**_grid;
  // Enemy			*_enemies;
