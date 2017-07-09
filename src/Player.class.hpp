@@ -32,7 +32,7 @@ public:
   int getPosX(void) const;
   int getPosY(void) const;
   void takeDamage(void);
-  void drawPlayer(void) const;
+  void drawPlayer(WINDOW *enemyWin) const;
 
 private:
 	void _initValue(void);

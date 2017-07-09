@@ -160,8 +160,8 @@ void Player::takeDamage(void)
   this->_lives--;
 }
 
-void Player::drawPlayer(void) const
+void Player::drawPlayer(WINDOW *enemyWin) const
 {
-  mvwaddch(Game::enemyWin, this->_posY, this->_posX, this->_symbol);
+  mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
 
 }
