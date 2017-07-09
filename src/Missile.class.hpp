@@ -8,8 +8,10 @@
 
 #ifndef MISSILE_HPP
 # define MISSILE_HPP
+# include "GameEntity.class.hpp"
+# include "Game.hpp"
 
-class Missile {
+class Missile : public AGameEntity{
 public:
 	void instantiate(void);
 	bool move(void);
@@ -21,6 +23,8 @@ public:
 	Missile(Missile const & src); //canonical
 	Missile(void); //Canonical
 	~Missile(void); //Canonical
+    bool takeAction(void);
+  void drawMissile(WINDOW *wind) const;
 private:
 	void _initValue(void);
 };

@@ -20,6 +20,7 @@ public:
   bool move(int x, int y);
   virtual bool getAlive(void) const;
   virtual void drawToWindow(void) const;
+  virtual ~AGameEntity(void) = 0;
     
 protected:
   std::string _name;

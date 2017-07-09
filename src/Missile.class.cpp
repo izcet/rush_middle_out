@@ -6,6 +6,10 @@
  * Author: Sesl, Irhett, Tiny, Bemillie, Searsie
  * ==========================================================================*/
 
+#include "Missile.class.hpp"
+#include "Game.hpp"
+#include "Player.class.hpp"
+
 // CONSTRUCTORS //
 
 Missile::Missile(void) {
@@ -34,40 +38,61 @@ Missile::~Missile(void) {
 
 Missile	&Missile::operator=(Missile const &old)
 {
-	return(*this);
+  if (this == &old)
+    return(*this);
+  else
+    {
+      this->_posX = old._posX;
+      this->_posY = old._posY;
+      this->_symbol = old._symbol;
+    }
+  return(*this);
 }
 
 // METHODS //
 
-void Missile::shoot(std::string gun)
-{
-	std::cout << "Shooting with " << gun << std::endl;
-	if (gun == "single_shot")
-		this->symbol = '|';
-	//Missile::_instantiate(this->_posX + 1, this->_posY + 1);
-}
+// void Missile::shoot(std::string gun)
+// {
+// 	std::cout << "Shooting with " << gun << std::endl;
+// 	if (gun == "single_shot")
+// 		this->_symbol = '|';
+// 	//Missile::_instantiate(this->_posX + 1, this->_posY + 1);
+// }
 
-bool Missile::move(int key)
+bool Missile::move(void)
 {
-	if (this->_posX == Game::maxX)
+	if (this->_posY - 1 == 0)
 	{
+		
+		this->_lives--;
 		return (false);
-		this->_live--;
 	}
 	else
-	  this->_posX += _speed;
+	  this->_posY -= 1;
 	return (true);
 }
 
+bool Missile::takeAction(void)
+{
+  bool hit = false;
+  hit = this->move();
+  return(hit);
+}
+
+void Missile::drawMissile(WINDOW *wind) const
+{
+  mvwaddch(wind, this->_posY, this->_posX, this->_symbol);
+}
+
+
 // INIT //
 
-void Enemy::_initValue(void)
+void Missile::_initValue(void)
 {
 	this->_name = "Missile";
-	this->_posX = Player::_posX;
-	this->_posY = Player::_posY;
+	this->_posX = Game::maxX / 2;
+	this->_posY = Game::maxY;
 	this->_speed = 1;
 	this->_symbol = '|';
 	this->_lives = 1;
 }
-

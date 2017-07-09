@@ -10,13 +10,18 @@
 #include <ncurses.h>
 //#include "Enemy.class.hpp"
 #include "Environment.hpp"
-//#include "GameEntity.class.hpp"
-//#include "Player.class.hpp"
+#include "GameEntity.class.hpp"
+#include "Player.class.hpp"
+#include "Enemy.class.hpp"
+#include "Missile.class.hpp"
 
 int Game::score = 0;
 int Game::maxX = 0;
 int Game::maxY = 0;
 bool Game::debug = false;
+WINDOW *Game::enemyWin = NULL;
+WINDOW *Game::playerWin = NULL;
+
 
 Game::Game(WINDOW *win)
 {
@@ -38,6 +43,7 @@ void Game::launch() {
   cbreak();
   noecho();
   curs_set(0);
+  keypad(stdscr, TRUE);
   getmaxyx(stdscr, maxY, maxX);
   printw("window size id %d tall and %d wide", maxY, maxX);
   play();
@@ -49,10 +55,15 @@ void Game::play() {
   keypad(map.getWin(), TRUE);
   nodelay(map.getWin(), TRUE);
   timeout(300);
-  border(0, 0, 0, 0, 0, 0, 0, 0);
-  while ((ch = wgetch(_win)) != 'q') {
+  border(0,0,0,0,0,0,0,0);
+  Player playerOne(maxX / 2, maxY - 10);
+  playerWin = newwin(0, 0, 0, 0);
+  Enemy enemy1(maxX / 2, maxY / 2);
+  Enemy massEnemy[10];
+  enemyWin = newwin(0, 0, 0, 0);
+  while ((ch = getch()) != 'q') {
     map.starsRnd();
-
+    playerOne.move(ch);
     // every X cycles, spawn a new enemy at a random position on the spawn wall.
     // this.spawnEnemies();
 
@@ -61,6 +72,12 @@ void Game::play() {
     // bullet once,
     // // check for collisions and change is_alive as needed
     // this.bulletsAct();
+    //printw("Shoot missile! %d", ch);
+    if (ch == 32)
+    {
+      printw("Shoot missile!");
+      //Missile bullet(playerOne.getPosY(), playerOne.getPosX());
+    }
 
     // // Do what for and mean to be. Fire lasers, do some damage! Move the
     // player!
@@ -82,12 +99,39 @@ void Game::play() {
     // // is_alive == false;
     // this.cleanup();
 
-    if (ch == 'D') debug = true;
-    if (ch != ERR) addch(ch);
-    wrefresh(_win);
+  wclear(map.getWin());
+    for (int i = 0; i < 10; i++)
+    {
+      if (playerOne.getPosX() == massEnemy[i].getPosX() &&
+            playerOne.getPosY() == massEnemy[i].getPosY())
+      {
+        printw("Missile hit target!");;
+      }
+    }
+    
+      if (playerOne.getPosX() == enemy1.getPosX() &&
+            playerOne.getPosY() == enemy1.getPosY())
+      {
+        playerOne.takeDamage();
+      }
+
+      wclear(enemyWin);
+      enemy1.doAction(enemyWin);
+
+      for (int i = 0; i < 10; i++)
+      {
+        massEnemy[i].doAction(enemyWin);
+      }
+
+      overlay(enemyWin, stdscr);
+      wclear(playerWin);
+
+      playerOne.drawPlayer(playerWin);
+      overlay(playerWin, stdscr);      
+    refresh();
     ch = 0;
   }
-  wclear(map.getWin());
+  //delete  enemy1;
 }
 /*
 GameEntity		*Game::getEntityAt(int x, int y)

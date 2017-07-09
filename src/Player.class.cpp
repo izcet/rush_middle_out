@@ -22,8 +22,8 @@ void Player::shoot(std::string gun)
 
 bool Player::move(int key)
 {
-  int prevX = this->_posX;
-  int prevy = this->_posY;
+  // int prevX = this->_posX;
+  //int prevy = this->_posY;
 
 	if (key == KEY_UP && this->_posY - 1 > 0)
 		this->_posY = this->_posY - 1;
@@ -32,40 +32,47 @@ bool Player::move(int key)
 	if (key == KEY_LEFT && this->_posX - 1 > 0)
 		this->_posX = this->_posX - 1;
 	if (key == KEY_RIGHT && this->_posX + 1 < Game::maxX)
-		this->_posY = this->_posX + 1;
-	if (checkCollision(this->_posX, this->_posY))
-	  return(false);
-	if (prevX == this->_posX && prevy == this->_posY)
-	  {
-	    if (checkCollision(this->_posX, this->_posY - 1))
-	      return (false);
-	  }
+		this->_posX = this->_posX + 1;
+	// if (checkCollision(this->_posX, this->_posY))
+	//   return(false);
+	// if (prevX == this->_posX && prevy == this->_posY)
+	//   {
+	//     if (checkCollision(this->_posX, this->_posY - 1))
+	//       return (false);
+	//   }
 	return (true);
 }
 
-bool Player::checkCollisionObject(char c)
-{
-	if (c == 'X')
-	{
-		this->_lives--;
-		std::cout << "Player hit!" << std::endl;
-		return true;
-	}
-	return false;
-}
+// bool Player::checkCollisionObject(char c)
+// {
+	// if (c == 'X')
+	// {
+	// 	this->_lives--;
+	// 	std::cout << "Player hit!" << std::endl;
+	// 	return true;
+	// }
+	// return false;
+// }
 
 //Params same x and y as movement
 
-bool Player::checkCollision(int x, int y)
-{
-	bool hit = false;
-	char d;
+// bool Player::checkCollision(int x, int y)
+// {
+// 	bool hit = false;
+// 	char d;
 
-	d = 'S';
-	mvwscanw(playerwin, y, x, "%c", d);
-	hit = checkCollisionObject(d);
-	return (hit);
-}
+// 	d = 'S';
+// 	mvwscanw(Game::playerWin, y, x, "%c", d);
+// 	hit = checkCollisionObject(d);
+// 	return (hit);
+	// bool hit = false;
+	// char d;
+
+	// d = 'S';
+	// mvwscanw(Game::playerWin, y, x, "%c", d);
+	// hit = checkCollisionObject(d);
+	// return (hit);
+// }
 
 // OPERATOR OVERLOADS //
 
@@ -86,7 +93,6 @@ Player & Player::operator=(Player const & rhs)
 
 Player::Player(int startX, int startY)
 {
-	std::srand(std::time(NULL));
 	this->_initValue();
 	this->_posX = startX;
 	this->_posY = startY;
@@ -99,7 +105,6 @@ Player::Player(int startX, int startY)
 
 Player::Player(Player const & src)
 {
-	std::srand(std::time(NULL));
 	*this = src;
 	if (Game::debug)
 	{
@@ -111,10 +116,9 @@ Player::Player(Player const & src)
 
 Player::Player(void)
 {
-	std::srand(std::time(NULL));
 	this->_initValue();
 	//std::cout << "Player has been created!" << std::endl;
-	mvwprintw(playerwin, Game::maxX / 2, Game::maxY / 2, "Player has been created!");
+	//mvwprintw(Game::playerWin, Game::maxX / 2, Game::maxY / 2, "Player has been created!");
 }
 
 // DECONSTRUCTORS //
@@ -135,7 +139,29 @@ void Player::_initValue(void)
 	this->_dirX = 1;
 	this->_dirY = 1;
 	this->_speed = 1;
-	this->_symbol = '@';
+	this->_symbol = '^';
 	this->_lives = 3;
+
+}
+
+int Player::getPosX(void) const
+{
+  return (this->_posX);
+}
+
+
+int Player::getPosY(void) const
+{
+  return (this->_posY);
+}
+
+void Player::takeDamage(void)
+{
+  this->_lives--;
+}
+
+void Player::drawPlayer(WINDOW *enemyWin) const
+{
+  mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
 
 }

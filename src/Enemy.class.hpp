@@ -17,7 +17,7 @@ class Enemy : public AGameEntity{
 public:
 
 	Enemy(void);
-  	Enemy(int x, int y);
+  Enemy(int x, int y);
 	Enemy(Enemy const & old);
 	~Enemy(void); // to be updated
 
@@ -27,9 +27,15 @@ public:
   bool checkCollisionObject(char c);
   bool checkCollision(void);
   void _initValue(void);
-  void doAction(void);
+  void doAction(WINDOW *enemyWin);
+  int getPosX(void) const;
+  int getPosY(void) const;
+  int getAmount(void) const;
+  
+  
   
 private:
+  static int _amount;
   std::string name;
 
 };
@@ -37,3 +43,5 @@ private:
 // std::ostream	&operator<<(std::ostream &o, Enemy const &c);
 
 #endif
+
+

@@ -13,6 +13,8 @@
 
 Enemy::Enemy(void) {
 	this->_initValue();
+	this->_posX = rand() % Game::maxX;
+	this->_posY = rand() % Game::maxY;
 	std::cout << "Enemy Default Constructor" << std::endl;
 	return;
 }
@@ -82,33 +84,33 @@ bool Enemy::move(void)
 	return (true);
 }
 
-bool Enemy::checkCollisionObject(char c)
+// bool Enemy::checkCollisionObject(char c)
+// {
+//   if (c == '&' || c == '|') //change second to Bullet::_symbol
+// 	{
+// 		this->_lives--;
+// 		std::cout << "Enemy hit!" << std::endl;
+// 		return true;
+// 	}
+// 	return false;
+// }
+
+void Enemy::doAction(WINDOW *enemyWin)
 {
-  if (c == '&' || c == '|') //change second to Bullet::_symbol
-	{
-		this->_lives--;
-		std::cout << "Enemy hit!" << std::endl;
-		return true;
-	}
-	return false;
+  bool hit = false;
+  hit = this->move();
+  mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol); 
 }
 
-void Enemy::doAction(void)
-{
-  this->move();
-  this->checkCollision();
-  
-}
+// bool Enemy::checkCollision(void)
+// {
+// 	char c;
+// 	bool hit = false;
 
-bool Enemy::checkCollision(void)
-{
-	char c;
-	bool hit = false;
-
-	mvwscanw(enemy, this->_posY, this->_posX, "%c", c);
-	hit = this->checkCollisionObject(c);
-	return (hit);
-}
+// 	//	mvwscanw(stdscr, this->_posY, this->_posX, "%c", c);
+// 	hit = this->checkCollisionObject(c);
+// 	return (hit);
+// }
 
 //INIT
 
@@ -124,3 +126,22 @@ void Enemy::_initValue(void)
 	this->_lives = 1;
 
 }
+
+int Enemy::getPosX(void) const
+{
+  return (this->_posX);
+}
+
+
+int Enemy::getPosY(void) const
+{
+  return (this->_posY);
+}
+
+int Enemy::getAmount(void) const
+{
+  return(this->_amount);
+}
+
+int Enemy::_amount  = 10;
+

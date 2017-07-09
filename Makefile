@@ -14,8 +14,17 @@ NAME		=	ft_retro
 
 CXX			=	clang++
 FLAGS		=	-Wall -Werror -Wextra -std=c++98
+
 SRC_DIR		=	src
-SRC_FILE	=	main.cpp Screen.cpp Game.cpp Environment.cpp Menu.cpp
+SRC_FILE	=	main.cpp \
+			GameEntity.class.cpp \
+			Player.class.cpp \
+			Enemy.class.cpp \
+			Game.cpp \
+			Environment.cpp \
+			Missile.class.cpp
+
+
 
 SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILE))
 
@@ -30,7 +39,7 @@ INC			=	-I src
 all: $(NAME)
 
 $(NAME): $(SRCS) | $(OBJS)
-	    $(CXX) $(INC) $(FLAGS) -l ncurses -l menu $(OBJS) -o $(NAME)
+	    $(CXX) $(INC) $(FLAGS) -l ncurses $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	@$(CXX) $(INC) -c $^ $(FLAGS) -o $@
