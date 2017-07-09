@@ -40,6 +40,7 @@ bool Player::move(int key)
 	    if (checkCollision(this->_posX, this->_posY - 1))
 	      return (false);
 	  }
+	std::cout << "player moving" << std::endl;
 	return (true);
 }
 
@@ -113,7 +114,7 @@ Player::Player(void)
 {
 	std::srand(std::time(NULL));
 	this->_initValue();
-	//std::cout << "Player has been created!" << std::endl;
+	std::cout << "Player has been created!" << std::endl;
 	mvwprintw(Game::playerWin, Game::maxX / 2, Game::maxY / 2, "Player has been created!");
 }
 
@@ -121,6 +122,7 @@ Player::Player(void)
 
 Player::~Player(void)
 {
+	std::cout << "Player deleted" << std::endl;
 	mvwprintw(stdscr, Game::maxX / 2, Game::maxY / 2, "Player has been destroyed!");
 	return;
 }
