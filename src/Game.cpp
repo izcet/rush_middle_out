@@ -48,6 +48,7 @@ void Game::play() {
   timeout(300);
   box(stdscr, '|', '_');
   Player playerOne(maxY, maxX / 2);
+  playerWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
     map.starsRnd();
     playerOne.move(ch);
