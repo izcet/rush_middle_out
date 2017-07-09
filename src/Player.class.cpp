@@ -62,7 +62,7 @@ bool Player::checkCollision(int x, int y)
 	char d;
 
 	d = 'S';
-	mvwscanw(playerwin, y, x, "%c", d);
+	mvwscanw(Game::playerWin, y, x, "%c", d);
 	hit = checkCollisionObject(d);
 	return (hit);
 }
@@ -114,7 +114,7 @@ Player::Player(void)
 	std::srand(std::time(NULL));
 	this->_initValue();
 	//std::cout << "Player has been created!" << std::endl;
-	mvwprintw(playerwin, Game::maxX / 2, Game::maxY / 2, "Player has been created!");
+	mvwprintw(Game::playerWin, Game::maxX / 2, Game::maxY / 2, "Player has been created!");
 }
 
 // DECONSTRUCTORS //

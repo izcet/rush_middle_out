@@ -105,7 +105,7 @@ bool Enemy::checkCollision(void)
 	char c;
 	bool hit = false;
 
-	mvwscanw(enemy, this->_posY, this->_posX, "%c", c);
+	mvwscanw(Game::enemyWin, this->_posY, this->_posX, "%c", c);
 	hit = this->checkCollisionObject(c);
 	return (hit);
 }

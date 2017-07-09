@@ -31,7 +31,7 @@ bool AGameEntity::move(int x, int y)
     {
       this->_posX += x;
       this->_posY += y;
-      mvscanw(this->_posY, this->_posX, fmt.c_str() ,this->pos);
+      // mvscanw(this->_posY, this->_posX, fmt  ,this->pos);
       if (pos == 'X')
 	{
 	  this->_lives--;
