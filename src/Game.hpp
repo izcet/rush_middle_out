@@ -1,3 +1,4 @@
+#include <ncurses.h>
 #ifndef GAME_HPP
 #define GAME_HPP
 
@@ -18,6 +19,7 @@ public:
   void launch();
   void play();
 
+  static WINDOW* playerWin;
   static  int score;
   static int maxY;
   static int maxX;
