@@ -28,6 +28,7 @@ public:
   bool checkCollision(void);
   void _initValue(void);
   void doAction(void);
+  void drawMissile(void) const;
   
 private:
   std::string name;
@@ -37,3 +38,4 @@ private:
 // std::ostream	&operator<<(std::ostream &o, Enemy const &c);
 
 #endif
+

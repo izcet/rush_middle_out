@@ -79,6 +79,11 @@ bool Missile::takeAction(void)
   return(hit);
 }
 
+void Missile::drawMissile(void) const
+{
+  wvwprintw(Game::missileWin, this->_posY, this->_posX, "%c", this->_symbol);
+}
+
 
 // INIT //
 

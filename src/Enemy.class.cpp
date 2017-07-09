@@ -99,7 +99,7 @@ void Enemy::doAction(void)
   this->move();
   hit = this->checkCollision();
   if (hit)
-    wprintw(enemyWin, "%c", this->_symbol);
+    wvwprintw(Game::enemyWin,this->_posY, this->_posX, "%c", this->_symbol);
   
 }
 
