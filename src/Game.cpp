@@ -86,7 +86,7 @@ void Game::play() {
     wrefresh(_win);
     ch = 0;
   }
-  wclear(map.background);
+  wclear(map.getWin());
 }
 /*
 GameEntity		*Game::getEntityAt(int x, int y)

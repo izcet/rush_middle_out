@@ -10,11 +10,11 @@
 static bool colors = TRUE;
 static unsigned char  movement = 0;
 static unsigned int state = 42424242;
-
+static WINDOW *background;
 
 Environment::Environment( void )
 {
-    this->background = newwin(Game::maxY - 2, Game::maxX - 2, 1, 1);
+    background = newwin(Game::maxY - 2, Game::maxX - 2, 1, 1);
     return ;
 }
 unsigned int    Environment::starShift(void)/* random number generator */
@@ -29,38 +29,43 @@ unsigned int    Environment::starShift(void)/* random number generator */
 }
 void    Environment::starsRnd( void )/* Displays the stars randomly in terminal*/
 {
-    getmaxyx(this->background, Game::maxY, Game::maxX);
+    getmaxyx(background, Game::maxY, Game::maxX);
     start_color();			/* Start color 			*/
     init_pair(1, COLOR_BLUE, COLOR_BLACK);
     init_pair(2, COLOR_MAGENTA, COLOR_BLACK);
     init_pair(3, COLOR_WHITE, COLOR_BLACK);
     if (colors)
     {
-        wattron(this->background, COLOR_PAIR(1));
-        mvwaddch(this->background, 0, (starShift() % Game::maxX), '*');
+        wattron(background, COLOR_PAIR(1));
+        mvwaddch(background, 0, (starShift() % Game::maxX), '*');
         colors = FALSE;
         movement++;
     }
     else
     {
-        wattron(this->background, COLOR_PAIR(2));
-        mvwaddch(this->background, 0, (starShift() % Game::maxX), '.');
+        wattron(background, COLOR_PAIR(2));
+        mvwaddch(background, 0, (starShift() % Game::maxX), '.');
         colors = TRUE;
         movement++;
     }
     if (movement == 10)
     {
-        wattron(this->background, COLOR_PAIR(3));
-        mvwaddch(this->background, 0, (starShift() % Game::maxX), '0');
+        wattron(background, COLOR_PAIR(3));
+        mvwaddch(background, 0, (starShift() % Game::maxX), '0');
         movement = 0;
     }
-    wattroff(this->background, COLOR_PAIR(1));
-    wattroff(this->background, COLOR_PAIR(2));
-    wattroff(this->background, COLOR_PAIR(3));
-    scrollok(this->background, TRUE);
-    wscrl(this->background, -1);
-    wrefresh(this->background);
+    wattroff(background, COLOR_PAIR(1));
+    wattroff(background, COLOR_PAIR(2));
+    wattroff(background, COLOR_PAIR(3));
+    scrollok(background, TRUE);
+    wscrl(background, -1);
+    wrefresh(background);
     return ;
+}
+
+WINDOW  *Environment::getWin( void )
+{
+    return background;
 }
 
 Environment::~Environment( void )
