@@ -68,6 +68,11 @@ bool Player::checkCollision(int x, int y)
 	return (hit);
 }
 
+void Player::draw(void) const
+{
+	mvwprintw(Game::playerWin, this->_posY, this->_posX, "%c", this->_symbol);
+}
+
 // OPERATOR OVERLOADS //
 
 Player & Player::operator=(Player const & rhs)
