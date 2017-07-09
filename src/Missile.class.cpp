@@ -6,6 +6,9 @@
  * Author: Sesl, Irhett, Tiny, Bemillie, Searsie
  * ==========================================================================*/
 
+#include "Missile.class.hpp"
+#include "Game.hpp"
+
 // CONSTRUCTORS //
 
 Missile::Missile(void) {
