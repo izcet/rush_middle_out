@@ -32,6 +32,7 @@ public:
   int getPosX(void) const;
   int getPosY(void) const;
   void takeDamage(void);
+  void drawPlayer(void) const;
 
 private:
 	void _initValue(void);

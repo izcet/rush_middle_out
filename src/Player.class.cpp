@@ -56,16 +56,16 @@ bool Player::checkCollisionObject(char c)
 
 //Params same x and y as movement
 
-bool Player::checkCollision(int x, int y)
-{
-	bool hit = false;
-	char d;
+// bool Player::checkCollision(int x, int y)
+// {
+// 	bool hit = false;
+// 	char d;
 
-	d = 'S';
-	mvwscanw(Game::playerWin, y, x, "%c", d);
-	hit = checkCollisionObject(d);
-	return (hit);
-}
+// 	d = 'S';
+// 	mvwscanw(Game::playerWin, y, x, "%c", d);
+// 	hit = checkCollisionObject(d);
+// 	return (hit);
+// }
 
 // OPERATOR OVERLOADS //
 
@@ -153,4 +153,8 @@ void Player::takeDamage(void)
   this->_lives--;
 }
 
+void Player::drawPlayer(void) const
+{
+  mvwaddch(Game::enemyWin, this->_posY, this->_posX, this->_symbol);
 
+}

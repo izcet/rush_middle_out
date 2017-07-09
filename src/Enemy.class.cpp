@@ -99,19 +99,20 @@ void Enemy::doAction(void)
   this->move();
   hit = this->checkCollision();
   if (hit)
-    wvwprintw(Game::enemyWin,this->_posY, this->_posX, "%c", this->_symbol);
+     mvwaddch(Game::enemyWin, this->_posY, this->_posX, this->_symbol);
+    
   
 }
 
-bool Enemy::checkCollision(void)
-{
-	char c;
-	bool hit = false;
+// bool Enemy::checkCollision(void)
+// {
+// 	char c;
+// 	bool hit = false;
 
-	mvwscanw(stdscr, this->_posY, this->_posX, "%c", c);
-	hit = this->checkCollisionObject(c);
-	return (hit);
-}
+// 	//	mvwscanw(stdscr, this->_posY, this->_posX, "%c", c);
+// 	hit = this->checkCollisionObject(c);
+// 	return (hit);
+// }
 
 //INIT
 

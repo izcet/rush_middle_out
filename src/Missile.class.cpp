@@ -81,7 +81,7 @@ bool Missile::takeAction(void)
 
 void Missile::drawMissile(void) const
 {
-  wvwprintw(Game::missileWin, this->_posY, this->_posX, "%c", this->_symbol);
+  mvwaddch(Game::enemyWin, this->_posY, this->_posX, this->_symbol);
 }
 
 
