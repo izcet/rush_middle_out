@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 13:56:47 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 15:29:18 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,51 +17,15 @@
 
 Entity			&Entity::operator=(Entity const &old)
 {
-	//std::cout << "Entity Assignment FUCK" << std::endl;
+	// I hope this works the way I think it does
 	this = old;
 	return *this;
 }
 
+// by default an entity will do nothing every turn
 virtual void	Entity::act(World &w)
 {
-	Entity	*e;
-
-	if (this->_alive)
-	{
-		switch (this->_direction) {
-			case NORTH:
-				e = this->getUp(w);
-				if (e)
-					collision(this, e);
-				else
-					this->moveUp(w);
-				break;
-			case SOUTH:
-				e = this->getDown(w);
-				if (e)
-					collision(this, e);
-				else
-					this->moveDown(w);
-				break;
-			case EAST:
-				e = this->getRight(w);
-				if (e)
-					collision(this, e);
-				else
-					this->moveRight(w);
-				break;
-			case WEST:
-				e = this->getLeft(w);
-				if (e)
-					collision(this, e);
-				else
-					this->moveLeft(w);
-				break;
-			default:
-				std::cout << "ENTITY " << this->_sybmol << " is confused!";
-				break;
-		}
-	}
+	(void)w;
 }
 
 virtual char	Entity::getSymbol(void) const
@@ -74,6 +38,16 @@ bool			Entity::isAlive(void) const
 	return (this->_alive);
 }
 
+int				Entity::getX(void) const
+{
+	return (this->_x);
+}
+
+int				Entity::getY(void) const
+{
+	return (this->_y);
+}
+
 void			Entity::die(void)
 {
 	this->_alive = false;
@@ -81,42 +55,60 @@ void			Entity::die(void)
 
 void			collision(Entity &a, Entity &b)
 {
-	// PROBABLY NOT THE RIGHT SYNTAX, DEBUG LATER
-	if (a && b)
-	{
-		a->die();
-		b->die();
-	}
+	a.die();
+	b.die();
 }
 
 // MOVEMENT HELPERS /////////////////////////////
 
 void			Entity::moveUp(World &w)
 {
-	this->_y = this->_y - 1;
-	w->grid[this->_y][this->_x] = &this;
-	w->grid[this->_y + 1][this->_x] = nullptr;
+	if (this->_y > 0)
+	{
+		this->_y = this->_y - 1;
+		w->grid[this->_y][this->_x] = &this;
+		w->grid[this->_y + 1][this->_x] = nullptr;
+	}
+	else
+		this->die();
 }
 
 void			Entity::moveDown(World &w)
 {
-	this->_y = this->_y + 1;
-	w->grid[this->_y][this->_x] = &this;
-	w->grid[this->_y - 1][this->_x] = nullptr;
+	if (this->_y < w.getHeight())
+	{
+		this->_y = this->_y + 1;
+		w->grid[this->_y][this->_x] = &this;
+		w->grid[this->_y - 1][this->_x] = nullptr;
+	}
+	else
+		this->die();
 }
 
 void			Entity::moveLeft(World &w)
 {
-	this->_x = this->_x - 1;
-	w->grid[this->_y][this->_x] = &this;
-	w->grid[this->_y][this->_x + 1] = nullptr;
+	if (this->_x > 0)
+	{
+		this->_x = this->_x - 1;
+		w->grid[this->_y][this->_x] = &this;
+		w->grid[this->_y][this->_x + 1] = nullptr;
+	}
+	else
+		this->die();
+
 }
 
 void			Entity::moveUp(World &w)
 {
-	this->_x = this->_x + 1;
-	w->grid[this->_y][this->_x] = &this;
-	w->grid[this->_y][this->_x - 1] = nullptr;
+	if (this->_x < w.getWidth())
+	{
+		this->_x = this->_x + 1;
+		w->grid[this->_y][this->_x] = &this;
+		w->grid[this->_y][this->_x - 1] = nullptr;
+	}
+	else
+		this->die();
+
 }
 
 // LOCATION COLLISION HELPERS //////////////////////

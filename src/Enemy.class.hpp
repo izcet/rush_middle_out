@@ -7,6 +7,10 @@
 # include "Entity.class.hpp"
 # include "World.cass.hpp"
 
+// enemy type is 'e'
+// enemy _symbol is '8' or user-defined
+// enemy _symbol is '$' on death
+
 class Enemy : public Entity{
 
 public:
@@ -22,8 +26,6 @@ public:
 	virtual char	getSymbol(void) const;
 
 private:
-	Enemy(Enemy const & old);
-
 	int		_moveStep; // 0
 	int		_moveMax; // 10
 	// move every 10 frames or cycles

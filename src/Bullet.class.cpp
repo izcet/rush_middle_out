@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 13:59:48 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 14:04:34 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 14:29:42 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,8 @@
 #include "World.class.hpp"
 #include "Entity.class.hpp"
 
-Bullet::Bullet(void) :
-	_alive(false),
-	_x(-1),
-	_y(0),
-	_direction(NORTH),
-	_symbol('!')
-{
-	return;
-}
-
 Bullet::Bullet(int direction, int x, int y) : 
+		type('b');
 		_alive(true),
 		_x(x),
 		_y(y),
@@ -90,27 +81,24 @@ virtual char	getSymbol(void) const
 
 // NOT MESSED WITH YET
 
-Bullet::Bullet(Bullet const &old) {
-	std::cout << "Bullet Copy Constructor" << std::endl;
-	*this = old;
-	return;
-}
-
 Bullet::~Bullet(void) {
 	std::cout << "Bullet Destructor" << std::endl;
 	return;
 }
 
-Bullet				&Bullet::operator=(Bullet const &old)
+Bullet::Bullet(void) :
+	type('b');
+	_alive(false),
+	_x(-1),
+	_y(0),
+	_direction(NORTH),
+	_symbol('b')
 {
-	std::cout << "Bullet Assignment Operator" << std::endl;
-	if (this != &old)
-		this->_privateFoo = old.getFoo();
-	return *this;
+	return;
 }
 
 std::ostream	&operator<<(std::ostream &o, Bullet const &c)
 {
-	o << "To String Function of Bullet: " << c.getFoo();
+	o << "To String Function of Bullet"
 	return (o);
 }

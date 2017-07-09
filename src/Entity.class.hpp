@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 14:20:31 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 15:28:39 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # define SOUTH 1
 # define EAST 2
 # define WEST 3
+
+// # define BULLET		'b'
+// # define ENEMY		'e'
+// # define PLAYER		'p'
+// # define ASTEROID	'a'
+
 
 class Entity {
 
@@ -40,7 +46,9 @@ class Entity {
 		// these are the same for all entities
 		virtual	char	getSymbol(void) const;
 		bool			isAlive(void) const;
-	
+		int				getX(void) const;
+		int				getY(void) const;
+
 		void			die(void);
 		void			collision(Entity &a, Entity &b);
 
