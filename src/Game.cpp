@@ -36,6 +36,7 @@ void Game::launch() {
   cbreak();
   noecho();
   keypad(stdscr, TRUE);
+  curs_set(0);
   getmaxyx(stdscr, maxY, maxX);
   printw("window size id %d tall and %d wide", maxY, maxX);
   play();
@@ -46,7 +47,7 @@ void Game::play() {
   Environment map;
   int ch = 0;
   timeout(300);
-  box(stdscr, '|', '_');
+  border(0, 0, 0, 0, 0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
     map.starsRnd();
 
