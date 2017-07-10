@@ -23,13 +23,17 @@ public:
 	Missile(Missile const & src); //canonical
 	Missile(void); //Canonical
 	~Missile(void); //Canonical
-    bool takeAction(void);
+    bool takeAction(WINDOW *wind);
   void drawMissile(WINDOW *wind) const;
   void getHit(void);
     void setIsAlive(bool shot);
   void setPos(int x, int y);
+<<<<<<< HEAD
   void getPosX(void);
   void getPosY(void);
+=======
+  bool getIsAlive(void) const;
+>>>>>>> a62206237918aca9d04608cd9c1b0727ab2fe5cb
 private:
 	void _initValue(void);
 };
