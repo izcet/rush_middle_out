@@ -86,6 +86,7 @@ void Missile::_initValue(void)
 	this->_speed = 1;
 	this->_symbol = '|';
 	this->_lives = 1;
+	this->_isAlive = true;
 }
 
 void Missile::getHit(void)
