@@ -103,7 +103,7 @@ void Player::_initValue(void)
 	this->_symbol = '^';
 	this->_lives = 5;
 	this->_isAlive = true;
-
+	//this->_sprite = "    /\\\n  (  )\n  (  )\n /|/\\|\\\n/_||||_\\";
 }
 
 int Player::getPosX(void) const
@@ -128,13 +128,19 @@ void Player::takeDamage(void)
     
 }
 
-void Player::drawPlayer(WINDOW *enemyWin) const
+void Player::drawPlayer(WINDOW *playerWin) const
 {
-  mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
-
+	std::string _sprite = "  ^  \n / \\\n  \\ \n/  / \n\\ / \n  \\/\n ^ / \n\\ / ";
+	mvwprintw(playerWin,this->_posY, this->_posX, "  ^  ");
+	mvwprintw(playerWin,this->_posY + 1, this->_posX, " / \\ ");
+	mvwprintw(playerWin,this->_posY + 2, this->_posX, " \\ / ");
+	mvwprintw(playerWin,this->_posY + 3, this->_posX, " / \\ ");
+	mvwprintw(playerWin,this->_posY + 4, this->_posX, "/   \\");
+	mvwprintw(playerWin,this->_posY + 5, this->_posX, "\\ ^ /");
+	mvwprintw(playerWin,this->_posY + 6, this->_posX, " V V ");
 }
 
 bool Player::getIsAlive(void) const
-{
+ {
   return(this->_isAlive);
 }
