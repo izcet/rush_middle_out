@@ -5,24 +5,21 @@
  *
  * Author: Sesl, Irhett, Tiny, Bemillie, Searsie
  * ==========================================================================*/
- 
+
 #ifndef GAMEENTITY_CLASS_HPP
-# define GAMEENTITY_CLASS_HPP
-# include <ncurses.h>
-# include <string>
-# include <iostream>
+#define GAMEENTITY_CLASS_HPP
+#include <ncurses.h>
+#include <iostream>
+#include <string>
 
-class AGameEntity
-{
-  
-public:
-
+class AGameEntity {
+ public:
   bool move(int x, int y);
   virtual bool getAlive(void) const;
   virtual void drawToWindow(void) const;
   virtual ~AGameEntity(void) = 0;
-    
-protected:
+
+ protected:
   std::string _name;
   int _posX;
   int _posY;
@@ -33,8 +30,6 @@ protected:
   int _lives;
   bool _isAlive;
   char pos;
-
-  
 };
 
 #endif
@@ -43,6 +38,4 @@ protected:
 // scanf(""%s", str);
 
 // wprintw(x, y, "%s%s%s", str, strw);
-// wscanw(x, y "%c" c); 
-
-
+// wscanw(x, y "%c" c);
