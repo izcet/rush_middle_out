@@ -12,9 +12,9 @@
 // {
 //   char pos;
 //   //std *fmt = "%c";
-  
+
 //   pos = 'p';
-  
+
 //   // if movement results in a collision return false and kill entity;
 //   if (this->_posX + x >= Game::maxX)
 //     {
@@ -26,7 +26,7 @@
 //       mvprintw(this->_posY, this->_posX, "%c", 'X');
 //       return (false);
 //     }
-  
+
 //   else
 //     {
 //       this->_posX += x;
@@ -41,31 +41,23 @@
 //     }
 //   return(true);
 // }
-  
 
-void AGameEntity::drawToWindow(void) const
-{
-  if (this->_isAlive == false)
-    {
-      return ;
-    }
-  mvprintw(this->_posX, this->_posY, "%c", this->_symbol);  // Draw this->AGameEntity at it's x and y after it has moved or not
+void AGameEntity::drawToWindow(void) const {
+  if (this->_isAlive == false) {
+    return;
+  }
+  mvprintw(this->_posX, this->_posY, "%c",
+           this->_symbol);  // Draw this->AGameEntity at it's x and y after it
+                            // has moved or not
   refresh();
 }
 
-bool AGameEntity::getAlive(void) const
-{
-  return (this->_isAlive);
-}
+bool AGameEntity::getAlive(void) const { return (this->_isAlive); }
 
 // bool AGameEntiity::checkCollision(void)
 // {
-  
+
 //   return (true);
 // }
 
-AGameEntity::~AGameEntity(void)
-{
-	return;
-}
-
+AGameEntity::~AGameEntity(void) { return; }
