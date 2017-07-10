@@ -15,6 +15,7 @@ NAME		=	ft_retro
 CXX			=	clang++
 FLAGS		=	-Wall -Werror -Wextra -std=c++98
 
+
 SRC_DIR		=	src
 SRC_FILE	=	main.cpp \
 			GameEntity.class.cpp \

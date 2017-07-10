@@ -26,7 +26,7 @@ class Menu : public Screen {
 		void instantiate_settings(void);
 		void input_loop(int c);
 		MENU *get_menu(void);
-		void print_in_middle(WINDOW *win, int starty, int startx, int width, char *string, chtype color);
+		void print_in_middle(WINDOW *win, int starty, int startx, int width, std::string string, chtype color);
 		//Menu & operator=(Menu const & rhs);
 
 	protected:

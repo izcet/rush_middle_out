@@ -11,12 +11,13 @@
 #include "Enemy.class.hpp"
 #include "Player.class.hpp"
 #include "Game.hpp"
-
+#include "Environment.hpp"
 // DEFAULT CONSTUCTOR
 Enemy::Enemy(void) {
+	Environment yes;
 	this->_initValue();
-	this->_posX = rand() % Game::maxX;
-	this->_posY = rand() % Game::maxY;
+	this->_posX = yes.starShift() % Game::maxX;
+	this->_posY = yes.starShift() % Game::maxY;
 	return;
 }
 
@@ -30,7 +31,7 @@ Enemy::Enemy(int x, int y) {
 
 // CONSTRUCTOR COPYING EXISTING ENEMY
 Enemy::Enemy(Enemy const &old) {
-	std::srand(std::time(NULL));
+	//	std::srand(std::time(NULL));
 	*this = old;
 	return;
 }

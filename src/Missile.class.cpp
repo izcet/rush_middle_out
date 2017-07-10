@@ -9,7 +9,7 @@
 #include "Missile.class.hpp"
 #include "Game.hpp"
 #include "Player.class.hpp"
-
+#include <stdlib.h>
 // CONSTRUCTORS //
 
 Missile::Missile(void) {
@@ -25,7 +25,7 @@ Missile::Missile(int x, int y) {
 }
 
 Missile::Missile(Missile const &old) {
-	std::srand(std::time(NULL));
+	std::srand(time(NULL));
 	*this = old;
 	return;
 }

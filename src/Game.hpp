@@ -6,7 +6,7 @@
 class Game {
 public:
   //! Default constructor
-  Game(WINDOW *win);
+  Game();
 
   //! Copy constructor
   Game(const Game &other);
@@ -35,7 +35,6 @@ public:
 
  protected:
  private:
-    WINDOW *_win;
 
  // GameEntity		**_grid;
  // Enemy			*_enemies;

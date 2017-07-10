@@ -5,15 +5,15 @@
  *
  * Author: Sesl, Irhett, Tiny, Bemillie, Searsie
  * ==========================================================================*/
- 
+
 #include "Game.hpp"
 #include <ncurses.h>
 //#include "Enemy.class.hpp"
+#include "Enemy.class.hpp"
 #include "Environment.hpp"
 #include "GameEntity.class.hpp"
-#include "Player.class.hpp"
-#include "Enemy.class.hpp"
 #include "Missile.class.hpp"
+#include "Player.class.hpp"
 
 int Game::score = 0;
 int Game::maxX = 0;
@@ -22,11 +22,7 @@ bool Game::debug = false;
 WINDOW *Game::enemyWin = NULL;
 WINDOW *Game::playerWin = NULL;
 
-
-Game::Game(WINDOW *win)
-{
-  _win = win;
-}
+Game::Game() {}
 
 Game::Game(const Game &other) { *this = other; }
 
@@ -55,7 +51,7 @@ void Game::play() {
   keypad(map.getWin(), TRUE);
   nodelay(map.getWin(), TRUE);
   timeout(300);
-  border(0,0,0,0,0,0,0,0);
+  border(0, 0, 0, 0, 0, 0, 0, 0);
   Player playerOne(maxX / 2, maxY - 10);
   playerWin = newwin(0, 0, 0, 0);
   Enemy enemy1(maxX / 2, maxY / 2);
@@ -64,74 +60,38 @@ void Game::play() {
   while ((ch = getch()) != 'q') {
     map.starsRnd();
     playerOne.move(ch);
-    // every X cycles, spawn a new enemy at a random position on the spawn wall.
-    // this.spawnEnemies();
-
-    // // This Game will have an array of bullets.
-    // // This function just needs to loop through the array and move each
-    // bullet once,
-    // // check for collisions and change is_alive as needed
-    // this.bulletsAct();
-    //printw("Shoot missile! %d", ch);
-    if (ch == 32)
-    {
+    if (ch == 32) {
       printw("Shoot missile!");
-      //Missile bullet(playerOne.getPosY(), playerOne.getPosX());
+      // Missile bullet(playerOne.getPosY(), playerOne.getPosX());
     }
-
-    // // Do what for and mean to be. Fire lasers, do some damage! Move the
-    // player!
-    // this.playerAct(ch);
-
-    // // Loop through the array of Enemies and have them move, shoot, etc.
-    // this.enemiesAct();
-
-    // this.doStarStuff();
-
-    // this.drawEverything();
-
-    // // every X cycles, spawn a new enemy at a random position on the spawn
-    // wall.
-    // this.spawnEnemies();
-
-    // // loop through all enemies, bullets, and players, and remove all
-    // entities with
-    // // is_alive == false;
-    // this.cleanup();
-
-  wclear(map.getWin());
-    for (int i = 0; i < 10; i++)
-    {
+    wclear(map.getWin());
+    for (int i = 0; i < 10; i++) {
       if (playerOne.getPosX() == massEnemy[i].getPosX() &&
-            playerOne.getPosY() == massEnemy[i].getPosY())
-      {
-        printw("Missile hit target!");;
+          playerOne.getPosY() == massEnemy[i].getPosY()) {
+        printw("Missile hit target!");
+        ;
       }
     }
-    
-      if (playerOne.getPosX() == enemy1.getPosX() &&
-            playerOne.getPosY() == enemy1.getPosY())
-      {
-        playerOne.takeDamage();
-      }
+    if (playerOne.getPosX() == enemy1.getPosX() &&
+        playerOne.getPosY() == enemy1.getPosY()) {
+      playerOne.takeDamage();
+    }
 
-      wclear(enemyWin);
-      enemy1.doAction(enemyWin);
+    enemy1.doAction(enemyWin);
 
-      for (int i = 0; i < 10; i++)
-      {
-        massEnemy[i].doAction(enemyWin);
-      }
+    for (int i = 0; i < 10; i++) {
+      massEnemy[i].doAction(enemyWin);
+    }
 
-      overlay(enemyWin, stdscr);
-      wclear(playerWin);
+    overlay(enemyWin, stdscr);
+    wclear(playerWin);
 
-      playerOne.drawPlayer(playerWin);
-      overlay(playerWin, stdscr);      
+    playerOne.drawPlayer(playerWin);
+    overlay(playerWin, stdscr);
     refresh();
     ch = 0;
   }
-  //delete  enemy1;
+  // delete  enemy1;
 }
 /*
 GameEntity		*Game::getEntityAt(int x, int y)

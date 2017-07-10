@@ -28,8 +28,8 @@ Menu::Menu(int one) : Screen(one)
 	while((c = wgetch(_my_win)) != KEY_F(1))
 	{
 		input_loop(c);
-        wrefresh(_my_win);
-	}	
+        overlay(_my_win, stdscr);
+	}
 
 	/* Unpost and free all the memory taken up */
 	unpost_menu(_my_menu);
@@ -42,13 +42,13 @@ Menu::~Menu(void)
 {
 	wclear(_my_win);
 	wprintw(_my_win, "Good bye :[\n");
-	wrefresh(_my_win);
+	overlay(_my_win, stdscr);
 	sleep(1);
 }
 
 void Menu::input_loop(int c)
 {
-	Game test(get_window());
+	Game test;
 
 	switch(c)
 	{	case KEY_DOWN:
@@ -60,8 +60,8 @@ void Menu::input_loop(int c)
 	case '\n':
 		return;
 	case 'm':
-		test.launch();
 		wclear(_my_win);
+		test.launch();
 		break;
 	}
 }
@@ -79,7 +79,7 @@ void Menu::instantiate_settings(void)
 	keypad(stdscr, TRUE);
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	_n_choices = ARRAY_SIZE(choices);
-	_my_items = (ITEM**)calloc(_n_choices, sizeof(ITEM *));
+	ITEM **_my_items = new ITEM*[sizeof(ITEM*)];
 	for(i = 0; i < _n_choices; i++)
 		_my_items[i] = new_item(choices[i], desc[i]);
 	_my_menu = new_menu((ITEM**)_my_items);
@@ -94,12 +94,12 @@ void Menu::instantiate_settings(void)
 	mvwhline(_my_win, 2, 1, ACS_HLINE, 38);
 	mvwaddch(_my_win, 2, 39, ACS_RTEE);
 	mvprintw(LINES - 2, 2, "Press Return to Exit");
-	refresh();
+	//refresh();
 	post_menu(_my_menu);
-	wrefresh(_my_win);
+	overlay(_my_win, stdscr);
 }
 
-void Menu::print_in_middle(WINDOW *win, int starty, int startx, int width, char *string, chtype color)
+void Menu::print_in_middle(WINDOW *win, int starty, int startx, int width, std::string string, chtype color)
 {
 	int length, x, y;
 	float temp;
@@ -114,13 +114,13 @@ void Menu::print_in_middle(WINDOW *win, int starty, int startx, int width, char 
 	if(width == 0)
 		width = 80;
 
-	length = strlen(string);
+	length = string.length();
 	temp = (width - length)/ 2;
 	x = startx + (int)temp;
 	wattron(win, color);
-	mvwprintw(win, y, x, "%s", string);
+	mvwprintw(win, y, x, "%s", string.c_str());
 	wattroff(win, color);
-	refresh();
+	//refresh();
 }
 
 void Menu::PrintOptions(void)
