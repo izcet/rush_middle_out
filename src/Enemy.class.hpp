@@ -28,9 +28,11 @@ class Enemy : public AGameEntity {
   void getHit(void);
   void _initValue(void);
   void doAction(WINDOW *enemyWin);
+  void resurrect(void);
   int getPosX(void) const;
   int getPosY(void) const;
   int getAmount(void) const;
+  bool getIsAlive(void) const;
 
  private:
   static int _amount;  // amount of enemies

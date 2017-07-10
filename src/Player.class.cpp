@@ -30,6 +30,16 @@ bool Player::move(int key) {
   return (true);
 }
 
+void Player::setScore(int score)
+{
+  this->_score += score;
+}
+
+int Player::getScore(void) const
+{
+  return this->_score;
+}
+
 // OPERATOR OVERLOADS //
 
 Player &Player::operator=(Player const &rhs) {
@@ -91,6 +101,7 @@ void Player::_initValue(void)
   this->_symbol = '^';
   this->_lives = 5;
   this->_isAlive = true;
+  this->_score = 0;
 }
 
 int Player::getPosX(void) const { return (this->_posX); }

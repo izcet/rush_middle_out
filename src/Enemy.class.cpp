@@ -83,6 +83,13 @@ void Enemy::doAction(WINDOW *enemyWin) {
   mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
 }
 
+void Enemy::resurrect(void)
+{
+  this->_posX = yes.starShift() % (Game::maxX - 1);
+  this->_posY = (yes.starShift() % Game::maxY / 2) + 2;
+  this->_isAlive = true;
+}
+
 void Enemy::getHit(void) {
   this->_lives--;
   this->_isAlive = false;
@@ -109,5 +116,7 @@ int Enemy::getPosX(void) const { return (this->_posX); }
 int Enemy::getPosY(void) const { return (this->_posY); }
 
 int Enemy::getAmount(void) const { return (this->_amount); }
+
+bool Enemy::getIsAlive(void) const { return (this->_isAlive); }
 
 int Enemy::_amount = 10;
