@@ -86,6 +86,7 @@ void Game::play() {
               mag[i].getPosY() == massEnemy[x].getPosY()) {
             mag[i].setIsAlive(false);
             massEnemy[x].getHit();
+            playerOne._setScore(playerOne._getScore());
           }
         }
       }
