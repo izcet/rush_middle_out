@@ -82,9 +82,11 @@ bool Enemy::move(void)
 
 void Enemy::doAction(WINDOW *enemyWin)
 {
-  bool hit = false;
-  hit = this->move();
-  mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol); 
+	if (!this->_isAlive)
+		return;
+	bool hit = false;
+	hit = this->move();
+	mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol); 
 }
 
 void Enemy::getHit(void)
