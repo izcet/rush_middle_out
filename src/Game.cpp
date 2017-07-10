@@ -120,7 +120,7 @@ void Game::play() {
     overlay(playerWin, stdscr);
     refresh();
     ch = 0;
-    usleep(35000);
+    usleep(16000);
   }
   // delete  enemy1;
 }
