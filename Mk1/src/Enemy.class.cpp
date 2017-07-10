@@ -64,8 +64,8 @@ Enemy &Enemy::operator=(Enemy const &old) {
 // }
 
 bool Enemy::move(void) {
-  if (this->_posX + this->_dirX == Game::maxX ||
-      this->_posX + this->_dirX == 0) {
+  if (this->_posX + this->_dirX + 5 == Game::maxX ||
+      this->_posX + this->_dirX - 1 == 0) {
     this->_dirX *= -1;
     this->_dirY = 1;
   } else
@@ -79,12 +79,30 @@ void Enemy::doAction(WINDOW *enemyWin) {
   if (!this->_isAlive) return;
   bool hit = false;
   hit = this->move();
-  mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
+  init_pair(5, COLOR_RED, COLOR_BLACK);
+  if (!this->_isAlive) return;
+  wattron(enemyWin, COLOR_PAIR(6));
+  mvwprintw(enemyWin,this->_posY, this->_posX, "   _   ");
+  wattron(enemyWin, COLOR_PAIR(5));
+  mvwprintw(enemyWin,this->_posY + 1, this->_posX, "__/_\\__ ");
+  wattroff(enemyWin, COLOR_PAIR(5));
+  wattroff(enemyWin, COLOR_PAIR(6));
+
+}
+
+void Enemy::resurrect(void)
+{
+  this->_posX = rand() % (Game::maxX - 1);
+  this->_posY = rand() % (Game::maxY / 2) + 2;
+  this->_isAlive = true;
 }
 
 void Enemy::getHit(void) {
   this->_lives--;
   this->_isAlive = false;
+  this->_posY = 1;
+  this->_posX = 1;
+  std::cout << '';
 }
 
 // INIT
@@ -97,7 +115,7 @@ void Enemy::_initValue(void) {
   this->_dirY = 0;
   this->_speed = 1;
   this->_symbol = 'X';
-  this->_lives = 1;
+  this->_lives = 5;
   this->_isAlive = true;
 }
 
@@ -106,5 +124,7 @@ int Enemy::getPosX(void) const { return (this->_posX); }
 int Enemy::getPosY(void) const { return (this->_posY); }
 
 int Enemy::getAmount(void) const { return (this->_amount); }
+
+bool Enemy::getIsAlive(void) const { return (this->_isAlive); }
 
 int Enemy::_amount = 10;

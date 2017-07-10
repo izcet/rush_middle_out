@@ -30,6 +30,16 @@ bool Player::move(int key) {
   return (true);
 }
 
+void Player::setScore(int score)
+{
+  this->_score += score;
+}
+
+int Player::getScore(void) const
+{
+  return this->_score;
+}
+
 // OPERATOR OVERLOADS //
 
 Player &Player::operator=(Player const &rhs) {
@@ -89,8 +99,9 @@ void Player::_initValue(void)
   this->_dirY = 1;
   this->_speed = 1;
   this->_symbol = '^';
-  this->_lives = 1;
+  this->_lives = 5;
   this->_isAlive = true;
+  this->_score = 0;
 }
 
 int Player::getPosX(void) const { return (this->_posX); }
@@ -108,12 +119,17 @@ void Player::takeDamage(void)
 
 void Player::drawPlayer(WINDOW *playerWin) const
 {
-	std::string _sprite = "  ^  \n / \\\n  \\ \n/  / \n\\ / \n  \\/\n ^ / \n\\ / ";
-	mvwprintw(playerWin,this->_posY, this->_posX, "  ^  ");
-	mvwprintw(playerWin,this->_posY + 1, this->_posX, " / \\ ");
-	mvwprintw(playerWin,this->_posY + 2, this->_posX, "/ %c \\", '8');
-	mvwprintw(playerWin,this->_posY + 3, this->_posX, "\\ ^ /");
-	mvwprintw(playerWin,this->_posY + 4, this->_posX, " V V ");
+  start_color();
+  init_pair(4, COLOR_YELLOW, COLOR_BLACK);
+  wattron(playerWin, COLOR_PAIR(4));
+  mvwprintw(playerWin,this->_posY, this->_posX, "  ^  ");
+  mvwprintw(playerWin,this->_posY + 1, this->_posX, " / \\ ");
+  mvwprintw(playerWin,this->_posY + 2, this->_posX, "/ %c \\", '8');
+  mvwprintw(playerWin,this->_posY + 3, this->_posX, "\\ ^ /");
+  mvwprintw(playerWin,this->_posY + 4, this->_posX, " V V ");
+  wattroff(playerWin, COLOR_PAIR(4));
 }
 
 bool Player::getIsAlive(void) const { return (this->_isAlive); }
+
+int Player::getLives(void) const { return (this->_lives); }

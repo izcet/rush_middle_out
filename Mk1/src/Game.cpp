@@ -57,10 +57,11 @@ void Game::play() {
   playerWin = newwin(0, 0, 0, 0);
   Enemy enemy1(maxX / 2, maxY / 2);
   Enemy massEnemy[50];
-  Missile mag[500];
-  int magSize = 499;
+  Missile mag[20000];
+  int magSize = 19999;
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
+    
     if (!playerOne.getIsAlive())
       {
 	wclear(stdscr);
@@ -79,14 +80,17 @@ void Game::play() {
 	}
       // Missile bullet(playerOne.getPosY(), playerOne.getPosX());
     }
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < 20000; i++) {
       if (mag[i].getIsAlive()) {
-        for (int x = 0; x < 50; x++) {
-          if (mag[i].getPosX() == massEnemy[x].getPosX() &&
-              mag[i].getPosY() == massEnemy[x].getPosY()) {
-            mag[i].setIsAlive(false);
-            massEnemy[x].getHit();
-          }
+	for (int y = - 2; y <= 2; y++) {	  
+	  for (int x = 0; x < 50; x++) {
+	    if (mag[i].getPosX() == massEnemy[x].getPosX() + y &&
+		mag[i].getPosY() == massEnemy[x].getPosY() + 2) {
+	      mag[i].setIsAlive(false);
+	      massEnemy[x].getHit();
+	      playerOne.setScore(1);
+	    }
+	  }
         }
       }
       mag[i].takeAction(playerWin);
@@ -100,19 +104,23 @@ void Game::play() {
 	massEnemy[i].getHit();
 	playerOne.takeDamage();
       }
+      if (!massEnemy[i].getIsAlive()) {
+	massEnemy[i].resurrect();
+      }	
       massEnemy[i].doAction(enemyWin);
     }
     overlay(enemyWin, stdscr);
     wclear(playerWin);
-    for (int i = 0; i <= 500; i++) {
+    for (int i = 0; i <= 20000; i++) {
       if (mag[i].getIsAlive()) mag[i].takeAction(playerWin);
     }
-
+    mvwprintw(playerWin, 2, 2, " lives: %d", playerOne.getLives());
+    mvwprintw(playerWin, 3, 2, " score: %d", playerOne.getScore());
     playerOne.drawPlayer(playerWin);
     overlay(playerWin, stdscr);
     refresh();
     ch = 0;
-    usleep(35000);
+    usleep(16000);
   }
   // delete  enemy1;
 }

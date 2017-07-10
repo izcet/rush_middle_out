@@ -69,7 +69,10 @@ bool Missile::takeAction(WINDOW *wind) {
 }
 
 void Missile::drawMissile(WINDOW *wind) const {
+  init_pair(6, COLOR_GREEN, COLOR_BLACK);
+  wattron(wind, COLOR_PAIR(6));
   if (this->_isAlive) mvwaddch(wind, this->_posY, this->_posX, this->_symbol);
+  wattroff(wind, COLOR_PAIR(6));
 }
 
 // INIT //
@@ -79,7 +82,7 @@ void Missile::_initValue(void) {
   this->_posX = Game::maxX / 2;
   this->_posY = Game::maxY;
   this->_speed = 1;
-  this->_symbol = '|';
+  this->_symbol = ':';
   this->_lives = 1;
   this->_isAlive = false;
 }

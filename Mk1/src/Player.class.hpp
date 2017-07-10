@@ -33,16 +33,13 @@ class Player : public AGameEntity {
   void takeDamage(void);
   void drawPlayer(WINDOW *enemyWin) const;
   bool getIsAlive(void) const;
+  int getLives(void) const;
+  void setScore(int score);
+  int getScore(void) const;
 
  private:
   void _initValue(void);
+  int _score;
 };
 
 #endif
-
-
-  //   /\
-  //  (  )
-  //  (  )
-  // /|/\|\
-  ///_||||_\
