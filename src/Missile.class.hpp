@@ -28,6 +28,8 @@ public:
   void getHit(void);
     void setIsAlive(bool shot);
   void setPos(int x, int y);
+  void getPosX(void);
+  void getPosY(void);
 private:
 	void _initValue(void);
 };
