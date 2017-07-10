@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Enemy.class.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/09 17:18:56 by irhett            #+#    #+#             */
+/*   Updated: 2017/07/09 17:19:08 by irhett           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include <string>
 #include "Enemy.class.hpp"
@@ -27,8 +39,8 @@ Enemy::Enemy(char symbol) :
 	_alive(true),
 	_y(0),
 	_direction(SOUTH),
-	_symbol(symbol);
-_moveStep(0),
+	_symbol(symbol),
+	_moveStep(0),
 	_moveMax(10)
 {
 	int		random;

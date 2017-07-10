@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/08 22:19:42 by dubious          ###   ########.fr       */
+/*   Updated: 2017/07/09 17:15:01 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,20 @@ List			&List::operator=(List const &old)
 	std::cout << "List Assignment Operator" << std::endl;
 	if (this != &old)
 	{
-			this->_empty = old.isEmpty();
-			this->_ent = old.getEnt();
+		this->_empty = old.isEmpty();
+		this->_ent = old.getEnt();
 	}
 	return *this;
 }
 
 bool			List::isEmpty(void) const
 {
-		return (this->_empty);
+	return (this->_empty);
 }
 
 Entity			*getEnt(void) const
 {
-		return (this->_ent);
+	return (this->_ent);
 }
 
 std::ostream	&operator<<(std::ostream &o, List const &c)

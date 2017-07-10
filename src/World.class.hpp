@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 00:03:40 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 15:33:59 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 17:12:50 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ class World {
 		World			&operator=(World const &old);
 
 		void			_act(List *Entities);
-		void			_playerInput(void/*args*/); // input args?
+		void			_takeInput(void/*args*/); // input args?
 		bool			_cleanup(void);
+		List			*_clean(List *Entities);
+		void			_deleteList(List *ent);
+		List			*_addList(List *li, Entity *ent);
 
 
 		int				_width;
@@ -53,7 +56,7 @@ class World {
 
 		List			*_Bullets;
 		List			*_Enemies;
-		Entity			*_Player;
+		Player			*_Player;
 
 };
 

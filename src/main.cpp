@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 15:30:55 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 15:31:47 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 17:24:25 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,24 @@
 
 int main(void)
 {
-		World	w(20, 40);
-		bool	going;
-		// update to take window parameters rather than hardcoded
+	World	w(20, 40); // update to take window size parameters
 
-		while ((going = World.doCycle(void)))
+	bool	going;
+	int		count;
+
+	count = 0;
+	while ((going = World.doCycle(void)))
+	{
+		count++;
+		if (count >= 10)
 		{
-				//add enemies
-				// window.clear;
-				// window.drawStars;
-				// window.drawEntities;
+			World.addEnemy(5);
+			count = 0;
 		}
-		// game over;
-  return (0);
+		// window.clear;
+		// window.drawStars;
+		// window.drawEntities;
+	}
+	// game over;
+	return (0);
 }

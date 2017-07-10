@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 00:03:40 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 15:36:01 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 17:22:59 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 #include <string>
 #include "World.class.hpp"
 
-World::World(void) : _width(0), _height(0) {
-	std::cout << "DO NOT CALL ME" << std::endl;
-	return;
-}
-
-World::World(int height, int width) : _height(height), _width(width) {
+World::World(int height, int width) :
+	_height(height),
+	_width(width)
+{
 	int		x;
 	int		y;
-	
+
 	this->grid = new Entity*[height][width];
 	y = 0;
 	while (y < height)
@@ -32,37 +30,20 @@ World::World(int height, int width) : _height(height), _width(width) {
 			this->grid[y][x++] = nullptr;
 		y++;
 	}
-	this->payer = new Player();
-
-	
-
-	// generate 2d array from width and height;
-	// generate empty list of bullets;
-	// generate emptyu list of enemies;
-	// spawn the player and put them at the bottom center of the map
-
-	std::cout << "World Parametric Constructor" << std::endl;
-	return;
-}
-
-World::World(World const &old) {
-	std::cout << "SUCK A DICK GRANDPA" << std::endl;
-	*this = old;
+	this->_Player = new Player(width / 2, height / 2);
+	this->grid[this->_Player.getY()][this->_Player.getX()] = this->_Player;
+	this->_Bullets = new List();
+	this->_Enemies = new List();
 	return;
 }
 
 World::~World(void) {
-	// flesh out later. clean up all the classes
+	this->_deleteList(this->_Bullets);
+	this->_deleteList(this->_Enemies);
+	delete this->_Player;
+	delete this->grid;
 	std::cout << "World Destructor" << std::endl;
 	return;
-}
-
-World			&World::operator=(World const &old)
-{
-	std::cout << "DON'T EVEN THINK ABOUT IT" << std::endl;
-	if (this != &old)
-		this->_privateFoo = old.getFoo();
-	return *this;
 }
 
 void			World::addEnemy(void)
@@ -75,15 +56,19 @@ void			World::addEnemy(void)
 
 void			World::addEnemy(int x)
 {
-	Enemy	*e = new Enemy(); // fix this
-	// add it to the list
-	// add it to the grid
+	Enemy	*e;
+
+	if (this->grid[0][x])
+		return;
+	e = new Enemy(x);
+	this->grid[e->getY()][e->getX] = e;
+	this->_Enemies = this->_addList(this->_Enemies, e);
 }
 
 void			World::addBullet(Bullet &b)
 {
-
-
+	this->grid[b->getY()][b->getX] = b;
+	this->_Bullets = this->_addList(this->_Bullets, b);
 }
 
 int				World::getWidth(void) const
@@ -101,7 +86,7 @@ bool			World::doCycle(void) // maybe this is going to take inputs
 	bool	ret;
 
 	this->_act(this->_Bullets);
-	// take inputs and set this->key here
+	this->_takeInput(); ///////////////???
 	this->_Player.act(this);
 	this->_act(this->_Enemies);
 	ret = this->_cleanup();
@@ -110,46 +95,87 @@ bool			World::doCycle(void) // maybe this is going to take inputs
 
 void			World::_act(List *ent)
 {
-	List	*temp;
-
-	temp = ent;
-	while (!temp.isEmpty())
+	if (!temp.isEmpty())
 	{
+		this->_act(ent->next);
 		ent.getEnt().act();
-		temp = temp.next;
 	}
 }
 
-void			World::_playerInput(void) // probably going to take args
+void			World::_takeInput(void) // probably going to take args
 {
-	if (keys fuck shit shuffle move)
-	{
-		player. move the fuck around()
-	}
-	if (keys fire lasers shit)
-		player.shootgunsdodamage;
-
-	if (player.crashed into shit)
-	{
-		player.loseLife();
-		if (player.lives == 0)
-			return (false);
-	}
-	return (true);
+	// brett,
+	// brett i...
+	// i need you.
 }
 
 bool			World::_cleanup(void)
 {
-	//loop through bullets and delete any that ! this->_isAlive;
-	// loop through enemies and do the same shit
-	// it's a linked list so it shouldn't be too hard, just listdel
-	// then delete the entity that is contained. or delete the entity first.
-	// but also, from that entity, delete the pointer in world->grid[ent_y][ent_x]
-	return (true); // actually return if the player is still alive or not
+	this->_Bullets = this->_clean(this->_Bullets);
+	this->_Enemies = this->_clean(this->_Enemies);
+	return (this->_Player.isAlive());
 }	
+
+List			*World::_clean(List *ent)
+{
+	List	*next;
+
+	if (ent->isEmpty())
+		return (ent);
+	if (ent->getEnt().isAlive())
+	{
+		ent->next = this._clean(ent->next);
+		return (ent);
+	}
+	next = ent->next;
+	this->grid[ent->getEnt()->getY()][ent->getEnt()->getX()] = nullptr;
+	delete ent->getEnt();
+	delete ent;
+	return (next);
+}
+
+void			World::_deleteList(List *ent)
+{
+	if (!ent->isEmpty())
+	{
+		this->_deleteList(ent->next());
+		delete (ent->getEnt());
+	}
+	delete (ent);
+}
+
+List			*World::_addList(List *li, Entity *ent)
+{
+	List	*node;
+
+	node = new List(ent);
+	node->next = li;
+	return (node);
+}
+
+///////////////////////////////////////////////////////////////
 
 std::ostream	&operator<<(std::ostream &o, World const &c)
 {
 	o << "To String Function of World: "; // MAYBE FLESH THIS OUT
 	return (o);
+}
+
+World::World(World const &old) {
+	std::cout << "SUCK A DICK GRANDPA" << std::endl;
+	*this = old;
+	return;
+}
+
+World			&World::operator=(World const &old)
+{
+	std::cout << "DON'T EVEN THINK ABOUT IT" << std::endl;
+	if (this != &old)
+		this->_privateFoo = old.getFoo();
+	return *this;
+}
+
+World::World(void) : _width(0), _height(0) {
+	std::cout << "DO NOT CALL ME" << std::endl;
+	return;
 }
