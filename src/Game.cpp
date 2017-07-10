@@ -67,11 +67,13 @@ void Game::play() {
     map.starsRnd();
     playerOne.move(ch);
     if (ch == 32) {
-      
-      mag[magSize].setPos(playerOne.getPosX(), playerOne.getPosY());
-      mag[magSize].setIsAlive(true);
-      magSize--;
-      // Missile bullet(playerOne.getPosY(), playerOne.getPosX());
+      if (playerOne.getIsAlive())
+	{
+	  mag[magSize].setPos(playerOne.getPosX(), playerOne.getPosY());
+	  mag[magSize].setIsAlive(true);
+	  magSize--;
+	}
+
     }
     for (int i = 0; i < 500; i++) {
       if (mag[i].getIsAlive())
