@@ -24,11 +24,17 @@ class Menu : public Screen {
 		~Menu(void);
 		void PrintOptions(void);
 		void instantiate_settings(void);
+<<<<<<< HEAD
 		int input_loop(int c);
 		void menu_change(int zero);
 		void print_xxx(void);
 		void print_in_middle(WINDOW *win, int starty, int startx, int width, char *string, chtype color);
 		MENU *get_menu(void);
+=======
+		void input_loop(int c);
+		MENU *get_menu(void);
+		void print_in_middle(WINDOW *win, int starty, int startx, int width, std::string string, chtype color);
+>>>>>>> d40114276971666ea77ba344547c3ad6ad2f9f1b
 		//Menu & operator=(Menu const & rhs);
 
 	protected:

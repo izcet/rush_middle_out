@@ -8,24 +8,26 @@
 #ifndef ENEMY_CLASS_HPP
 # define ENEMY_CLASS_HPP
 
-# include "GameEntity.class.hpp"
 # include <iostream>
 # include <string>
+# include "GameEntity.class.hpp"
 
-class Enemy : public AGameEntity{
+class Enemy : public AGameEntity {
 
 public:
 
+  // Constructors & Deconstructors
 	Enemy(void);
   Enemy(int x, int y);
 	Enemy(Enemy const & old);
 	~Enemy(void); // to be updated
 
+  // Canonical Constructor
 	Enemy &operator=(Enemy const &old);
 
+  // Methods
   bool  move(void);
-  bool checkCollisionObject(char c);
-  bool checkCollision(void);
+  void getHit(void);
   void _initValue(void);
   void doAction(WINDOW *enemyWin);
   int getPosX(void) const;
@@ -35,12 +37,10 @@ public:
   
   
 private:
-  static int _amount;
-  std::string name;
+  static int _amount; //amount of enemies
+  std::string name; // name of enemy
 
 };
-
-// std::ostream	&operator<<(std::ostream &o, Enemy const &c);
 
 #endif
 

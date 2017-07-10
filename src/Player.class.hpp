@@ -34,6 +34,7 @@ public:
   void takeDamage(void);
   void drawPlayer(WINDOW *enemyWin) const;
 
+
 private:
 	void _initValue(void);
 };

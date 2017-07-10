@@ -30,8 +30,8 @@ Menu::Menu(int one) : Screen(one)
 	{
 		if (!input_loop(c))
 			break ;
-        wrefresh(_my_win);
-	}	
+        overlay(_my_win, stdscr);
+	}
 
 	/* Unpost and free all the memory taken up */
 	unpost_menu(_my_menu);
@@ -44,7 +44,7 @@ Menu::~Menu(void)
 {
 	wclear(_my_win);
 	wprintw(_my_win, "Good bye :[\n");
-	wrefresh(_my_win);
+	overlay(_my_win, stdscr);
 	sleep(1);
 }
 
@@ -76,13 +76,12 @@ int Menu::input_loop(int c)
 	case '\n':
 		if (_menu == 0)
 		{
+			wclear(_my_win);
 			test.launch();
 			return (1);
 		}
 		else if (_menu == 1)
 			return (0);
-	case 'm':
-		break;
 	}
 	return (1);
 }
@@ -100,7 +99,7 @@ void Menu::instantiate_settings(void)
 	keypad(stdscr, TRUE);
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	_n_choices = ARRAY_SIZE(choices);
-	_my_items = (ITEM**)calloc(_n_choices, sizeof(ITEM *));
+	ITEM **_my_items = new ITEM*[sizeof(ITEM*)];
 	for(i = 0; i < _n_choices; i++)
 		_my_items[i] = new_item(choices[i], desc[i]);
 	_my_menu = new_menu((ITEM**)_my_items);
@@ -116,9 +115,9 @@ void Menu::instantiate_settings(void)
 	mvwaddch(_my_win, 2, 39, ACS_RTEE);
 	print_xxx();
 	mvprintw(LINES - 2, 2, "Press Return to Exit");
-	refresh();
+	//refresh();
 	post_menu(_my_menu);
-	wrefresh(_my_win);
+	overlay(_my_win, stdscr);
 }
 
 void Menu::print_xxx(void)
@@ -141,13 +140,13 @@ void Menu::print_in_middle(WINDOW *win, int starty, int startx, int width, char 
 	if(width == 0)
 		width = 80;
 
-	length = strlen(string);
+	length = string.length();
 	temp = (width - length)/ 2;
 	x = startx + (int)temp;
 	wattron(win, color);
-	mvwprintw(win, y, x, "%s", string);
+	mvwprintw(win, y, x, "%s", string.c_str());
 	wattroff(win, color);
-	refresh();
+	//refresh();
 }
 
 void Menu::PrintOptions(void)

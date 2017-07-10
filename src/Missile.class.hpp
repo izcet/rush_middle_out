@@ -25,6 +25,9 @@ public:
 	~Missile(void); //Canonical
     bool takeAction(void);
   void drawMissile(WINDOW *wind) const;
+  void getHit(void);
+    void setIsAlive(bool shot);
+  void setPos(int x, int y);
 private:
 	void _initValue(void);
 };

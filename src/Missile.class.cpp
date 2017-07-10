@@ -9,7 +9,7 @@
 #include "Missile.class.hpp"
 #include "Game.hpp"
 #include "Player.class.hpp"
-
+#include <stdlib.h>
 // CONSTRUCTORS //
 
 Missile::Missile(void) {
@@ -25,7 +25,7 @@ Missile::Missile(int x, int y) {
 }
 
 Missile::Missile(Missile const &old) {
-	std::srand(std::time(NULL));
+	std::srand(time(NULL));
 	*this = old;
 	return;
 }
@@ -49,15 +49,6 @@ Missile	&Missile::operator=(Missile const &old)
   return(*this);
 }
 
-// METHODS //
-
-// void Missile::shoot(std::string gun)
-// {
-// 	std::cout << "Shooting with " << gun << std::endl;
-// 	if (gun == "single_shot")
-// 		this->_symbol = '|';
-// 	//Missile::_instantiate(this->_posX + 1, this->_posY + 1);
-// }
 
 bool Missile::move(void)
 {
@@ -69,11 +60,13 @@ bool Missile::move(void)
 	}
 	else
 	  this->_posY -= 1;
-	return (true);
+	return (true); 
 }
 
 bool Missile::takeAction(void)
 {
+  if (!this->_isAlive)
+    return(false);
   bool hit = false;
   hit = this->move();
   return(hit);
@@ -81,7 +74,8 @@ bool Missile::takeAction(void)
 
 void Missile::drawMissile(WINDOW *wind) const
 {
-  mvwaddch(wind, this->_posY, this->_posX, this->_symbol);
+  if (this->_isAlive)
+    mvwaddch(wind, this->_posY, this->_posX, this->_symbol);
 }
 
 
@@ -95,4 +89,22 @@ void Missile::_initValue(void)
 	this->_speed = 1;
 	this->_symbol = '|';
 	this->_lives = 1;
+	this->_isAlive = false;
+}
+
+void Missile::getHit(void)
+{
+  this->_lives -= 1;
+  this->_isAlive = false;
+}
+
+void Missile::setIsAlive(bool shot)
+{
+  this->_isAlive = shot;
+}
+
+void Missile::setPos(int x, int y)
+{
+  this->_posX = x;
+  this->_posY = y - 1;
 }
