@@ -89,7 +89,7 @@ void Player::_initValue(void)
   this->_dirY = 1;
   this->_speed = 1;
   this->_symbol = '^';
-  this->_lives = 5;
+  this->_lives = 1;
   this->_isAlive = true;
 }
 
