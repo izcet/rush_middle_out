@@ -33,7 +33,7 @@ public:
   int getPosY(void) const;
   void takeDamage(void);
   void drawPlayer(WINDOW *enemyWin) const;
-
+  bool getIsAlive(void) const;
 
 private:
 	void _initValue(void);

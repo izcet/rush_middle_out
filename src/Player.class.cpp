@@ -121,7 +121,10 @@ void Player::takeDamage(void)
 {
   this->_lives--;
   if (this->_lives <= 0)
-    this->_isAlive = false;
+    {
+      this->_isAlive = false;
+      this->_symbol = 'V';
+    }
     
 }
 
@@ -129,4 +132,9 @@ void Player::drawPlayer(WINDOW *enemyWin) const
 {
   mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
 
+}
+
+bool Player::getIsAlive(void) const
+{
+  return(this->_isAlive);
 }

@@ -60,6 +60,8 @@ void Game::play() {
   int magSize = 99;
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
+    if (!playerOne.getIsAlive())
+      printw("Game over!");
     map.starsRnd();
     playerOne.move(ch);
     if (ch == 32) {
@@ -67,7 +69,6 @@ void Game::play() {
       mag[magSize].setPos(playerOne.getPosX(), playerOne.getPosY());
       mag[magSize].setIsAlive(true);
       magSize--;
-      printw("Shoot missile!");
       // Missile bullet(playerOne.getPosY(), playerOne.getPosX());
     }
     for (int i = 0; i <= 100; i++) {
@@ -83,7 +84,7 @@ void Game::play() {
 	      }
 	    }
 	}
-	    mag[i].takeAction(playerWin);
+      mag[i].takeAction(playerWin);
     }
     
     wclear(enemyWin);
