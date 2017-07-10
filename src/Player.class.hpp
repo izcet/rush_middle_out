@@ -33,16 +33,10 @@ class Player : public AGameEntity {
   void takeDamage(void);
   void drawPlayer(WINDOW *enemyWin) const;
   bool getIsAlive(void) const;
+  int getLives(void) const;
 
  private:
   void _initValue(void);
 };
 
 #endif
-
-
-  //   /\
-  //  (  )
-  //  (  )
-  // /|/\|\
-  ///_||||_\

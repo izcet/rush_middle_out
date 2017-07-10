@@ -79,12 +79,15 @@ void Enemy::doAction(WINDOW *enemyWin) {
   if (!this->_isAlive) return;
   bool hit = false;
   hit = this->move();
+  if (!this->_isAlive) return;
   mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
 }
 
 void Enemy::getHit(void) {
   this->_lives--;
   this->_isAlive = false;
+  this->_posY = 1;
+  this->_posX = 1;
 }
 
 // INIT
@@ -97,7 +100,7 @@ void Enemy::_initValue(void) {
   this->_dirY = 0;
   this->_speed = 1;
   this->_symbol = 'X';
-  this->_lives = 1;
+  this->_lives = 5;
   this->_isAlive = true;
 }
 

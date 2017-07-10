@@ -89,7 +89,7 @@ void Player::_initValue(void)
   this->_dirY = 1;
   this->_speed = 1;
   this->_symbol = '^';
-  this->_lives = 1;
+  this->_lives = 5;
   this->_isAlive = true;
 }
 
@@ -117,3 +117,5 @@ void Player::drawPlayer(WINDOW *playerWin) const
 }
 
 bool Player::getIsAlive(void) const { return (this->_isAlive); }
+
+int Player::getLives(void) const { return (this->_lives); }
