@@ -83,6 +83,13 @@ void Enemy::doAction(WINDOW *enemyWin) {
   mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
 }
 
+void Enemy::resurrect(void)
+{
+  this->_posX = yes.starShift() % (Game::maxX - 1);
+  this->_posY = (yes.starShift() % Game::maxY / 2) + 2;
+  this->_isAlive = true;
+}
+
 void Enemy::getHit(void) {
   this->_lives--;
   this->_isAlive = false;
