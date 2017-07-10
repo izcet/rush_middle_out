@@ -110,4 +110,6 @@ int Enemy::getPosY(void) const { return (this->_posY); }
 
 int Enemy::getAmount(void) const { return (this->_amount); }
 
+bool Enemy::getIsAlive(void) const { return (this->_isAlive); }
+
 int Enemy::_amount = 10;

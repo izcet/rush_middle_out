@@ -31,6 +31,7 @@ class Enemy : public AGameEntity {
   int getPosX(void) const;
   int getPosY(void) const;
   int getAmount(void) const;
+  bool getIsAlive(void) const;
 
  private:
   static int _amount;  // amount of enemies
