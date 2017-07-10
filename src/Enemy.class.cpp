@@ -5,63 +5,59 @@
  *
  * Author: Sesl, Irhett, Tiny, Bemillie, Searsie
  * ==========================================================================*/
+
 #include <iostream>
 #include <string>
 #include "Enemy.class.hpp"
 #include "Player.class.hpp"
 #include "Game.hpp"
 
+// DEFAULT CONSTUCTOR
 Enemy::Enemy(void) {
 	this->_initValue();
 	this->_posX = rand() % Game::maxX;
 	this->_posY = rand() % Game::maxY;
-	std::cout << "Enemy Default Constructor" << std::endl;
 	return;
 }
 
+// CONSTRUCTOR WITH START POSITION
 Enemy::Enemy(int x, int y) {
 	this->_initValue();
 	this->_posX = x;
 	this->_posY = y;
-	std::cout << "Enemy Parametric Constructor" << std::endl;
 	return;
 }
 
+// CONSTRUCTOR COPYING EXISTING ENEMY
 Enemy::Enemy(Enemy const &old) {
 	std::srand(std::time(NULL));
 	*this = old;
-	std::cout << "Enemy " << this->_name
-		<< " has been created!" << std::endl;
 	return;
 }
 
+// DEFAULT DECONSTRUCTOR
 Enemy::~Enemy(void) {
-	std::cout << "Enemy Destructor" << std::endl;
 	return;
 }
-
-// void			Enemy::sampleFunction(void) const
-// {
-// 	std::cout << "Enemy Sample Function" << std::endl
-// }
 
 Enemy				&Enemy::operator=(Enemy const &old)
 {
-	std::cout << "Enemy Assignment Operator" << std::endl;
-	if (this == &old)
-	  return(*this);
+	this->_name = old._name;
+	this->_posX = old._posX;
+	this->_posY = old._posY;
+	this->_dirX = old._dirX;
+	this->_dirY = old._dirY;
+	this->_speed = old._speed;
+	this->_symbol = old._symbol;
+	this->_lives = old._lives;
 	return(*this);
-	// 	this->_privateF = old.getFoo();
-	// return *this;
 }
 
-// std::ostream	&operator<<(std::ostream &o, Enemy const &c)
-// {
-// 	o << "To String Function of Enemy: " << c.getFoo();
-// 	return (o);
-// }
+/*=============================================================================
 
-// METHODS //
+                                    METHODS
+
+=============================================================================*/
 
 // void Enemy::shoot(std::string gun)
 // {
@@ -84,17 +80,6 @@ bool Enemy::move(void)
 	return (true);
 }
 
-// bool Enemy::checkCollisionObject(char c)
-// {
-//   if (c == '&' || c == '|') //change second to Bullet::_symbol
-// 	{
-// 		this->_lives--;
-// 		std::cout << "Enemy hit!" << std::endl;
-// 		return true;
-// 	}
-// 	return false;
-// }
-
 void Enemy::doAction(WINDOW *enemyWin)
 {
   bool hit = false;
@@ -102,15 +87,11 @@ void Enemy::doAction(WINDOW *enemyWin)
   mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol); 
 }
 
-// bool Enemy::checkCollision(void)
-// {
-// 	char c;
-// 	bool hit = false;
-
-// 	//	mvwscanw(stdscr, this->_posY, this->_posX, "%c", c);
-// 	hit = this->checkCollisionObject(c);
-// 	return (hit);
-// }
+void Enemy::getHit(void)
+{
+	this->_lives--;
+	this->_isAlive = false;
+}
 
 //INIT
 
@@ -124,6 +105,7 @@ void Enemy::_initValue(void)
 	this->_speed = 1;
 	this->_symbol = 'X';
 	this->_lives = 1;
+	this->_isAlive = true;
 
 }
 
@@ -131,7 +113,6 @@ int Enemy::getPosX(void) const
 {
   return (this->_posX);
 }
-
 
 int Enemy::getPosY(void) const
 {
