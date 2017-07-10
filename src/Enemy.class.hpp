@@ -6,42 +6,35 @@
  * Author: Sesl, Irhett, Tiny, Bemillie, Searsie
  * ==========================================================================*/
 #ifndef ENEMY_CLASS_HPP
-# define ENEMY_CLASS_HPP
+#define ENEMY_CLASS_HPP
 
-# include <iostream>
-# include <string>
-# include "GameEntity.class.hpp"
+#include <iostream>
+#include <string>
+#include "GameEntity.class.hpp"
 
 class Enemy : public AGameEntity {
-
-public:
-
+ public:
   // Constructors & Deconstructors
-	Enemy(void);
+  Enemy(void);
   Enemy(int x, int y);
-	Enemy(Enemy const & old);
-	~Enemy(void); // to be updated
+  Enemy(Enemy const &old);
+  ~Enemy(void);  // to be updated
 
   // Canonical Constructor
-	Enemy &operator=(Enemy const &old);
+  Enemy &operator=(Enemy const &old);
 
   // Methods
-  bool  move(void);
+  bool move(void);
   void getHit(void);
   void _initValue(void);
   void doAction(WINDOW *enemyWin);
   int getPosX(void) const;
   int getPosY(void) const;
   int getAmount(void) const;
-  
-  
-  
-private:
-  static int _amount; //amount of enemies
-  std::string name; // name of enemy
 
+ private:
+  static int _amount;  // amount of enemies
+  std::string name;    // name of enemy
 };
 
 #endif
-
-

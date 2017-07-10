@@ -9,6 +9,7 @@
 #include "Game.hpp"
 #include <ncurses.h>
 //#include "Enemy.class.hpp"
+#include <unistd.h>
 #include "Enemy.class.hpp"
 #include "Environment.hpp"
 #include "GameEntity.class.hpp"
@@ -49,67 +50,62 @@ void Game::play() {
   Environment map;
   int ch = 0;
   keypad(map.getWin(), TRUE);
-  nodelay(map.getWin(), TRUE);
-  timeout(300);
+  // nodelay(map.getWin(), TRUE);
+  timeout(1);
   border(0, 0, 0, 0, 0, 0, 0, 0);
   Player playerOne(maxX / 2, maxY - 10);
   playerWin = newwin(0, 0, 0, 0);
   Enemy enemy1(maxX / 2, maxY / 2);
-  Enemy massEnemy[10];
+  Enemy massEnemy[50];
   Missile mag[500];
   int magSize = 499;
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
     if (!playerOne.getIsAlive())
-      printw("Game over!");
+      mvprintw(playerOne.getPosY(), playerOne.getPosX(), "Game over!");
     map.starsRnd();
     playerOne.move(ch);
     if (ch == 32) {
-      
       mag[magSize].setPos(playerOne.getPosX(), playerOne.getPosY());
       mag[magSize].setIsAlive(true);
       magSize--;
       // Missile bullet(playerOne.getPosY(), playerOne.getPosX());
     }
     for (int i = 0; i < 500; i++) {
-      if (mag[i].getIsAlive())
-	{
-	  for (int x = 0; x < 10; x++)
-	    {
-	      if (mag[i].getPosX() == massEnemy[x].getPosX() &&
-		  mag[i].getPosY() == massEnemy[x].getPosY())
-	      {
-		mag[i].setIsAlive(false);
-		massEnemy[x].getHit();
-	      }
-	    }
-	}
+      if (mag[i].getIsAlive()) {
+        for (int x = 0; x < 50; x++) {
+          if (mag[i].getPosX() == massEnemy[x].getPosX() &&
+              mag[i].getPosY() == massEnemy[x].getPosY()) {
+            mag[i].setIsAlive(false);
+            massEnemy[x].getHit();
+          }
+        }
+      }
       mag[i].takeAction(playerWin);
     }
-    
+
     wclear(enemyWin);
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 50; i++) {
       if (playerOne.getPosX() == massEnemy[i].getPosX() &&
-	  playerOne.getPosY() == massEnemy[i].getPosY())
-	{
-	  playerOne.takeDamage();
-	  massEnemy[i].getHit();
-	}
+          playerOne.getPosY() == massEnemy[i].getPosY()) {
+        playerOne.takeDamage();
+        massEnemy[i].getHit();
+      }
       massEnemy[i].doAction(enemyWin);
     }
 
     overlay(enemyWin, stdscr);
     wclear(playerWin);
     for (int i = 0; i <= 500; i++) {
-      if (mag[i].getIsAlive())
-	mag[i].takeAction(playerWin);
-     }
-  
+      if (mag[i].getIsAlive()) mag[i].takeAction(playerWin);
+    }
+
     playerOne.drawPlayer(playerWin);
     overlay(playerWin, stdscr);
     refresh();
     ch = 0;
+    usleep(35000);
   }
   // delete  enemy1;
 }

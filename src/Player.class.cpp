@@ -6,92 +6,81 @@
  * Author: Sesl, Irhett, Tiny, Bemillie, Searsie
  * ==========================================================================*/
 
+#include "Player.class.hpp"
+#include <ncurses.h>
 #include <iostream>
 #include <string>
-#include <ncurses.h>
-#include "Player.class.hpp"
 #include "Game.hpp"
 
 // METHODS //
 
-void Player::shoot(std::string gun)
-{
-	std::cout << "Shooting with " << gun << std::endl;
-	//Missile::_instantiate(this->_posX + 1, this->_posY + 1);
+void Player::shoot(std::string gun) {
+  std::cout << "Shooting with " << gun << std::endl;
+  // Missile::_instantiate(this->_posX + 1, this->_posY + 1);
 }
 
-bool Player::move(int key)
-{
-  if (this->_isAlive == false)
-    return (false);
-	if (key == KEY_UP && this->_posY - 1 > 0)
-		this->_posY = this->_posY - 1;
-	if (key == KEY_DOWN && this->_posY + 1 < Game::maxY)
-		this->_posY = this->_posY +1;
-	if (key == KEY_LEFT && this->_posX - 1 > 0)
-		this->_posX = this->_posX - 1;
-	if (key == KEY_RIGHT && this->_posX + 1 < Game::maxX)
-		this->_posX = this->_posX + 1;
-	return (true);
+bool Player::move(int key) {
+  if (this->_isAlive == false) return (false);
+  if (key == KEY_UP && this->_posY - 1 > 0) this->_posY = this->_posY - 1;
+  if (key == KEY_DOWN && this->_posY + 1 < Game::maxY)
+    this->_posY = this->_posY + 1;
+  if (key == KEY_LEFT && this->_posX - 1 > 0) this->_posX = this->_posX - 1;
+  if (key == KEY_RIGHT && this->_posX + 1 < Game::maxX)
+    this->_posX = this->_posX + 1;
+  return (true);
 }
 
 // OPERATOR OVERLOADS //
 
-Player & Player::operator=(Player const & rhs)
-{
-	this->_posX = rhs._posX;
-	this->_posY = rhs._posY;
-	this->_dirX = rhs._dirX;
-	this->_dirY = rhs._dirY;
-	this->_speed = rhs._speed;
-	this->_symbol = rhs._symbol;
-	this->_isAlive = rhs._isAlive;
-	this->_name = rhs._name;
-	return *this;
+Player &Player::operator=(Player const &rhs) {
+  this->_posX = rhs._posX;
+  this->_posY = rhs._posY;
+  this->_dirX = rhs._dirX;
+  this->_dirY = rhs._dirY;
+  this->_speed = rhs._speed;
+  this->_symbol = rhs._symbol;
+  this->_isAlive = rhs._isAlive;
+  this->_name = rhs._name;
+  return *this;
 }
 
 // CONSTRUCTORS //
 
-Player::Player(int startX, int startY)
-{
-	this->_initValue();
-	this->_posX = startX;
-	this->_posY = startY;
-	if (Game::debug)
-	{
-		std::cout << "Player " << this->_name
-			<< " has been created!" << std::endl;
-	}
+Player::Player(int startX, int startY) {
+  this->_initValue();
+  this->_posX = startX;
+  this->_posY = startY;
+  if (Game::debug) {
+    std::cout << "Player " << this->_name << " has been created!" << std::endl;
+  }
 }
 
-Player::Player(Player const & src)
-{
-	*this = src;
-	if (Game::debug)
-	{
-		std::cout << "Player " << this->_name
-			<< " has been created!" << std::endl;
-	}
-	return;
+Player::Player(Player const &src) {
+  *this = src;
+  if (Game::debug) {
+    std::cout << "Player " << this->_name << " has been created!" << std::endl;
+  }
+  return;
 }
 
-Player::Player(void)
-{
-	this->_initValue();
-	//std::cout << "Player has been created!" << std::endl;
-	//mvwprintw(Game::playerWin, Game::maxX / 2, Game::maxY / 2, "Player has been created!");
+Player::Player(void) {
+  this->_initValue();
+  // std::cout << "Player has been created!" << std::endl;
+  // mvwprintw(Game::playerWin, Game::maxX / 2, Game::maxY / 2, "Player has been
+  // created!");
 }
 
 // DECONSTRUCTORS //
 
-Player::~Player(void)
-{
-	mvwprintw(stdscr, Game::maxX / 2, Game::maxY / 2, "Player has been destroyed!");
-	return;
+Player::~Player(void) {
+  mvwprintw(stdscr, Game::maxX / 2, Game::maxY / 2,
+            "Player has been destroyed!");
+  return;
 }
 
 // INIT //
 
+<<<<<<< HEAD
 void Player::_initValue(void)
 {
 	this->_name = "PlayerOne";
@@ -101,7 +90,7 @@ void Player::_initValue(void)
 	this->_dirY = 1;
 	this->_speed = 1;
 	this->_symbol = '^';
-	this->_lives = 5;
+	this->_lives = 1;
 	this->_isAlive = true;
 	//this->_sprite = "    /\\\n  (  )\n  (  )\n /|/\\|\\\n/_||||_\\";
 }
@@ -109,25 +98,33 @@ void Player::_initValue(void)
 int Player::getPosX(void) const
 {
   return (this->_posX);
+=======
+void Player::_initValue(void) {
+  this->_name = "PlayerOne";
+  this->_posX = 0;
+  this->_posY = 0;
+  this->_dirX = 1;
+  this->_dirY = 1;
+  this->_speed = 1;
+  this->_symbol = '^';
+  this->_lives = 5;
+  this->_isAlive = true;
+>>>>>>> 52a20cfe54285f88cfdb86d921d9df125b2e252b
 }
 
+int Player::getPosX(void) const { return (this->_posX); }
 
-int Player::getPosY(void) const
-{
-  return (this->_posY);
-}
+int Player::getPosY(void) const { return (this->_posY); }
 
-void Player::takeDamage(void)
-{
+void Player::takeDamage(void) {
   this->_lives--;
-  if (this->_lives <= 0)
-    {
-      this->_isAlive = false;
-      this->_symbol = 'V';
-    }
-    
+  if (this->_lives <= 0) {
+    this->_isAlive = false;
+    this->_symbol = 'V';
+  }
 }
 
+<<<<<<< HEAD
 void Player::drawPlayer(WINDOW *playerWin) const
 {
 	std::string _sprite = "  ^  \n / \\\n  \\ \n/  / \n\\ / \n  \\/\n ^ / \n\\ / ";
@@ -144,3 +141,10 @@ bool Player::getIsAlive(void) const
  {
   return(this->_isAlive);
 }
+=======
+void Player::drawPlayer(WINDOW *enemyWin) const {
+  mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
+}
+
+bool Player::getIsAlive(void) const { return (this->_isAlive); }
+>>>>>>> 89f1550e6ba84e85b79b13e0829e0fa782e6500c

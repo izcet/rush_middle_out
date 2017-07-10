@@ -11,27 +11,26 @@
 /* ************************************************************************** */
 
 #ifndef SCREEN_H
-# define SCREEN_H
-# include <iostream>
-# include <ncurses.h>
+#define SCREEN_H
+#include <ncurses.h>
+#include <iostream>
 
 class Screen {
+ public:
+  Screen(void);
+  Screen(int one);
+  ~Screen(void);
+  void create_newwin(int height, int width, int starty, int startx);
+  WINDOW *get_window(void);
+  void destroy_win(void);
+  // Menu & operator=(Menu const & rhs);
 
-	public:
-		Screen(void);
-		Screen(int one);
-		~Screen(void);
-		void create_newwin(int height, int width, int starty, int startx);
-		WINDOW *get_window(void);
-		void destroy_win(void);
-		//Menu & operator=(Menu const & rhs);
-
-	public:
-		int		_width;
-		int		_height;
-		int		_startx;
-		int		_starty;
-		WINDOW  *_my_win;
+ public:
+  int _width;
+  int _height;
+  int _startx;
+  int _starty;
+  WINDOW *_my_win;
 };
 
 #endif
