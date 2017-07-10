@@ -64,7 +64,6 @@ void Game::play() {
       printw("Shoot missile!");
       // Missile bullet(playerOne.getPosY(), playerOne.getPosX());
     }
-    wclear(map.getWin());
     for (int i = 0; i < 10; i++) {
       if (playerOne.getPosX() == massEnemy[i].getPosX() &&
           playerOne.getPosY() == massEnemy[i].getPosY()) {
@@ -77,6 +76,7 @@ void Game::play() {
       playerOne.takeDamage();
     }
 
+    wclear(enemyWin);
     enemy1.doAction(enemyWin);
 
     for (int i = 0; i < 10; i++) {
