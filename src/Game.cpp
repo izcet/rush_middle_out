@@ -87,7 +87,7 @@ void Game::play() {
               mag[i].getPosY() == massEnemy[x].getPosY()) {
             mag[i].setIsAlive(false);
             massEnemy[x].getHit();
-            playerOne._setScore(playerOne._getScore());
+            playerOne.setScore(1);
           }
         }
       }
@@ -110,6 +110,7 @@ void Game::play() {
       if (mag[i].getIsAlive()) mag[i].takeAction(playerWin);
     }
     mvwprintw(playerWin, 2, 2, " lives: %d", playerOne.getLives());
+    mvwprintw(playerWin, 3, 2, " score: %d", playerOne.getScore());
     playerOne.drawPlayer(playerWin);
     overlay(playerWin, stdscr);
     refresh();
