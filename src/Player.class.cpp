@@ -80,6 +80,25 @@ Player::~Player(void) {
 
 // INIT //
 
+<<<<<<< HEAD
+void Player::_initValue(void)
+{
+	this->_name = "PlayerOne";
+	this->_posX = 0;
+	this->_posY = 0;
+	this->_dirX = 1;
+	this->_dirY = 1;
+	this->_speed = 1;
+	this->_symbol = '^';
+	this->_lives = 1;
+	this->_isAlive = true;
+
+}
+
+int Player::getPosX(void) const
+{
+  return (this->_posX);
+=======
 void Player::_initValue(void) {
   this->_name = "PlayerOne";
   this->_posX = 0;
@@ -90,6 +109,7 @@ void Player::_initValue(void) {
   this->_symbol = '^';
   this->_lives = 5;
   this->_isAlive = true;
+>>>>>>> 52a20cfe54285f88cfdb86d921d9df125b2e252b
 }
 
 int Player::getPosX(void) const { return (this->_posX); }
