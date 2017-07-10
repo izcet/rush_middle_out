@@ -65,6 +65,8 @@ bool Missile::move(void)
 
 bool Missile::takeAction(void)
 {
+  if (!this->_isAlive)
+    return(false);
   bool hit = false;
   hit = this->move();
   return(hit);

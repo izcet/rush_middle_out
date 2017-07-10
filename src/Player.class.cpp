@@ -22,9 +22,8 @@ void Player::shoot(std::string gun)
 
 bool Player::move(int key)
 {
-  // int prevX = this->_posX;
-  //int prevy = this->_posY;
-
+  if (this->_isAlive == false)
+    return (false);
 	if (key == KEY_UP && this->_posY - 1 > 0)
 		this->_posY = this->_posY - 1;
 	if (key == KEY_DOWN && this->_posY + 1 < Game::maxY)
@@ -33,46 +32,8 @@ bool Player::move(int key)
 		this->_posX = this->_posX - 1;
 	if (key == KEY_RIGHT && this->_posX + 1 < Game::maxX)
 		this->_posX = this->_posX + 1;
-	// if (checkCollision(this->_posX, this->_posY))
-	//   return(false);
-	// if (prevX == this->_posX && prevy == this->_posY)
-	//   {
-	//     if (checkCollision(this->_posX, this->_posY - 1))
-	//       return (false);
-	//   }
 	return (true);
 }
-
-// bool Player::checkCollisionObject(char c)
-// {
-	// if (c == 'X')
-	// {
-	// 	this->_lives--;
-	// 	std::cout << "Player hit!" << std::endl;
-	// 	return true;
-	// }
-	// return false;
-// }
-
-//Params same x and y as movement
-
-// bool Player::checkCollision(int x, int y)
-// {
-// 	bool hit = false;
-// 	char d;
-
-// 	d = 'S';
-// 	mvwscanw(Game::playerWin, y, x, "%c", d);
-// 	hit = checkCollisionObject(d);
-// 	return (hit);
-	// bool hit = false;
-	// char d;
-
-	// d = 'S';
-	// mvwscanw(Game::playerWin, y, x, "%c", d);
-	// hit = checkCollisionObject(d);
-	// return (hit);
-// }
 
 // OPERATOR OVERLOADS //
 
@@ -141,6 +102,7 @@ void Player::_initValue(void)
 	this->_speed = 1;
 	this->_symbol = '^';
 	this->_lives = 3;
+	this->_isAlive = true;
 
 }
 
@@ -158,6 +120,9 @@ int Player::getPosY(void) const
 void Player::takeDamage(void)
 {
   this->_lives--;
+  if (this->_lives <= 0)
+    this->_isAlive = false;
+    
 }
 
 void Player::drawPlayer(WINDOW *enemyWin) const
