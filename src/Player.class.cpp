@@ -80,26 +80,8 @@ Player::~Player(void) {
 
 // INIT //
 
-<<<<<<< HEAD
-void Player::_initValue(void)
+void Player::_initValue(void) 
 {
-	this->_name = "PlayerOne";
-	this->_posX = 0;
-	this->_posY = 0;
-	this->_dirX = 1;
-	this->_dirY = 1;
-	this->_speed = 1;
-	this->_symbol = '^';
-	this->_lives = 1;
-	this->_isAlive = true;
-	//this->_sprite = "    /\\\n  (  )\n  (  )\n /|/\\|\\\n/_||||_\\";
-}
-
-int Player::getPosX(void) const
-{
-  return (this->_posX);
-=======
-void Player::_initValue(void) {
   this->_name = "PlayerOne";
   this->_posX = 0;
   this->_posY = 0;
@@ -109,14 +91,14 @@ void Player::_initValue(void) {
   this->_symbol = '^';
   this->_lives = 5;
   this->_isAlive = true;
->>>>>>> 52a20cfe54285f88cfdb86d921d9df125b2e252b
 }
 
 int Player::getPosX(void) const { return (this->_posX); }
 
 int Player::getPosY(void) const { return (this->_posY); }
 
-void Player::takeDamage(void) {
+void Player::takeDamage(void) 
+{
   this->_lives--;
   if (this->_lives <= 0) {
     this->_isAlive = false;
@@ -124,7 +106,6 @@ void Player::takeDamage(void) {
   }
 }
 
-<<<<<<< HEAD
 void Player::drawPlayer(WINDOW *playerWin) const
 {
 	std::string _sprite = "  ^  \n / \\\n  \\ \n/  / \n\\ / \n  \\/\n ^ / \n\\ / ";
@@ -137,14 +118,4 @@ void Player::drawPlayer(WINDOW *playerWin) const
 	mvwprintw(playerWin,this->_posY + 6, this->_posX, " V V ");
 }
 
-bool Player::getIsAlive(void) const
- {
-  return(this->_isAlive);
-}
-=======
-void Player::drawPlayer(WINDOW *enemyWin) const {
-  mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
-}
-
 bool Player::getIsAlive(void) const { return (this->_isAlive); }
->>>>>>> 89f1550e6ba84e85b79b13e0829e0fa782e6500c
