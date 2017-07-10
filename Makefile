@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/03 15:27:10 by irhett            #+#    #+#              #
-#    Updated: 2017/07/09 23:05:14 by irhett           ###   ########.fr        #
+#    Updated: 2017/07/09 23:07:27 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,10 +62,10 @@ $(FAME): $(MINIS) | $(MOBS)
 	$(CXX) $(INK) $(FLAGS) -l ncurses $(MOBS) -o $(FAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
-	$(CXX) $(INC) -c $^ $(FLAGS) -o $@
+	@$(CXX) $(INC) -c $^ $(FLAGS) -o $@
 
 $(MOB_DIR)/%.o: $(MINI_DIR)/%.cpp | $(MOB_DIR)
-	$(CXX) $(INK) -c $^ $(FLAGS) -o $@
+	@$(CXX) $(INK) -c $^ $(FLAGS) -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -77,6 +77,6 @@ clean:
 	rm -rf $(MOB_DIR) $(OBJ_DIR)
 
 fclean: clean
-	rm -f $(NAME) minigame
+	rm -f $(NAME) $(FAME) 
 
 re: fclean all
