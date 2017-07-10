@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 19:13:02 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 21:13:54 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,23 @@
 #include "World.class.hpp"
 
 
-Entity::Entity(void) : _alive(true) {
+Entity::Entity(char type, int x, int y, int dir, char sym, bool alive) :
+	type(type),
+	_alive(alive),
+	_x(x),
+	_y(y),
+	_direction(dir),
+	_symbol(sym)
+{
 	return;
 }
 
-// by default an entity will do nothing every turn
 void			Entity::act(World &w)
 {
 	(void)w;
 }
 
-char			Entity::getSymbol(void) const
+int				Entity::getSymbol(void) const
 {
 	return (this->_symbol);
 }
@@ -73,7 +79,7 @@ void			Entity::moveUp(World &w)
 
 void			Entity::moveDown(World &w)
 {
-	if (this->_y < w.getHeight())
+	if (this->_y < w.getHeight() - 1)
 	{
 		this->_y = this->_y + 1;
 		w.grid[this->_y][this->_x] = this;
@@ -98,7 +104,7 @@ void			Entity::moveLeft(World &w)
 
 void			Entity::moveRight(World &w)
 {
-	if (this->_x < w.getWidth())
+	if (this->_x < w.getWidth() - 1)
 	{
 		this->_x = this->_x + 1;
 		w.grid[this->_y][this->_x] = this;
@@ -113,22 +119,30 @@ void			Entity::moveRight(World &w)
 
 Entity			*Entity::getLeft(World &w) const
 {
-	return (w.grid[this->_y][this->_x - 1]);
+	if (this->_x > 0)
+		return (w.grid[this->_y][this->_x - 1]);
+	return (nullptr);
 }
 
 Entity			*Entity::getRight(World &w) const
 {
-	return (w.grid[this->_y][this->_x + 1]);
+	if (this->_x < w.getWidth() - 1)
+		return (w.grid[this->_y][this->_x + 1]);
+	return (nullptr);
 }
 
 Entity			*Entity::getUp(World &w) const
 {
-	return (w.grid[this->_y - 1][this->_x]);
+	if (this->_y > 0)
+		return (w.grid[this->_y - 1][this->_x]);
+	return (nullptr);
 }
 
 Entity			*Entity::getDown(World &w) const
 {
-	return (w.grid[this->_y + 1][this->_x]);
+	if (this->_y < w.getHeight() - 1)
+		return (w.grid[this->_y + 1][this->_x]);
+	return (nullptr);
 }
 
 // BELOW HERE BE SOME CRAYZ SHIT I DON'T WANT TO DEAL WITH
@@ -140,27 +154,7 @@ std::ostream	&operator<<(std::ostream &o, Entity const &c)
 	return (o);
 }
 
-Entity::Entity(const Entity *ent) {
-	(void)ent;
-	std::cout << "Entity Parametric FUCK" << std::endl;
-	return;
-}
-
-Entity::Entity(Entity const &old) {
-	std::cout << "Entity Copy FUCK" << std::endl;
-	*this = old;
-	return;
-}
-
 Entity::~Entity(void) {
-	std::cout << "Entity Destructor" << std::endl;
+//	std::cout << "Entity Destructor" << std::endl;
 	return;
-}
-
-Entity			&Entity::operator=(Entity const &old)
-{
-	Entity	&e = *(new Entity());
-	// I hope this works the way I think it does
-	(void)old;
-	return e;
 }

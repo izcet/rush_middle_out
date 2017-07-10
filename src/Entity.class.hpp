@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 19:37:37 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 20:27:22 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class Entity {
 
 		virtual void	act(World &w);
 
-		virtual	char	getSymbol(void) const;
+		virtual	int		getSymbol(void) const;
 		bool			isAlive(void) const;
 		int				getX(void) const;
 		int				getY(void) const;
@@ -63,7 +63,7 @@ class Entity {
 		int				_x;
 		int				_y;
 		int				_direction;
-		char			_symbol;
+		int				_symbol;
 };
 
 std::ostream		&operator<<(std::ostream &o, Entity const &c);

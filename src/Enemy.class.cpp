@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 17:18:56 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 19:11:33 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 20:42:03 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@
 #include "Enemy.class.hpp"
 
 Enemy::Enemy(void) :
-	type('e'),
-	_alive(true),
-	_y(0),
-	_direction(SOUTH),
-	_symbol('8'),
+	Entity('e', 0, 0, SOUTH, '8', true), // ?
 	_moveStep(0),
 	_moveMax(10)
 {
@@ -35,11 +31,7 @@ Enemy::Enemy(void) :
 }
 
 Enemy::Enemy(char symbol) : 
-	type('e'),
-	_alive(true),
-	_y(0),
-	_direction(SOUTH),
-	_symbol(symbol),
+	Entity('e', 0, 0, SOUTH, symbol, true),
 	_moveStep(0),
 	_moveMax(10)
 {
@@ -52,12 +44,7 @@ Enemy::Enemy(char symbol) :
 }
 
 Enemy::Enemy(int x) : 
-	type('e'),
-	_alive(true),
-	_x(x),
-	_y(0),
-	_direction(SOUTH),
-	_symbol('8'),
+	Entity('e', x, 0, SOUTH, '8', true),
 	_moveStep(0),
 	_moveMax(10)
 {
@@ -66,12 +53,9 @@ Enemy::Enemy(int x) :
 }
 
 Enemy::Enemy(int x, char symbol) : 
-	type('e'),	
-	_alive(true),
-	_x(x),
-	_y(0),
-	_direction(SOUTH),
-	_symbol(symbol)
+	Entity('e', x, 0, SOUTH, symbol, true),
+	_moveStep(0),
+	_moveMax(10)
 {
 	//std::cout << "Enemy Parametric Constructor 3" << std::endl;
 	return;
@@ -81,11 +65,11 @@ void			Enemy::act(World &w)
 {
 	Entity	*e;
 
-	if (this->_alive)
+	if (this->Entity::_alive)
 	{
 		if (this->_moveStep >= this->_moveMax)
 		{
-			switch (this->_direction) {
+			switch (this->Entity::_direction) {
 				case NORTH:
 					e = this->Entity::getUp(w);
 					if (e)
@@ -115,7 +99,7 @@ void			Enemy::act(World &w)
 						this->Entity::moveLeft(w);
 					break;
 				default:
-					std::cout << "Enemy " << this->_symbol << " is confused!";
+					std::cout << "Enemy is confused!";
 					break;
 
 			}
@@ -129,7 +113,7 @@ void			Enemy::act(World &w)
 	}
 }
 
-char				Enemy::getSymbol(void) const
+int					Enemy::getSymbol(void) const
 {
 	if (this->_alive)
 		return (this->_symbol);
@@ -139,13 +123,13 @@ char				Enemy::getSymbol(void) const
 // NOT MESSED WITH YET
 
 Enemy::~Enemy(void) {
-	std::cout << "Enemy Destructor" << std::endl;
+//	std::cout << "Enemy Destructor" << std::endl;
 	return;
 }
 
 Enemy				&Enemy::operator=(Enemy const &old)
 {
-	std::cout << "Enemy Assignment Operator" << std::endl;
+//	std::cout << "Enemy Assignment Operator" << std::endl;
 	(void)old;
 	return *this;
 }

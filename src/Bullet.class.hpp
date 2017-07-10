@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 13:59:48 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 19:37:12 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 20:31:56 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ public:
 	~Bullet(void);
 
 	virtual void	act(World &w);
-	virtual char	getSymbol(void) const;
+	virtual int		getSymbol(void) const;
 
 };
 

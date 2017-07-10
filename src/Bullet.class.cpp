@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 13:59:48 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 19:37:01 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 20:30:58 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void				Bullet::act(World &w)
 	}
 }
 
-char			Bullet::getSymbol(void) const
+int				Bullet::getSymbol(void) const
 {
 	if (!this->_alive)
 		return (' ');

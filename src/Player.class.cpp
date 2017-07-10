@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 14:51:30 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 18:37:27 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 21:18:49 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,52 +16,42 @@
 #include "World.class.hpp"
 #include "Entity.class.hpp"
 #include "Bullet.class.hpp"
-// # include ncurses
-// delete thise
-#define KEY_UP 0
-#define KEY_DOWN 1
-#define KEY_LEFT 2
-#define KEY_RIGHT 3
-#define KEY_SHOOT 69
+#include <ncurses.h>
+#define KEY_SHOOT 32
 
 
-Player::Player(int x, int y) : 
-	type('p'),
-	_alive(true),
-	_x(x),
-	_y(y),
-	_direction(NORTH),
-	_symbol('^'),
+Player::Player(int x, int y) :
+	Entity('p', x, y, NORTH, '^', true),
 	_moveStep(0),
 	_moveMax(5)
 {
 	int		random;
 
 	random = 69; ///////////// ok but really random though
-	this->_x = random;
+	this->Entity::_x = random;
 	return;
 }
 
 void			Player::act(World &w)
 {
-	if (this->_alive)
+	if (this->Entity::_alive)
 	{
 		switch (w.key)
 		{
 			case KEY_UP:
-				this->_direction = NORTH;
+				this->Entity::_direction = NORTH;
 				this->_move(w);
 				break;
 			case KEY_DOWN:
-				this->_direction = SOUTH;
+				this->Entity::_direction = SOUTH;
 				this->_move(w);
 				break;
 			case KEY_LEFT:
-				this->_direction = WEST;
+				this->Entity::_direction = WEST;
 				this->_move(w);
 				break;
 			case KEY_RIGHT:
-				this->_direction = EAST;
+				this->Entity::_direction = EAST;
 				this->_move(w);
 				break;
 			case KEY_SHOOT:
@@ -79,36 +69,52 @@ void			Player::_move(World &w)
 {
 	Entity	*e;
 
+	std::cout << "moo";
 	if (this->_moveStep >= this->_moveMax)
 	{
-		switch (this->_direction) {
+		switch (this->Entity::_direction) {
 			case NORTH:
-				e = this->getUp(w);
-				if (e)
-					collision(*this, *e);
-				else
-					this->moveUp(w);
+				if (this->Entity::_y > 0)
+				{
+					e = this->getUp(w);
+					if (e)
+						collision(*this, *e);
+					else
+						this->moveUp(w);
+				}
 				break;
+
 			case SOUTH:
-				e = this->getDown(w);
-				if (e)
-					collision(*this, *e);
-				else
-					this->moveDown(w);
+				if (this->Entity::_y < w.getHeight() - 1)
+				{
+					e = this->getDown(w);
+					if (e)
+						collision(*this, *e);
+					else
+						this->moveDown(w);
+				}
 				break;
+
 			case EAST:
-				e = this->getRight(w);
-				if (e)
-					collision(*this, *e);
-				else
-					this->moveRight(w);
+				if (this->Entity::_x < w.getWidth() - 1)
+				{
+					e = this->getRight(w);
+					if (e)
+						collision(*this, *e);
+					else
+						this->moveRight(w);
+				}
 				break;
+
 			case WEST:
-				e = this->getLeft(w);
-				if (e)
-					collision(*this, *e);
-				else
-					this->moveLeft(w);
+				if (this->Entity::_x > 0)
+				{
+					e = this->getLeft(w);
+					if (e)
+						collision(*this, *e);
+					else
+						this->moveLeft(w);
+				}
 				break;
 			default:
 				break;
@@ -120,33 +126,42 @@ void			Player::_move(World &w)
 void			Player::_shoot(World &w)
 {
 	Bullet	*b;
-	switch(this->_direction)
+	switch(this->Entity::_direction)
 	{
 		case NORTH:
-			b = new Bullet(this->_direction, this->_x, this->_y - 1);
+			b = new Bullet(this->Entity::_direction, this->Entity::_x, this->Entity::_y - 1);
 			w.addBullet(*b);
 			break;
 		case SOUTH:
-			b = new Bullet(this->_direction, this->_x, this->_y + 1);
+			b = new Bullet(this->Entity::_direction, this->Entity::_x, this->Entity::_y + 1);
 			w.addBullet(*b);
 			break;
 		case EAST:
-			b = new Bullet(this->_direction, this->_x + 1, this->_y);
+			b = new Bullet(this->Entity::_direction, this->Entity::_x + 1, this->Entity::_y);
 			w.addBullet(*b);
 			break;
 		case WEST:
-			b = new Bullet(this->_direction, this->_x - 1, this->_y);
+			b = new Bullet(this->Entity::_direction, this->Entity::_x - 1, this->Entity::_y);
 			w.addBullet(*b);
 			break;
 	}
 }
 
 
-char			Player::getSymbol(void) const
+int				Player::getSymbol(void) const
 {
-	if (this->_alive)
-		return (this->_symbol);
-	return ('$');
+	if (this->Entity::_alive)
+	{
+		switch(this->Entity::_direction)
+		{
+			case NORTH:	return '^';
+			case SOUTH: return 'v';
+			case EAST: return '>';
+			case WEST: return '<';
+			default: return '?';
+		}
+	}
+	return ('X');
 }
 
 // NOT MESSED WITH YET
@@ -154,13 +169,6 @@ char			Player::getSymbol(void) const
 Player::~Player(void) {
 	std::cout << "Player Destructor" << std::endl;
 	return;
-}
-
-Player			&Player::operator=(Player const &old)
-{
-	std::cout << "Player Assignment Operator" << std::endl;
-	(void)old;
-	return *this;
 }
 
 std::ostream	&operator<<(std::ostream &o, Player const &c)

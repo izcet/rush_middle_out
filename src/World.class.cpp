@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 00:03:40 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 18:25:48 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 20:44:26 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,18 @@ World::World(int height, int width) :
 	y = 0;
 	while (y < height)
 	{
+		this->grid[y] = new Entity*[this->_width];
 		x = 0;
 		while (x < height)
 			this->grid[y][x++] = nullptr;
 		y++;
 	}
-	this->_Player = new Player(width / 2, height / 2);
+	this->_Player = new Player(height / 2, width / 2);
 	this->grid[this->_Player->getY()][this->_Player->getX()] = this->_Player;
 	this->_Bullets = new List();
 	this->_Enemies = new List();
+	std::cout << "New World Created" << std::endl;
+	this->key = -1;
 	return;
 }
 
