@@ -49,15 +49,6 @@ Missile	&Missile::operator=(Missile const &old)
   return(*this);
 }
 
-// METHODS //
-
-// void Missile::shoot(std::string gun)
-// {
-// 	std::cout << "Shooting with " << gun << std::endl;
-// 	if (gun == "single_shot")
-// 		this->_symbol = '|';
-// 	//Missile::_instantiate(this->_posX + 1, this->_posY + 1);
-// }
 
 bool Missile::move(void)
 {
@@ -69,7 +60,7 @@ bool Missile::move(void)
 	}
 	else
 	  this->_posY -= 1;
-	return (true);
+	return (true); 
 }
 
 bool Missile::takeAction(void)
@@ -95,4 +86,10 @@ void Missile::_initValue(void)
 	this->_speed = 1;
 	this->_symbol = '|';
 	this->_lives = 1;
+}
+
+void Missile::getHit(void)
+{
+  this->_lives -= 1;
+  this->_isAlive = false;
 }
