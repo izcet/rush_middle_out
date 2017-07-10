@@ -56,8 +56,8 @@ void Game::play() {
   playerWin = newwin(0, 0, 0, 0);
   Enemy enemy1(maxX / 2, maxY / 2);
   Enemy massEnemy[10];
-  Missile mag[100];
-  int magSize = 99;
+  Missile mag[500];
+  int magSize = 499;
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
     if (!playerOne.getIsAlive())
@@ -71,7 +71,7 @@ void Game::play() {
       magSize--;
       // Missile bullet(playerOne.getPosY(), playerOne.getPosX());
     }
-    for (int i = 0; i <= 100; i++) {
+    for (int i = 0; i < 500; i++) {
       if (mag[i].getIsAlive())
 	{
 	  for (int x = 0; x < 10; x++)
@@ -101,7 +101,7 @@ void Game::play() {
 
     overlay(enemyWin, stdscr);
     wclear(playerWin);
-    for (int i = 0; i <= 100; i++) {
+    for (int i = 0; i <= 500; i++) {
       if (mag[i].getIsAlive())
 	mag[i].takeAction(playerWin);
      }

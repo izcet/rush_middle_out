@@ -67,7 +67,7 @@ bool Missile::move(void)
 	if (this->_posY - 1 == 0)
 	{
 		
-		this->_lives--;
+		this->_isAlive = false;
 		return (false);
 	}
 	else
