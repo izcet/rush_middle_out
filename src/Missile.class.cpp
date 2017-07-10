@@ -34,6 +34,18 @@ Missile::~Missile(void) {
 	return;
 }
 
+// GETTERS //
+
+void getPosX(void)
+{
+	return (this->_posX);
+}
+
+void getPosY(void)
+{
+	return (this->_posY)
+}
+
 // OPERATOR OVERLOAD //
 
 Missile	&Missile::operator=(Missile const &old)

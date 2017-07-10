@@ -28,7 +28,12 @@ public:
   void getHit(void);
     void setIsAlive(bool shot);
   void setPos(int x, int y);
+<<<<<<< HEAD
+  void getPosX(void);
+  void getPosY(void);
+=======
   bool getIsAlive(void) const;
+>>>>>>> a62206237918aca9d04608cd9c1b0727ab2fe5cb
 private:
 	void _initValue(void);
 };
