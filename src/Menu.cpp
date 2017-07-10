@@ -62,7 +62,7 @@ void Menu::menu_change(int zero)
 
 int Menu::input_loop(int c)
 {
-	Game test(get_window());
+	Game test;
 
 	switch(c)
 	{	case KEY_DOWN:
@@ -125,7 +125,7 @@ void Menu::print_xxx(void)
 	mvprintw(LINES + 1, 2, "HI SUP DOG");
 }
 
-void Menu::print_in_middle(WINDOW *win, int starty, int startx, int width, char *string, chtype color)
+void Menu::print_in_middle(WINDOW *win, int starty, int startx, int width, std::string string, chtype color)
 {
 	int length, x, y;
 	float temp;
