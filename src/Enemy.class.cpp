@@ -64,8 +64,8 @@ Enemy &Enemy::operator=(Enemy const &old) {
 // }
 
 bool Enemy::move(void) {
-  if (this->_posX + this->_dirX == Game::maxX ||
-      this->_posX + this->_dirX == 0) {
+  if (this->_posX + this->_dirX + 5 == Game::maxX ||
+      this->_posX + this->_dirX - 1 == 0) {
     this->_dirX *= -1;
     this->_dirY = 1;
   } else
@@ -79,15 +79,18 @@ void Enemy::doAction(WINDOW *enemyWin) {
   if (!this->_isAlive) return;
   bool hit = false;
   hit = this->move();
+  init_pair(5, COLOR_RED, COLOR_BLACK);
+  wattron(enemyWin, COLOR_PAIR(5));
   if (!this->_isAlive) return;
-  mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
+  mvwprintw(enemyWin,this->_posY, this->_posX, "   _   ");
+  mvwprintw(enemyWin,this->_posY + 1, this->_posX, "__/_\\__ ");
+  wattron(enemyWin, COLOR_PAIR(5));
 }
 
 void Enemy::resurrect(void)
 {
-  Environment yes;
-  this->_posX = yes.starShift() % (Game::maxX - 1);
-  this->_posY = (yes.starShift() % Game::maxY / 2) + 2;
+  this->_posX = rand() % (Game::maxX - 1);
+  this->_posY = rand() % (Game::maxY / 2) + 2;
   this->_isAlive = true;
 }
 
