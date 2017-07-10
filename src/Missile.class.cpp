@@ -36,14 +36,14 @@ Missile::~Missile(void) {
 
 // GETTERS //
 
-void getPosX(void)
+int Missile::getPosX(void)
 {
 	return (this->_posX);
 }
 
-void getPosY(void)
+int Missile::getPosY(void)
 {
-	return (this->_posY)
+	return (this->_posY);
 }
 
 // OPERATOR OVERLOAD //
