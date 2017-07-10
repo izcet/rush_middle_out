@@ -9,7 +9,7 @@
 #include "Missile.class.hpp"
 #include "Game.hpp"
 #include "Player.class.hpp"
-#include <stdlib.h>
+
 // CONSTRUCTORS //
 
 Missile::Missile(void) {
@@ -25,7 +25,7 @@ Missile::Missile(int x, int y) {
 }
 
 Missile::Missile(Missile const &old) {
-	std::srand(time(NULL));
+	std::srand(std::time(NULL));
 	*this = old;
 	return;
 }
@@ -63,12 +63,13 @@ bool Missile::move(void)
 	return (true); 
 }
 
-bool Missile::takeAction(void)
+bool Missile::takeAction(WINDOW *wind)
 {
   if (!this->_isAlive)
     return(false);
   bool hit = false;
   hit = this->move();
+  this->drawMissile(wind);
   return(hit);
 }
 
@@ -107,4 +108,9 @@ void Missile::setPos(int x, int y)
 {
   this->_posX = x;
   this->_posY = y - 1;
+}
+
+bool Missile::getIsAlive(void) const
+{
+  return(this->_isAlive);
 }
