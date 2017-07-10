@@ -85,9 +85,8 @@ void Enemy::doAction(WINDOW *enemyWin) {
 
 void Enemy::resurrect(void)
 {
-  Environment yes;
-  this->_posX = yes.starShift() % (Game::maxX - 1);
-  this->_posY = (yes.starShift() % Game::maxY / 2) + 2;
+  this->_posX = rand() % (Game::maxX - 1);
+  this->_posY = rand() % (Game::maxY / 2) + 2;
   this->_isAlive = true;
 }
 
