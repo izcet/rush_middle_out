@@ -78,6 +78,7 @@ int Menu::input_loop(int c)
 		{
 			wclear(_my_win);
 			test.launch();
+			wclear(_my_win);
 			return (1);
 		}
 		else if (_menu == 1)
