@@ -63,38 +63,48 @@ void Game::play() {
     map.starsRnd();
     playerOne.move(ch);
     if (ch == 32) {
+      
       mag[magSize].setPos(playerOne.getPosX(), playerOne.getPosY());
       mag[magSize].setIsAlive(true);
       magSize--;
-      //printw("Shoot missile!");
+      printw("Shoot missile!");
       // Missile bullet(playerOne.getPosY(), playerOne.getPosX());
     }
     for (int i = 0; i <= 100; i++) {
       if (mag[i].getIsAlive())
-	mag[i].takeAction(playerWin);
+	{
+	  for (int x = 0; x < 10; x++)
+	    {
+	      if (mag[i].getPosX() == massEnemy[x].getPosX() &&
+		  mag[i].getPoxY() == massEnemy[x].getPosY())
+	      {
+		mag[i].setIsAlive(false);
+		massEnemy[x].getHit();
+	      }
+	    }
+	}
+	    mag[i].takeAction(playerWin);
     }
+    
+    wclear(enemyWin);
+
     for (int i = 0; i < 10; i++) {
       if (playerOne.getPosX() == massEnemy[i].getPosX() &&
-          playerOne.getPosY() == massEnemy[i].getPosY()) {
-        playerOne.takeDamage();
-        ;
-      }
-    }
-    if (playerOne.getPosX() == enemy1.getPosX() &&
-        playerOne.getPosY() == enemy1.getPosY()) {
-      playerOne.takeDamage();
-    }
-
-    wclear(enemyWin);
-    enemy1.doAction(enemyWin);
-
-    for (int i = 0; i < 10; i++) {
+	  playerOne.getPosY() == massEnemy[i].getPosY())
+	{
+	  playerOne.takeDamage();
+	  massEnemy[i].getHit();
+	}
       massEnemy[i].doAction(enemyWin);
     }
 
     overlay(enemyWin, stdscr);
     wclear(playerWin);
-
+    for (int i = 0; i <= 100; i++) {
+      if (mag[i].getIsAlive())
+	mag[i].takeAction(playerWin);
+     }
+  
     playerOne.drawPlayer(playerWin);
     overlay(playerWin, stdscr);
     refresh();
