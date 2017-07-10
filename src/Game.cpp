@@ -61,7 +61,6 @@ void Game::play() {
   int magSize = 499;
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
-    usleep(10000);
     if (!playerOne.getIsAlive())
       mvprintw(playerOne.getPosY(), playerOne.getPosX(), "Game over!");
     map.starsRnd();
@@ -106,6 +105,7 @@ void Game::play() {
     overlay(playerWin, stdscr);
     refresh();
     ch = 0;
+    usleep(35000);
   }
   // delete  enemy1;
 }
