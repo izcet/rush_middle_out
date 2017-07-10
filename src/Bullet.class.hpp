@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 13:59:48 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 20:31:56 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 21:56:57 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 
 class Entity;
 class World;
-
-// bullet type is 'b'
-// bullet _symbol is '-' or '|' or ' '
 
 class Bullet : public Entity{
 

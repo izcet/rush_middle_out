@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 14:51:30 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 20:31:41 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 21:57:12 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@
 
 class World;
 class Bullet;
-
-// player type is 'p'
-// player _symbol is '^' or '>' or '<' or 'v'
-// player _symbol is 'X' on death
 
 class Player : public Entity {
 
@@ -41,9 +37,8 @@ class Player : public Entity {
 		void			_move(World &w);
 		void			_shoot(World &w);
 
-		int				_moveStep; // 0
-		int				_moveMax; // 5
-		// move every 5 frames or cycles
+		int				_moveStep;
+		int				_moveMax;
 
 };
 

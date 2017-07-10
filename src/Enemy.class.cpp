@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 17:18:56 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 21:38:24 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 21:59:19 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int					Enemy::getSymbol(void) const
 {
 	if (this->_alive)
 		return (this->_symbol);
-	return ('$');
+	return ('X');
 }
 
 // NOT MESSED WITH YET

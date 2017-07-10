@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 00:03:40 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 21:44:10 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 21:57:32 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class World {
 		void			addEnemy(int x);
 		void			addBullet(Bullet &b);
 
-		bool			doCycle(void); //input args?
+		bool			doCycle(void);
 
 		int				getWidth(void) const;
 		int				getHeight(void) const;
@@ -47,7 +47,7 @@ class World {
 		World			&operator=(World const &old);
 
 		void			_act(List *Entities);
-		void			_takeInput(void/*args*/); // input args?
+		void			_takeInput(void);
 		List			*_clean(List *Entities);
 		void			_deleteList(List *ent);
 		List			*_addList(List *li, Entity *ent);
