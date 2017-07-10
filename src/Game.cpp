@@ -61,7 +61,7 @@ void Game::play() {
   int magSize = 19999;
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
-    
+
     if (!playerOne.getIsAlive())
       {
 	wclear(stdscr);
@@ -82,7 +82,7 @@ void Game::play() {
     }
     for (int i = 0; i < 20000; i++) {
       if (mag[i].getIsAlive()) {
-	for (int y = - 2; y <= 2; y++) {	  
+	for (int y = - 2; y <= 2; y++) {
 	  for (int x = 0; x < 50; x++) {
 	    if (mag[i].getPosX() == massEnemy[x].getPosX() + y &&
 		mag[i].getPosY() == massEnemy[x].getPosY() + 2) {
@@ -106,7 +106,7 @@ void Game::play() {
       }
       if (!massEnemy[i].getIsAlive()) {
 	massEnemy[i].resurrect();
-      }	
+      }
       massEnemy[i].doAction(enemyWin);
     }
     overlay(enemyWin, stdscr);

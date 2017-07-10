@@ -82,7 +82,7 @@ void Missile::_initValue(void) {
   this->_posX = Game::maxX / 2;
   this->_posY = Game::maxY;
   this->_speed = 1;
-  this->_symbol = '|';
+  this->_symbol = ':';
   this->_lives = 1;
   this->_isAlive = false;
 }
