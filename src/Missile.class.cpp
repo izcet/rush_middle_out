@@ -74,7 +74,8 @@ bool Missile::takeAction(void)
 
 void Missile::drawMissile(WINDOW *wind) const
 {
-  mvwaddch(wind, this->_posY, this->_posX, this->_symbol);
+  if (this->_isAlive)
+    mvwaddch(wind, this->_posY, this->_posX, this->_symbol);
 }
 
 
@@ -88,11 +89,22 @@ void Missile::_initValue(void)
 	this->_speed = 1;
 	this->_symbol = '|';
 	this->_lives = 1;
-	this->_isAlive = true;
+	this->_isAlive = false;
 }
 
 void Missile::getHit(void)
 {
   this->_lives -= 1;
   this->_isAlive = false;
+}
+
+void Missile::setIsAlive(bool shot)
+{
+  this->_isAlive = shot;
+}
+
+void Missile::setPos(int x, int y)
+{
+  this->_posX = x;
+  this->_posY = y - 1;
 }
