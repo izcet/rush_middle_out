@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 00:03:40 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 21:44:55 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 22:19:42 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "Player.class.hpp"
 
 World::World(int height, int width) :
+	score(0),
 	_width(width),
 	_height(height)
 {
@@ -50,7 +51,6 @@ World::~World(void) {
 	this->_deleteList(this->_Enemies);
 	delete this->_Player;
 	delete this->grid;
-	std::cout << "World Destructor" << std::endl;
 	return;
 }
 
@@ -88,13 +88,9 @@ int				World::getHeight(void) const
 
 bool			World::doCycle(void) // maybe this is going to take inputs
 {
-//	bool	ret;
-
 	this->_act(this->_Bullets);
-	this->_takeInput(); ///////////////???
 	this->_Player->act(*this);
 	this->_act(this->_Enemies);
-//	ret = this->_cleanup();
 	return (true);
 }
 
@@ -105,13 +101,6 @@ void			World::_act(List *ent)
 		this->_act(ent->next);
 		ent->getEnt()->act(*this);
 	}
-}
-
-void			World::_takeInput(void) // probably going to take args
-{
-	// brett,
-	// brett i...
-	// i need you.
 }
 
 bool			World::_cleanup(void)
@@ -158,11 +147,9 @@ List			*World::_addList(List *li, Entity *ent)
 	return (node);
 }
 
-///////////////////////////////////////////////////////////////
-
 std::ostream	&operator<<(std::ostream &o, World const &c)
 {
-	o << "To String Function of World: "; // MAYBE FLESH THIS OUT
+	o << "To String Function of World: ";
 	(void)c;
 	return (o);
 }

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 17:18:56 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 21:59:19 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 22:25:27 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,28 +64,40 @@ void			Enemy::act(World &w)
 				case NORTH:
 					e = this->Entity::getUp(w);
 					if (e)
+					{
 						collision(*this, *e);
+						w.score += 15;
+					}
 					else
 						this->Entity::moveUp(w);
 					break;
 				case SOUTH:
 					e = this->Entity::getDown(w);
 					if (e)
+					{
 						collision(*this, *e);
+						w.score += 15;
+					}
 					else
 						this->Entity::moveDown(w);
 					break;
 				case EAST:
 					e = this->Entity::getRight(w);
 					if (e)
+					{
 						collision(*this, *e);
+						w.score += 15;
+					}
 					else
 						this->Entity::moveRight(w);
 					break;
 				case WEST:
 					e = this->Entity::getLeft(w);
 					if (e)
+					{
 						collision(*this, *e);
+						w.score += 15;
+					}
 					else
 						this->Entity::moveLeft(w);
 					break;
@@ -95,12 +107,10 @@ void			Enemy::act(World &w)
 
 			}
 			this->_moveStep = 0;
+			if (!this->Entity::_alive)
+				w.score -= 10;
 		}
 		this->_moveStep++;
-
-		// we could put some other behaviors here
-		// like changing direction or sucking dick
-		// the world is truly our oyster
 	}
 }
 
@@ -114,13 +124,13 @@ int					Enemy::getSymbol(void) const
 // NOT MESSED WITH YET
 
 Enemy::~Enemy(void) {
-//	std::cout << "Enemy Destructor" << std::endl;
+	//	std::cout << "Enemy Destructor" << std::endl;
 	return;
 }
 
 Enemy				&Enemy::operator=(Enemy const &old)
 {
-//	std::cout << "Enemy Assignment Operator" << std::endl;
+	//	std::cout << "Enemy Assignment Operator" << std::endl;
 	(void)old;
 	return *this;
 }

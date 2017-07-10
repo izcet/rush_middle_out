@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 15:30:55 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 21:44:31 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 22:33:40 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(void)
 	timeout(20);
 	getmaxyx(stdscr, y, x);
 	keypad(stdscr, TRUE);
-	World	w(y, x); // update to take window size parameters
+	World	w(y, x);
 
 	bool	going;
 	int		count;
@@ -42,8 +42,8 @@ int main(void)
 		w.key = getch();
 		w.doCycle();
 		clear();
-		count++;
-		if (count >= 10)
+		count+= rand() % 20;
+		if (count >= 200)
 		{
 			w.addEnemy();
 			count = 0;
@@ -68,12 +68,12 @@ int main(void)
 			}
 			y++;
 		}
-		// call sleep
 		refresh();
 		going = w._cleanup();
-		// window.clear;
 	}
-	// game over;
+	sleep(5);
 	endwin();
+	std::cout << "\t\tGAME OVER" << std::endl;
+	std::cout << "Your final score was: " << w.score << std::endl;
 	return (0);
 }

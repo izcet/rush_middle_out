@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 17:29:36 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 21:56:21 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 22:22:39 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ private:
 	
 	int		_moveStep;
 	int		_moveMax;
-
 };
 
 std::ostream	&operator<<(std::ostream &o, Enemy const &c);

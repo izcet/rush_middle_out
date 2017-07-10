@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 14:51:30 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 21:26:36 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 22:15:35 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void			Player::_move(World &w)
 {
 	Entity	*e;
 
-	std::cout << "moo";
 	if (this->_moveStep >= this->_moveMax)
 	{
 		switch (this->Entity::_direction) {
@@ -160,10 +159,8 @@ int				Player::getSymbol(void) const
 	return ('X');
 }
 
-// NOT MESSED WITH YET
 
 Player::~Player(void) {
-	std::cout << "Player Destructor" << std::endl;
 	return;
 }
 

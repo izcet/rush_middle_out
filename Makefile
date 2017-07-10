@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/03 15:27:10 by irhett            #+#    #+#              #
-#    Updated: 2017/07/09 19:33:05 by irhett           ###   ########.fr        #
+#    Updated: 2017/07/09 22:37:48 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME		=	ft_retro
 CXX			=	clang++
 FLAGS		=	-Wall -Werror -Wextra -std=c++98
 
-SRC_DIR		=	src
-SRC_FILE	=	main.cpp \
+MINI_DIR	=	mini
+MINI_FILE	=	main.cpp \
 				Entity.class.cpp \
 				World.class.cpp \
 				Player.class.cpp \
@@ -26,29 +26,30 @@ SRC_FILE	=	main.cpp \
 
 
 
-SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC_FILE))
+MINI		=	$(addprefix $(MINI_DIR)/, $(MINI_FILE))
 
-OBJ_DIR		=	obj
-OBJ_FILE	=	$(SRC_FILE:.cpp=.o)
-OBJS		=	$(addprefix $(OBJ_DIR)/, $(OBJ_FILE))
+MOB_DIR		=	obj
+MOB_FILE	=	$(MINI_FILE:.cpp=.o)
+MOBS		=	$(addprefix $(MOB_DIR)/, $(MOB_FILE))
 
-INC			=	-I src
+INK			=	-I mini
 
 .PHONY: re fclean clean all
 
 all: $(NAME)
 
-$(NAME): $(SRCS) | $(OBJS)
+$(NAME): $(MINIS) | $(OBJS) | $(MINI) | $(MOBS)
 	$(CXX) $(INC) $(FLAGS) -l ncurses $(OBJS) -o $(NAME)
+	$(CXX) $(INK) $(FLAGS) -l ncurses $(MOBS) -o minigame
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+$(MOB_DIR)/%.o: $(MINI_DIR)/%.cpp | $(MOB_DIR)
 	@$(CXX) $(INC) -c $^ $(FLAGS) -o $@
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+$(MOB_DIR):
+	@mkdir -p $(MOB_DIR)
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -rf $(MOB_DIR)
 
 fclean: clean
 	rm -f $(NAME)
