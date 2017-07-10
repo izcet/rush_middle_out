@@ -80,11 +80,14 @@ void Enemy::doAction(WINDOW *enemyWin) {
   bool hit = false;
   hit = this->move();
   init_pair(5, COLOR_RED, COLOR_BLACK);
-  wattron(enemyWin, COLOR_PAIR(5));
   if (!this->_isAlive) return;
+  wattron(enemyWin, COLOR_PAIR(6));
   mvwprintw(enemyWin,this->_posY, this->_posX, "   _   ");
-  mvwprintw(enemyWin,this->_posY + 1, this->_posX, "__/_\\__ ");
   wattron(enemyWin, COLOR_PAIR(5));
+  mvwprintw(enemyWin,this->_posY + 1, this->_posX, "__/_\\__ ");
+  wattroff(enemyWin, COLOR_PAIR(5));
+  wattroff(enemyWin, COLOR_PAIR(6));
+
 }
 
 void Enemy::resurrect(void)
