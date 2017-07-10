@@ -55,13 +55,13 @@ void Game::play() {
   Player playerOne(maxX / 2, maxY - 10);
   playerWin = newwin(0, 0, 0, 0);
   Enemy enemy1(maxX / 2, maxY / 2);
-  Enemy massEnemy[10];
+  Enemy massEnemy[50];
   Missile mag[500];
   int magSize = 499;
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
     if (!playerOne.getIsAlive())
-      printw("Game over!");
+      mvprintw(playerOne.getPosY(), playerOne.getPosX(), "Game over!");
     map.starsRnd();
     playerOne.move(ch);
     if (ch == 32) {
@@ -74,7 +74,7 @@ void Game::play() {
     for (int i = 0; i < 500; i++) {
       if (mag[i].getIsAlive())
 	{
-	  for (int x = 0; x < 10; x++)
+	  for (int x = 0; x < 50; x++)
 	    {
 	      if (mag[i].getPosX() == massEnemy[x].getPosX() &&
 		  mag[i].getPosY() == massEnemy[x].getPosY())
@@ -89,7 +89,7 @@ void Game::play() {
     
     wclear(enemyWin);
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 50; i++) {
       if (playerOne.getPosX() == massEnemy[i].getPosX() &&
 	  playerOne.getPosY() == massEnemy[i].getPosY())
 	{
