@@ -6,22 +6,27 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 00:03:40 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 17:22:59 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 18:25:48 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 #include "World.class.hpp"
+#include "Entity.class.hpp"
+#include "Enemy.class.hpp"
+#include "Bullet.class.hpp"
+#include "List.class.hpp"
+#include "Player.class.hpp"
 
 World::World(int height, int width) :
-	_height(height),
-	_width(width)
+	_width(width),
+	_height(height)
 {
 	int		x;
 	int		y;
 
-	this->grid = new Entity*[height][width];
+	this->grid = new Entity**[this->_height];
 	y = 0;
 	while (y < height)
 	{
@@ -31,7 +36,7 @@ World::World(int height, int width) :
 		y++;
 	}
 	this->_Player = new Player(width / 2, height / 2);
-	this->grid[this->_Player.getY()][this->_Player.getX()] = this->_Player;
+	this->grid[this->_Player->getY()][this->_Player->getX()] = this->_Player;
 	this->_Bullets = new List();
 	this->_Enemies = new List();
 	return;
@@ -50,25 +55,26 @@ void			World::addEnemy(void)
 {
 	int		x;
 
+	x = 2;
 	//x = some randome value;
 	this->addEnemy(x);
 }
 
 void			World::addEnemy(int x)
 {
-	Enemy	*e;
+	Entity 	*e;
 
 	if (this->grid[0][x])
 		return;
-	e = new Enemy(x);
-	this->grid[e->getY()][e->getX] = e;
+	e = (Entity*)(new Enemy(x));
+	this->grid[e->getY()][e->getX()] = e;
 	this->_Enemies = this->_addList(this->_Enemies, e);
 }
 
 void			World::addBullet(Bullet &b)
 {
-	this->grid[b->getY()][b->getX] = b;
-	this->_Bullets = this->_addList(this->_Bullets, b);
+	this->grid[b.getY()][b.getX()] = &b;
+	this->_Bullets = this->_addList(this->_Bullets, (Entity*)&b);
 }
 
 int				World::getWidth(void) const
@@ -87,7 +93,7 @@ bool			World::doCycle(void) // maybe this is going to take inputs
 
 	this->_act(this->_Bullets);
 	this->_takeInput(); ///////////////???
-	this->_Player.act(this);
+	this->_Player->act(*this);
 	this->_act(this->_Enemies);
 	ret = this->_cleanup();
 	return (ret);
@@ -95,10 +101,10 @@ bool			World::doCycle(void) // maybe this is going to take inputs
 
 void			World::_act(List *ent)
 {
-	if (!temp.isEmpty())
+	if (!ent->isEmpty())
 	{
 		this->_act(ent->next);
-		ent.getEnt().act();
+		ent->getEnt()->act(*this);
 	}
 }
 
@@ -113,7 +119,7 @@ bool			World::_cleanup(void)
 {
 	this->_Bullets = this->_clean(this->_Bullets);
 	this->_Enemies = this->_clean(this->_Enemies);
-	return (this->_Player.isAlive());
+	return (this->_Player->isAlive());
 }	
 
 List			*World::_clean(List *ent)
@@ -122,9 +128,9 @@ List			*World::_clean(List *ent)
 
 	if (ent->isEmpty())
 		return (ent);
-	if (ent->getEnt().isAlive())
+	if (ent->getEnt()->isAlive())
 	{
-		ent->next = this._clean(ent->next);
+		ent->next = this->_clean(ent->next);
 		return (ent);
 	}
 	next = ent->next;
@@ -138,7 +144,7 @@ void			World::_deleteList(List *ent)
 {
 	if (!ent->isEmpty())
 	{
-		this->_deleteList(ent->next());
+		this->_deleteList(ent->next);
 		delete (ent->getEnt());
 	}
 	delete (ent);
@@ -158,6 +164,7 @@ List			*World::_addList(List *li, Entity *ent)
 std::ostream	&operator<<(std::ostream &o, World const &c)
 {
 	o << "To String Function of World: "; // MAYBE FLESH THIS OUT
+	(void)c;
 	return (o);
 }
 
@@ -170,8 +177,7 @@ World::World(World const &old) {
 World			&World::operator=(World const &old)
 {
 	std::cout << "DON'T EVEN THINK ABOUT IT" << std::endl;
-	if (this != &old)
-		this->_privateFoo = old.getFoo();
+	(void)old;
 	return *this;
 }
 

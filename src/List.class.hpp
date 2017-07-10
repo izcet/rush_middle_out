@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 01:05:42 by dubious          ###   ########.fr       */
+/*   Updated: 2017/07/09 17:36:42 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 
 # include <iostream>
 # include <string>
-# include "Entity.class.hpp"
+
+class Entity;
 
 class List {
 
-public:
+	public:
 
-	List(void);
-	List(const Entity *ent);
-	List(List const & old);
-	List(void);
-	~List(void);
+		List(void);
+		List(const Entity *ent);
+		List(List const & old);
+		~List(void);
 
-	List	&operator=(List const &old);
+		List	&operator=(List const &old);
 
-	bool	isEmpty(void) const;
-	Entity	*getEnt(void) const;
+		bool	isEmpty(void) const;
+		Entity	*getEnt(void) const;
 
-	List	*next;
+		List	*next;
 
-private:
-	bool	_empty;
-	Entity	*_ent;
+	private:
+		bool	_empty;
+		Entity	*_ent;
 
 };
 

@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 15:30:55 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 17:24:25 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 17:43:05 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int main(void)
 	int		count;
 
 	count = 0;
-	while ((going = World.doCycle(void)))
+	while ((going = w.doCycle()))
 	{
 		count++;
 		if (count >= 10)
 		{
-			World.addEnemy(5);
+			w.addEnemy(5);
 			count = 0;
 		}
 		// window.clear;

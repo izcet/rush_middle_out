@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 15:28:39 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 18:22:13 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <iostream>
 # include <string>
-
-# include "World.class.hpp"
 
 # define NORTH 0
 # define SOUTH 1
@@ -28,17 +26,17 @@
 // # define PLAYER		'p'
 // # define ASTEROID	'a'
 
+class World;
 
 class Entity {
 
 	public:
+		virtual ~Entity(void);
 
 		// we have to be able to reference a generic entity
 		// as a return value from another function
 		// but an entity will never be declared on its own
 		// it should technically be abstract butt fuck it
-		Entity			&operator=(Entity const &old);
-		~Entity(void);
 
 		// overridden by child classes
 		virtual void	act(World &w);
@@ -55,12 +53,12 @@ class Entity {
 		char			type;
 
 	private:
+		Entity			&operator=(Entity const &old);
 
 		Entity(void);
 		Entity(const Entity *ent);
 		Entity(Entity const & old);
-		Entity(void);
-
+	
 	protected:
 
 		void			moveUp(World &w);

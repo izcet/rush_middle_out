@@ -6,7 +6,7 @@
 #    By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/03 15:27:10 by irhett            #+#    #+#              #
-#    Updated: 2017/07/09 01:13:52 by dubious          ###   ########.fr        #
+#    Updated: 2017/07/09 17:42:04 by irhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,10 @@ FLAGS		=	-Wall -Werror -Wextra -std=c++98
 
 SRC_DIR		=	src
 SRC_FILE	=	main.cpp \
+				Entity.class.cpp \
 				World.class.cpp \
 				Player.class.cpp \
 				List.class.cpp \
-				Entity.class.cpp \
 				Enemy.class.cpp \
 				Bullet.class.cpp \
 
@@ -39,7 +39,7 @@ INC			=	-I src
 all: $(NAME)
 
 $(NAME): $(SRCS) | $(OBJS)
-	    $(CXX) $(INC) $(FLAGS) -l ncurses $(OBJS) -o $(NAME)
+	$(CXX) $(INC) $(FLAGS) -l ncurses $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	@$(CXX) $(INC) -c $^ $(FLAGS) -o $@

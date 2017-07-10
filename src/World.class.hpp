@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 00:03:40 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 17:12:50 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 17:37:47 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 
 # include <iostream>
 # include <string>
-# include "List.class.hpp"
-# include "Entity.class.hpp"
-# include "Player.class.hpp"
+
+class List;
+class Player;
+class Entity;
+class Bullet;
 
 class World {
 
 	public:
 
 		World(int height, int width);
-		~World(void); // to be updated
+		~World(void);
 
 		void			addEnemy(void);
 		void			addEnemy(int x);

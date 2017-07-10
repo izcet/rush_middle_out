@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Enemy.class.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/09 17:29:36 by irhett            #+#    #+#             */
+/*   Updated: 2017/07/09 17:36:16 by irhett           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ENEMY_CLASS_HPP
 # define ENEMY_CLASS_HPP
 
 # include <iostream>
 # include <string>
 
-# include "Entity.class.hpp"
-# include "World.cass.hpp"
+class Entity;
+class World;
 
 // enemy type is 'e'
 // enemy _symbol is '8' or user-defined
