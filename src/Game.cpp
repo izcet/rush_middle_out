@@ -121,6 +121,7 @@ void Game::play() {
     refresh();
     ch = 0;
     usleep(35000);
+	border(0, 0, 0, 0, 0, 0, 0, 0);
   }
   // delete  enemy1;
 }
