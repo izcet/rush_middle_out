@@ -82,13 +82,15 @@ void Game::play() {
     }
     for (int i = 0; i < 20000; i++) {
       if (mag[i].getIsAlive()) {
-        for (int x = 0; x < 50; x++) {
-          if (mag[i].getPosX() == massEnemy[x].getPosX() + 2 &&
-              mag[i].getPosY() == massEnemy[x].getPosY() + 2) {
-            mag[i].setIsAlive(false);
-            massEnemy[x].getHit();
-            playerOne.setScore(1);
-          }
+	for (int y = - 2; y <= 2; y++) {	  
+	  for (int x = 0; x < 50; x++) {
+	    if (mag[i].getPosX() == massEnemy[x].getPosX() + y &&
+		mag[i].getPosY() == massEnemy[x].getPosY() + 2) {
+	      mag[i].setIsAlive(false);
+	      massEnemy[x].getHit();
+	      playerOne.setScore(1);
+	    }
+	  }
         }
       }
       mag[i].takeAction(playerWin);

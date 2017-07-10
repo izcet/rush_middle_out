@@ -99,6 +99,7 @@ void Enemy::getHit(void) {
   this->_isAlive = false;
   this->_posY = 1;
   this->_posX = 1;
+  std::cout << '';
 }
 
 // INIT
