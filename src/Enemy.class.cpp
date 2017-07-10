@@ -16,8 +16,8 @@
 Enemy::Enemy(void) {
   Environment yes;
   this->_initValue();
-  this->_posX = yes.starShift() % Game::maxX;
-  this->_posY = yes.starShift() % Game::maxY;
+  this->_posX = yes.starShift() % (Game::maxX - 1);
+  this->_posY = (yes.starShift() % Game::maxY / 2) + 2;
   return;
 }
 

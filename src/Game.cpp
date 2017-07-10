@@ -62,7 +62,12 @@ void Game::play() {
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
     if (!playerOne.getIsAlive())
-      mvprintw(playerOne.getPosY(), playerOne.getPosX(), "Game over!");
+      {
+	wclear(stdscr);
+	mvwprintw(stdscr, playerOne.getPosY(), playerOne.getPosX(), "Game over!");
+	refresh();
+	break;
+      }
     map.starsRnd();
     playerOne.move(ch);
     if (ch == 32) {
@@ -91,13 +96,12 @@ void Game::play() {
 
     for (int i = 0; i < 50; i++) {
       if (playerOne.getPosX() == massEnemy[i].getPosX() &&
-          playerOne.getPosY() == massEnemy[i].getPosY()) {
-        playerOne.takeDamage();
-        massEnemy[i].getHit();
+          playerOne.getPosY() + 2 == massEnemy[i].getPosY()) {
+	massEnemy[i].getHit();
+	playerOne.takeDamage();
       }
       massEnemy[i].doAction(enemyWin);
     }
-
     overlay(enemyWin, stdscr);
     wclear(playerWin);
     for (int i = 0; i <= 500; i++) {
