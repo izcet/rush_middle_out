@@ -14,6 +14,7 @@
 #include "GameEntity.class.hpp"
 #include "Missile.class.hpp"
 #include "Player.class.hpp"
+#include <unistd.h>
 
 int Game::score = 0;
 int Game::maxX = 0;
@@ -49,8 +50,8 @@ void Game::play() {
   Environment map;
   int ch = 0;
   keypad(map.getWin(), TRUE);
-  nodelay(map.getWin(), TRUE);
-  timeout(300);
+  //nodelay(map.getWin(), TRUE);
+  timeout(1);
   border(0, 0, 0, 0, 0, 0, 0, 0);
   Player playerOne(maxX / 2, maxY - 10);
   playerWin = newwin(0, 0, 0, 0);
@@ -60,6 +61,7 @@ void Game::play() {
   int magSize = 499;
   enemyWin = newwin(0, 0, 0, 0);
   while ((ch = getch()) != 'q') {
+        usleep(10000);
     if (!playerOne.getIsAlive())
       mvprintw(playerOne.getPosY(), playerOne.getPosX(), "Game over!");
     map.starsRnd();
