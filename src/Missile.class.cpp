@@ -69,9 +69,10 @@ bool Missile::takeAction(WINDOW *wind) {
 }
 
 void Missile::drawMissile(WINDOW *wind) const {
-  wattron(wind, COLOR_PAIR(2));
+  init_pair(6, COLOR_GREEN, COLOR_BLACK);
+  wattron(wind, COLOR_PAIR(6));
   if (this->_isAlive) mvwaddch(wind, this->_posY, this->_posX, this->_symbol);
-  wattroff(wind, COLOR_PAIR(2));
+  wattroff(wind, COLOR_PAIR(6));
 }
 
 // INIT //
