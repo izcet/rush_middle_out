@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 17:18:56 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 20:42:03 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 21:38:24 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,39 @@
 #include "Entity.class.hpp"
 #include "Enemy.class.hpp"
 
-Enemy::Enemy(void) :
+Enemy::Enemy(int wid) :
 	Entity('e', 0, 0, SOUTH, '8', true), // ?
 	_moveStep(0),
 	_moveMax(10)
 {
-	int		randomNumber;
-
-	randomNumber = 4; // fix this to be truly random
-	this->_x = randomNumber;
-
-	//std::cout << "Enemy Default Constructor" << std::endl;
+	this->Entity::_x = rand() % wid;
 	return;
 }
 
-Enemy::Enemy(char symbol) : 
-	Entity('e', 0, 0, SOUTH, symbol, true),
+Enemy::Enemy(int wid, char symbol) : 
+	Entity('e', -1, 0, SOUTH, symbol, true),
 	_moveStep(0),
 	_moveMax(10)
 {
-	int		random;
-
-	random = 69;
-	this->_x = random;
-	//std::cout << "Enemy Parametric Constructor" << std::endl;
+	this->_x = rand() % wid;
 	return;
 }
 
-Enemy::Enemy(int x) : 
-	Entity('e', x, 0, SOUTH, '8', true),
+Enemy::Enemy(int wid, int pos) : 
+	Entity('e', pos, 0, SOUTH, '8', true),
 	_moveStep(0),
 	_moveMax(10)
 {
-	//std::cout << "Enemy Parametric Constructor 2" << std::endl;
+	(void)wid;
 	return;
 }
 
-Enemy::Enemy(int x, char symbol) : 
-	Entity('e', x, 0, SOUTH, symbol, true),
+Enemy::Enemy(int wid, int pos, char symbol) : 
+	Entity('e', pos, 0, SOUTH, symbol, true),
 	_moveStep(0),
 	_moveMax(10)
 {
-	//std::cout << "Enemy Parametric Constructor 3" << std::endl;
+	(void)wid;
 	return;
 }
 

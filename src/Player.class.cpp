@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 14:51:30 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 21:18:49 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 21:26:36 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ Player::Player(int x, int y) :
 	_moveStep(0),
 	_moveMax(5)
 {
-	int		random;
-
-	random = 69; ///////////// ok but really random though
-	this->Entity::_x = random;
 	return;
 }
 

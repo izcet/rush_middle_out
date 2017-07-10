@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 17:29:36 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 20:31:49 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 21:38:34 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ class Enemy : public Entity{
 
 public:
 
-	Enemy(void);
 	Enemy(char symbol);
-	Enemy(int x);
-	Enemy(int x, char symbol);
+	Enemy(int wid);
+	Enemy(int wid, int pos);
+	Enemy(int wid, char symbol);
+	Enemy(int wid, int pos, char symbol);
 	~Enemy(void);
 	Enemy			&operator=(Enemy const &old);
 
@@ -50,12 +51,6 @@ private:
 	Entity			*getRight(World &w) const;
 	Entity			*getUp(World &w) const;
 	Entity			*getDown(World &w) const;
-
-	bool			_alive;
-	int				_x;
-	int				_y;
-	int				_direction;
-	char			_symbol;
 
 	int		_moveStep; // 0
 	int		_moveMax; // 10

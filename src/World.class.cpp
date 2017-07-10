@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 00:03:40 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 20:44:26 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 21:44:55 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,7 @@ World::~World(void) {
 
 void			World::addEnemy(void)
 {
-	int		x;
-
-	x = 2;
-	//x = some randome value;
-	this->addEnemy(x);
+	this->addEnemy(this->_width);
 }
 
 void			World::addEnemy(int x)
@@ -70,7 +66,7 @@ void			World::addEnemy(int x)
 	if (this->grid[0][x])
 		return;
 	e = (Entity*)(new Enemy(x));
-	this->grid[e->getY()][e->getX()] = e;
+	this->grid[e->Entity::getY()][e->Entity::getX()] = e;
 	this->_Enemies = this->_addList(this->_Enemies, e);
 }
 
@@ -92,14 +88,14 @@ int				World::getHeight(void) const
 
 bool			World::doCycle(void) // maybe this is going to take inputs
 {
-	bool	ret;
+//	bool	ret;
 
 	this->_act(this->_Bullets);
 	this->_takeInput(); ///////////////???
 	this->_Player->act(*this);
 	this->_act(this->_Enemies);
-	ret = this->_cleanup();
-	return (ret);
+//	ret = this->_cleanup();
+	return (true);
 }
 
 void			World::_act(List *ent)
