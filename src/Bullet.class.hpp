@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 13:59:48 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 18:17:50 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 18:59:34 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,16 @@ public:
 	int				getX(void) const;
 	int				getY(void) const;
 
+	char			type;
+
 private:
 	Bullet(void);
+
+	bool			_alive;
+	int				_x;
+	int				_y;
+	int				_direction;
+	char			_symbol;
 
 };
 

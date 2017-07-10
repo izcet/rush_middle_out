@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 18:22:13 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 18:46:07 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class World;
 class Entity {
 
 	public:
+		Entity(void);
 		virtual ~Entity(void);
 
 		// we have to be able to reference a generic entity
@@ -55,10 +56,9 @@ class Entity {
 	private:
 		Entity			&operator=(Entity const &old);
 
-		Entity(void);
 		Entity(const Entity *ent);
 		Entity(Entity const & old);
-	
+
 	protected:
 
 		void			moveUp(World &w);

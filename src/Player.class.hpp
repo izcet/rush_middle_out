@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 14:51:30 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 17:43:34 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 18:35:58 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,21 @@ class Player : public Entity {
 		virtual void	act(World &w);
 		virtual char	getSymbol(void) const;
 
-	private:
+		char			type;
 
-		int				_moveStep; // 0
-		int				_moveMax; // 5
-		// move every 5 frames or cycles
+	private:
 
 		void			_move(World &w);
 		void			_shoot(World &w);
+
+		bool			_alive;
+		int				_x;
+		int				_y;
+		int				_direction;
+		char			_symbol;
+		int				_moveStep; // 0
+		int				_moveMax; // 5
+		// move every 5 frames or cycles
 
 };
 

@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 17:36:42 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 18:46:15 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class List {
 	public:
 
 		List(void);
-		List(const Entity *ent);
+		List(Entity *ent);
 		List(List const & old);
 		~List(void);
 

@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 17:54:29 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 18:42:50 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include <string>
 #include "Entity.class.hpp"
 #include "World.class.hpp"
+
+
+Entity::Entity(void) : _alive(true) {
+	return;
+}
 
 // by default an entity will do nothing every turn
 void			Entity::act(World &w)
@@ -133,11 +138,6 @@ std::ostream	&operator<<(std::ostream &o, Entity const &c)
 	o << "ENTITY TOSTREAM";
 	(void)c;
 	return (o);
-}
-
-Entity::Entity(void) {
-	std::cout << "Entity Default FUCK" << std::endl;
-	return;
 }
 
 Entity::Entity(const Entity *ent) {

@@ -6,18 +6,18 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 17:18:56 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 17:19:08 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 18:55:27 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include "Enemy.class.hpp"
 #include "World.class.hpp"
 #include "Entity.class.hpp"
+#include "Enemy.class.hpp"
 
 Enemy::Enemy(void) :
-	_type('e'),
+	type('e'),
 	_alive(true),
 	_y(0),
 	_direction(SOUTH),
@@ -54,10 +54,10 @@ Enemy::Enemy(char symbol) :
 Enemy::Enemy(int x) : 
 	type('e'),
 	_alive(true),
-	_x(x)
+	_x(x),
 	_y(0),
 	_direction(SOUTH),
-	_symbol('8')
+	_symbol('8'),
 	_moveStep(0),
 	_moveMax(10)
 {
@@ -66,18 +66,18 @@ Enemy::Enemy(int x) :
 }
 
 Enemy::Enemy(int x, char symbol) : 
-	type(e),	
+	type('e'),	
 	_alive(true),
-	_x(x)
+	_x(x),
 	_y(0),
 	_direction(SOUTH),
-	_symbol(symbol);
+	_symbol(symbol)
 {
 	//std::cout << "Enemy Parametric Constructor 3" << std::endl;
 	return;
 }
 
-virtual void	Enemy::act(World &w)
+void			Enemy::act(World &w)
 {
 	Entity	*e;
 
@@ -89,33 +89,33 @@ virtual void	Enemy::act(World &w)
 				case NORTH:
 					e = this->getUp(w);
 					if (e)
-						collision(this, e);
+						collision(*this, *e);
 					else
 						this->moveUp(w);
 					break;
 				case SOUTH:
 					e = this->getDown(w);
 					if (e)
-						collision(this, e);
+						collision(*this, *e);
 					else
 						this->moveDown(w);
 					break;
 				case EAST:
 					e = this->getRight(w);
 					if (e)
-						collision(this, e);
+						collision(*this, *e);
 					else
 						this->moveRight(w);
 					break;
 				case WEST:
 					e = this->getLeft(w);
 					if (e)
-						collision(this, e);
+						collision(*this, *e);
 					else
 						this->moveLeft(w);
 					break;
 				default:
-					std::cout << "Enemy " << this->_sybmol << " is confused!";
+					std::cout << "Enemy " << this->_symbol << " is confused!";
 					break;
 
 			}
@@ -129,7 +129,7 @@ virtual void	Enemy::act(World &w)
 	}
 }
 
-virtual char	getSymbol(void) const
+char				Enemy::getSymbol(void) const
 {
 	if (this->_alive)
 		return (this->_symbol);
@@ -146,13 +146,13 @@ Enemy::~Enemy(void) {
 Enemy				&Enemy::operator=(Enemy const &old)
 {
 	std::cout << "Enemy Assignment Operator" << std::endl;
-	if (this != &old)
-		this->_privateFoo = old.getFoo();
+	(void)old;
 	return *this;
 }
 
 std::ostream	&operator<<(std::ostream &o, Enemy const &c)
 {
-	o << "To String Function of Enemy: " << c.getFoo();
+	(void)c;
+	o << "To String Function of Enemy: ";
 	return (o);
 }

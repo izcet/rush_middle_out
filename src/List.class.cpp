@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 17:15:01 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 18:46:56 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 #include "List.class.hpp"
 #include "Entity.class.hpp"
 
-List::List(void) : _empty(true), _ent(nullptr) {
+List::List(void) : 
+	_empty(true),
+	_ent(nullptr) 
+{
 	std::cout << "List Default Constructor" << std::endl;
 	return;
 }
 
-List::List(const Entity *ent) : _empty(false) _ent(ent) {
+List::List(Entity *ent) : 
+	_empty(false), 
+	_ent(ent) 
+{
 	std::cout << "List Parametric Constructor" << std::endl;
 	return;
 }
@@ -52,13 +58,13 @@ bool			List::isEmpty(void) const
 	return (this->_empty);
 }
 
-Entity			*getEnt(void) const
+Entity			*List::getEnt(void) const
 {
 	return (this->_ent);
 }
 
 std::ostream	&operator<<(std::ostream &o, List const &c)
 {
-	o << "LIST (" << c->getEnt() << ")";
+	o << "LIST (" << c.getEnt() << ")";
 	return (o);
 }

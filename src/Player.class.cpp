@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 14:51:30 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 15:29:40 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 18:37:27 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 #include "Player.class.hpp"
 #include "World.class.hpp"
 #include "Entity.class.hpp"
+#include "Bullet.class.hpp"
+// # include ncurses
+// delete thise
+#define KEY_UP 0
+#define KEY_DOWN 1
+#define KEY_LEFT 2
+#define KEY_RIGHT 3
+#define KEY_SHOOT 69
+
 
 Player::Player(int x, int y) : 
 	type('p'),
@@ -28,16 +37,13 @@ Player::Player(int x, int y) :
 {
 	int		random;
 
-	random = 69;
+	random = 69; ///////////// ok but really random though
 	this->_x = random;
-	//std::cout << "Player Parametric Constructor" << std::endl;
 	return;
 }
 
-virtual void	Player::act(World &w)
+void			Player::act(World &w)
 {
-	Entity	*e;
-
 	if (this->_alive)
 	{
 		switch (w.key)
@@ -55,7 +61,7 @@ virtual void	Player::act(World &w)
 				this->_move(w);
 				break;
 			case KEY_RIGHT:
-				this->_direciton = EAST;
+				this->_direction = EAST;
 				this->_move(w);
 				break;
 			case KEY_SHOOT:
@@ -71,34 +77,36 @@ virtual void	Player::act(World &w)
 
 void			Player::_move(World &w)
 {
+	Entity	*e;
+
 	if (this->_moveStep >= this->_moveMax)
 	{
 		switch (this->_direction) {
 			case NORTH:
 				e = this->getUp(w);
 				if (e)
-					collision(this, e);
+					collision(*this, *e);
 				else
 					this->moveUp(w);
 				break;
 			case SOUTH:
 				e = this->getDown(w);
 				if (e)
-					collision(this, e);
+					collision(*this, *e);
 				else
 					this->moveDown(w);
 				break;
 			case EAST:
 				e = this->getRight(w);
 				if (e)
-					collision(this, e);
+					collision(*this, *e);
 				else
 					this->moveRight(w);
 				break;
 			case WEST:
 				e = this->getLeft(w);
 				if (e)
-					collision(this, e);
+					collision(*this, *e);
 				else
 					this->moveLeft(w);
 				break;
@@ -134,7 +142,7 @@ void			Player::_shoot(World &w)
 }
 
 
-virtual char	getSymbol(void) const
+char			Player::getSymbol(void) const
 {
 	if (this->_alive)
 		return (this->_symbol);
@@ -148,16 +156,16 @@ Player::~Player(void) {
 	return;
 }
 
-Player				&Player::operator=(Player const &old)
+Player			&Player::operator=(Player const &old)
 {
 	std::cout << "Player Assignment Operator" << std::endl;
-	if (this != &old)
-		this->_privateFoo = old.getFoo();
+	(void)old;
 	return *this;
 }
 
 std::ostream	&operator<<(std::ostream &o, Player const &c)
 {
-	o << "To String Function of Player: " << c.getFoo();
+	o << "To String Function of Player: ";
+	(void)c;
 	return (o);
 }
