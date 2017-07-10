@@ -101,6 +101,9 @@ void Game::play() {
 	massEnemy[i].getHit();
 	playerOne.takeDamage();
       }
+      if (!massEnemy[i].getIsAlive()) {
+	massEnemy[i].resurrect();
+      }	
       massEnemy[i].doAction(enemyWin);
     }
     overlay(enemyWin, stdscr);
