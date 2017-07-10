@@ -23,11 +23,13 @@ Menu::Menu(int one) : Screen(one)
 {
 	i = 0;
 	c = 0;
+	_menu = 0;
 
 	instantiate_settings();
 	while((c = wgetch(_my_win)) != KEY_F(1))
 	{
-		input_loop(c);
+		if (!input_loop(c))
+			break ;
         wrefresh(_my_win);
 	}	
 
@@ -46,24 +48,43 @@ Menu::~Menu(void)
 	sleep(1);
 }
 
-void Menu::input_loop(int c)
+void Menu::menu_change(int zero)
+{
+	if (zero == 1)
+		_menu++;
+	else
+		_menu--;
+	if (_menu < 0)
+		_menu = 1;
+	else if (_menu > 1)
+		_menu = 0;
+}
+
+int Menu::input_loop(int c)
 {
 	Game test(get_window());
 
 	switch(c)
 	{	case KEY_DOWN:
 		menu_driver(_my_menu, REQ_DOWN_ITEM);
+		menu_change(1);
 		break;
 	case KEY_UP:
 		menu_driver(_my_menu, REQ_UP_ITEM);
+		menu_change(0);
 		break;
 	case '\n':
-		return;
+		if (_menu == 0)
+		{
+			test.launch();
+			return (1);
+		}
+		else if (_menu == 1)
+			return (0);
 	case 'm':
-		test.launch();
-		wclear(_my_win);
 		break;
 	}
+	return (1);
 }
 
 void Menu::instantiate_settings(void)
@@ -89,14 +110,20 @@ void Menu::instantiate_settings(void)
 	set_menu_sub(_my_menu, derwin(_my_win, 6, 38, 3, 1));
 	set_menu_mark(_my_menu, " * ");
 	box(_my_win, 0, 0);
-	print_in_middle(_my_win, 1, 0, 40, (char *)"Meet Your Generator", COLOR_PAIR(1));
+	print_in_middle(_my_win, 1, 0, 40, (char *)"Meet Your Generator: A Game", COLOR_PAIR(1));
 	mvwaddch(_my_win, 2, 0, ACS_LTEE);
 	mvwhline(_my_win, 2, 1, ACS_HLINE, 38);
 	mvwaddch(_my_win, 2, 39, ACS_RTEE);
+	print_xxx();
 	mvprintw(LINES - 2, 2, "Press Return to Exit");
 	refresh();
 	post_menu(_my_menu);
 	wrefresh(_my_win);
+}
+
+void Menu::print_xxx(void)
+{
+	mvprintw(LINES + 1, 2, "HI SUP DOG");
 }
 
 void Menu::print_in_middle(WINDOW *win, int starty, int startx, int width, char *string, chtype color)
