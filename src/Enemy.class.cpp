@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 17:18:56 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 18:55:27 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 19:11:33 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,32 +87,32 @@ void			Enemy::act(World &w)
 		{
 			switch (this->_direction) {
 				case NORTH:
-					e = this->getUp(w);
+					e = this->Entity::getUp(w);
 					if (e)
 						collision(*this, *e);
 					else
-						this->moveUp(w);
+						this->Entity::moveUp(w);
 					break;
 				case SOUTH:
-					e = this->getDown(w);
+					e = this->Entity::getDown(w);
 					if (e)
 						collision(*this, *e);
 					else
-						this->moveDown(w);
+						this->Entity::moveDown(w);
 					break;
 				case EAST:
-					e = this->getRight(w);
+					e = this->Entity::getRight(w);
 					if (e)
 						collision(*this, *e);
 					else
-						this->moveRight(w);
+						this->Entity::moveRight(w);
 					break;
 				case WEST:
-					e = this->getLeft(w);
+					e = this->Entity::getLeft(w);
 					if (e)
 						collision(*this, *e);
 					else
-						this->moveLeft(w);
+						this->Entity::moveLeft(w);
 					break;
 				default:
 					std::cout << "Enemy " << this->_symbol << " is confused!";

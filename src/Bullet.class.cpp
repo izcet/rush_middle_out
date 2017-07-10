@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 13:59:48 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 18:59:49 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 19:37:01 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 #include "World.class.hpp"
 
 Bullet::Bullet(int direction, int x, int y) : 
-		type('b'),
-		_alive(true),
-		_x(x),
-		_y(y),
-		_direction(direction),
-		_symbol('b')
+	Entity('b', x, y, direction, '|', true)
 {
 	//std::cout << "Bullet Parametric Constructor" << std::endl;
+	return;
+}
+
+Bullet::~Bullet(void) {
+//	std::cout << "Bullet Destructor" << std::endl;
 	return;
 }
 
@@ -36,32 +36,32 @@ void				Bullet::act(World &w)
 	{
 		switch (this->_direction) {
 			case NORTH:
-				e = this->getUp(w);
+				e = this->Entity::getUp(w);
 				if (e)
 					collision(*this, *e);
 				else
-					this->moveUp(w);
+					this->Entity::moveUp(w);
 				break;
 			case SOUTH:
-				e = this->getDown(w);
+				e = this->Entity::getDown(w);
 				if (e)
 					collision(*this, *e);
 				else
-					this->moveDown(w);
+					this->Entity::moveDown(w);
 				break;
 			case EAST:
-				e = this->getRight(w);
+				e = this->Entity::getRight(w);
 				if (e)
 					collision(*this, *e);
 				else
-					this->moveRight(w);
+					this->Entity::moveRight(w);
 				break;
 			case WEST:
-				e = this->getLeft(w);
+				e = this->Entity::getLeft(w);
 				if (e)
 					collision(*this, *e);
 				else
-					this->moveLeft(w);
+					this->Entity::moveLeft(w);
 				break;
 			default:
 				std::cout << "Bullet " << this->_symbol << " is confused!";
@@ -77,25 +77,6 @@ char			Bullet::getSymbol(void) const
 	if (this->_direction == NORTH || this->_direction == SOUTH)
 		return ('|');
 	return ('-');
-}
-
-// NOT MESSED WITH YET
-
-Bullet::~Bullet(void) {
-	std::cout << "Bullet Destructor" << std::endl;
-	return;
-}
-
-Bullet::Bullet(void) :
-	type('b'),
-	_alive(false),
-	_x(-1),
-	_y(0),
-	_direction(NORTH),
-	_symbol('b')
-{
-	std::cout << "ERROR BULLET" << std::endl;
-	return;
 }
 
 std::ostream	&operator<<(std::ostream &o, Bullet const &c)

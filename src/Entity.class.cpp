@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 18:42:50 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 19:13:02 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void			Entity::die(void)
 	this->_alive = false;
 }
 
-void			collision(Entity &a, Entity &b)
+void			Entity::collision(Entity &a, Entity &b)
 {
 	a.die();
 	b.die();

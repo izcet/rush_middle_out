@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/08 20:04:52 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 18:46:07 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/09 19:37:37 by irhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,16 @@
 # define EAST 2
 # define WEST 3
 
-// # define BULLET		'b'
-// # define ENEMY		'e'
-// # define PLAYER		'p'
-// # define ASTEROID	'a'
-
 class World;
 
 class Entity {
 
 	public:
-		Entity(void);
+		Entity(char type, int x, int y, int dir, char symbol, bool alive);
 		virtual ~Entity(void);
 
-		// we have to be able to reference a generic entity
-		// as a return value from another function
-		// but an entity will never be declared on its own
-		// it should technically be abstract butt fuck it
-
-		// overridden by child classes
 		virtual void	act(World &w);
 
-		// these are the same for all entities
 		virtual	char	getSymbol(void) const;
 		bool			isAlive(void) const;
 		int				getX(void) const;
@@ -60,7 +48,7 @@ class Entity {
 		Entity(Entity const & old);
 
 	protected:
-
+		
 		void			moveUp(World &w);
 		void			moveDown(World &w);
 		void			moveLeft(World &w);
