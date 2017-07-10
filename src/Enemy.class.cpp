@@ -79,8 +79,11 @@ void Enemy::doAction(WINDOW *enemyWin) {
   if (!this->_isAlive) return;
   bool hit = false;
   hit = this->move();
+  init_pair(5, COLOR_RED, COLOR_BLACK);
+  wattron(enemyWin, COLOR_PAIR(5));
   if (!this->_isAlive) return;
   mvwaddch(enemyWin, this->_posY, this->_posX, this->_symbol);
+  wattron(enemyWin, COLOR_PAIR(5));
 }
 
 void Enemy::getHit(void) {

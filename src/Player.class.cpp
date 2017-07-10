@@ -119,12 +119,15 @@ void Player::takeDamage(void)
 
 void Player::drawPlayer(WINDOW *playerWin) const
 {
-	std::string _sprite = "  ^  \n / \\\n  \\ \n/  / \n\\ / \n  \\/\n ^ / \n\\ / ";
-	mvwprintw(playerWin,this->_posY, this->_posX, "  ^  ");
-	mvwprintw(playerWin,this->_posY + 1, this->_posX, " / \\ ");
-	mvwprintw(playerWin,this->_posY + 2, this->_posX, "/ %c \\", '8');
-	mvwprintw(playerWin,this->_posY + 3, this->_posX, "\\ ^ /");
-	mvwprintw(playerWin,this->_posY + 4, this->_posX, " V V ");
+  start_color();
+  init_pair(4, COLOR_YELLOW, COLOR_BLACK);
+  wattron(playerWin, COLOR_PAIR(4));
+  mvwprintw(playerWin,this->_posY, this->_posX, "  ^  ");
+  mvwprintw(playerWin,this->_posY + 1, this->_posX, " / \\ ");
+  mvwprintw(playerWin,this->_posY + 2, this->_posX, "/ %c \\", '8');
+  mvwprintw(playerWin,this->_posY + 3, this->_posX, "\\ ^ /");
+  mvwprintw(playerWin,this->_posY + 4, this->_posX, " V V ");
+  wattroff(playerWin, COLOR_PAIR(4));
 }
 
 bool Player::getIsAlive(void) const { return (this->_isAlive); }
