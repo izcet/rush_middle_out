@@ -76,7 +76,7 @@ void Game::play() {
 	  for (int x = 0; x < 10; x++)
 	    {
 	      if (mag[i].getPosX() == massEnemy[x].getPosX() &&
-		  mag[i].getPoxY() == massEnemy[x].getPosY())
+		  mag[i].getPosY() == massEnemy[x].getPosY())
 	      {
 		mag[i].setIsAlive(false);
 		massEnemy[x].getHit();
