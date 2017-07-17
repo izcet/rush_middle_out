@@ -6,7 +6,7 @@
 /*   By: irhett <irhett@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 17:18:56 by irhett            #+#    #+#             */
-/*   Updated: 2017/07/09 22:25:27 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/17 15:33:34 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "World.class.hpp"
 #include "Entity.class.hpp"
 #include "Enemy.class.hpp"
+#include "Bullet.class.hpp"
 
 Enemy::Enemy(int wid) :
 	Entity('e', 0, 0, SOUTH, '8', true), // ?
@@ -111,6 +112,15 @@ void			Enemy::act(World &w)
 				w.score -= 10;
 		}
 		this->_moveStep++;
+		if (this->_shootClock < 10)
+			this->_shootClock++;
+		else
+		{
+			Bullet *b = new Bullet(SOUTH, this->Entity::_x, this->Entity::_y + 1);
+			w.addBullet(*b);
+			this->_shootClock = 0;
+		}
+
 	}
 }
 

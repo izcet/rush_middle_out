@@ -6,7 +6,7 @@
 /*   By: dubious </var/mail/dubious>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/09 00:03:40 by dubious           #+#    #+#             */
-/*   Updated: 2017/07/09 22:19:42 by irhett           ###   ########.fr       */
+/*   Updated: 2017/07/17 15:36:40 by sdarsie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,13 @@ void			World::addEnemy(int x)
 
 void			World::addBullet(Bullet &b)
 {
-	this->grid[b.getY()][b.getX()] = &b;
-	this->_Bullets = this->_addList(this->_Bullets, (Entity*)&b);
+	if (b.getY() < this->_height && b.getY() >= 0 && b.getX() < this->_width && b.getX() > 0)
+	{
+		this->grid[b.getY()][b.getX()] = &b;
+		this->_Bullets = this->_addList(this->_Bullets, (Entity*)&b);
+	}
+	else
+		delete &b;
 }
 
 int				World::getWidth(void) const
